@@ -1,0 +1,55 @@
+<resources>
+
+    <string name="app_name">AttentionAssessment</string>
+    <string name="splash">Name - \n Attention Assessment &amp; Training Game</string>
+
+    <!-- Navigation Drawer-->
+    <string name="heading">අවධානය ඇගයීම ක්රියාකාරකම්</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="gender">ඔබේ දරුවාගේ ලිංගභේදය තෝරන්න:</string>
+    <string name="girl">ගැහැණු</string>
+    <string name="boy">පිරිමි</string>
+    <string name="next">ඊළඟ</string>
+    <string name="previous">පෙර</string>
+    <string name="age">ඔබේ දරුවාගේ වයස තෝරන්න:</string>
+    <string name="language">භාෂාව තෝරන්න:</string>
+    <string name="childName">දරුවාගේ නම :</string>
+    <string name="parentEmail">විද්යුත් තැපෑල් ලිපිනය:</string>
+    <string name="parentContact">දුරකතන අංකය :</string>
+    <string name="optional">* විකල්ප</string>
+
+    <string name="select">තෝරන්න</string>
+    <string name="birdselect">ඔබ වඩාත්ම කැමති චරිතය තෝරන්න</string>
+    <string name="focg1">වඳුරු පැටවා දිස්වන විට රතු බොත්තම ඔබන්න </string>
+    <string name="divg1">වර්ණ ගැලපෙන විට රතු බොත්තම ඔබන්න</string>
+    <string name="susg1">කුරුල්ලා අත්ත මත වාඩි වූ විට රතු බොත්තම ඔබන්න</string>
+    <string name="altg1">සතා පෙනෙන පැත්තේ ඇති රතු බොත්තම ඔබන්න</string>
+
+    <string name="provideconsent">I have read this consent form and my questions have been answered. My signature below means that I do want my child to be in the study. I know that I can withdraw my child from the study at any time without any problems.</string>
+    <string name="getSignature">මෙහි අත්සන් කරන්න</string>
+    <string name="proceed">ඉදිරියට</string>
+    <string name="consentForm">පර්යේෂණ අධ්‍යයනයකට සහභාගී වීමට කැමැත්ත දක්වන පෝරමය</string>
+
+
+    <!-- Login Screen -->
+    <string name="welcome">ආයුබෝවන්!</string>
+    <string name="name">ඔබේ නම ඇතුළත් කරන්න</string>
+    <string name="email">ඔබගේ විද්‍යුත් ලිපිනය ඇතුළත් කරන්න</string>
+    <string name="pwd">මුරපදය ඇතුළත් කරන්න</string>
+    <string name="confirmPwd">මුරපදය තහවුරු කරන්න</string>
+    <string name="fgtPassword">මුරපදය අමතක වුණා ද?</string>
+    <string name="resetPassword">මුරපදය යළි සකසන්න</string>
+    <string name="rememberPassword">ඔබට මුරපදය මතකද?</string>
+    <string name="signIn">ඇතුල් වන්න</string>
+    <string name="signUp">ලියාපදිංචි වන්න</string>
+    <string name="createAccnt">ගිණුමක් තනන්න</string>
+    <string name="noAccnt">ඔබට ගිණුමක් නැද්ද?</string>
+    <string name="haveAccnt">දැනටමත් ගිණුමක් තිබේද?</string>
+    <string name="agree">මම එකඟයි</string>
+    <string name="terms">නියම සහ කොන්දේසි</string>
+    <string name="fgtPwdPara">ඔබගේ විද්‍යුත් තැපැල් ලිපිනය ඇතුලත් කරන්න, ඔබගේ මුරපදය නැවත සැකසීමට අපි ඔබට සබැඳියක් එවන්නෙමු.</string>
+
+
+</resources>

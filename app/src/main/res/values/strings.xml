@@ -1,0 +1,53 @@
+<resources>
+    <string name="app_name">AttentionAssessment</string>
+    <string name="splash">Name - \n Attention Assessment &amp; Training Game</string>
+
+    <!-- Navigation Drawer-->
+    <string name="heading">Attention Assessment Game</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="gender">Select your child\'s gender:</string>
+    <string name="girl">Girl</string>
+    <string name="boy">Boy</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="age">Select your child\'s age:</string>
+    <string name="language">Select language:</string>
+    <string name="childName">Child Name :</string>
+    <string name="parentEmail">Email :</string>
+    <string name="parentContact">Contact Number :</string>
+    <string name="optional">* Optional</string>
+
+    <string name="select">Select the</string>
+    <string name="birdselect">Pick your favourite character</string>
+    <string name="focg1">Press the red button when the monkey appears</string>
+    <string name="divg1">Press the red button when the colours match</string>
+    <string name="susg1">Press the red button when the bird sits on the branch</string>
+    <string name="altg1">Press the red button on the same side where the animal appears</string>
+
+    <string name="provideconsent">I have read this consent form and my questions have been answered. My signature below means that I do want my child to be in the study. I know that I can withdraw my child from the study at any time without any problems.</string>
+    <string name="getSignature">Sign Here</string>
+    <string name="proceed">Proceed</string>
+    <string name="consentForm">Consent Form To Participate in a Research Study</string>
+
+
+    <!-- Login Screen -->
+    <string name="welcome">Welcome!</string>
+    <string name="name">Enter your name</string>
+    <string name="email">Enter your email</string>
+    <string name="pwd">Enter your password</string>
+    <string name="confirmPwd">Confirm password</string>
+    <string name="fgtPassword">Forgot Password?</string>
+    <string name="resetPassword">Reset Password</string>
+    <string name="rememberPassword">Remember Password ?</string>
+    <string name="signIn">Sign In</string>
+    <string name="signUp">Sign Up</string>
+    <string name="createAccnt">Create an Account</string>
+    <string name="noAccnt">Don\'t have an account?</string>
+    <string name="haveAccnt">Already have an account?</string>
+    <string name="agree">I agree to the</string>
+    <string name="terms">Terms and Conditions</string>
+    <string name="fgtPwdPara">Enter your email and we\'ll send you a link to reset your password.</string>
+
+</resources>

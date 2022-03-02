@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:title="Title">
+        <menu>
+            <group android:checkableBehavior="single">
+
+                <item android:id="@+id/dashboard" android:title="Dashboard" android:icon="@drawable/icon_dashboard"/>
+                <item android:id="@+id/admin" android:title="Visual Attention Assessments" android:icon="@drawable/icon_profile"/>
+                <item android:id="@+id/parents" android:title="Ayeshka" android:icon="@drawable/icon_profile"/>
+                <item android:id="@+id/healthProfessional" android:title="Sandunika" android:icon="@drawable/icon_profile"/>
+                <item android:id="@+id/doctor" android:title="Isuri" android:icon="@drawable/icon_profile"/>
+            </group>
+        </menu>
+    </item>
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/consentForm" android:title="Consent Form" android:icon="@drawable/icon_terms"/>
+        <item android:id="@+id/termsAndConditions" android:title="Preliminary Medical Guidance" android:icon="@drawable/icon_medical"/>
+        <item android:id="@+id/aboutUs" android:title="Contact Health Professional" android:icon="@drawable/icon_support"/>
+        <item android:id="@+id/logOut" android:title="Logout" android:icon="@drawable/icon_logout"/>
+  </group>
+
+</menu>
