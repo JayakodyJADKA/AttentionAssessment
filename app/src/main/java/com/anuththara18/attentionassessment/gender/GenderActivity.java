@@ -26,7 +26,7 @@ public class GenderActivity extends AppCompatActivity {
     ImageView girl_img, boy_img;
     TextView boy_txt, girl_txt, next, previous, selectGender;
 
-    public static int gender = 0;
+    public static int gender = 2;
 
     int click = 1;
 
@@ -86,7 +86,7 @@ public class GenderActivity extends AppCompatActivity {
                     girl_txt.setAlpha(0.5f);
                     boy_img.setImageAlpha(255);
                     boy_txt.setAlpha(1f);
-                    gender = 0; // boy
+                    gender = 2; // boy
                     Log.d("gender", String.valueOf(gender));
                 }
             }

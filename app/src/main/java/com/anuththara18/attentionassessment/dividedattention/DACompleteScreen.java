@@ -167,7 +167,7 @@ public class DACompleteScreen extends AppCompatActivity {
         try {
             writer = new CSVWriter(new FileWriter(csv));
 
-            String[] entries = {"id","child_id","total_correct_responses","correct_responses","commission_errors","omission_errors","mean_reaction_time","total_duration"};
+            String[] entries = {"id","child_gender","child_age","total_correct_responses","correct_responses","commission_errors","omission_errors","mean_reaction_time","total_duration"};
             writer.writeNext(entries);
 
             List<String[]> data = new ArrayList<String[]>();
@@ -176,7 +176,8 @@ public class DACompleteScreen extends AppCompatActivity {
 
                 Divided gameData = dataList.get(i);
                 data.add(new String[]{ String.valueOf(gameData.getId()),
-                        String.valueOf(gameData.getChildID()),
+                        String.valueOf(String.valueOf(gameData.getChildID()).charAt(0)),
+                        String.valueOf(String.valueOf(gameData.getChildID()).charAt(1)),
                         String.valueOf(gameData.getTotalCorrectResponses()),
                         String.valueOf(gameData.getNoOfCorrectResponses()),
                         String.valueOf(gameData.getNoOfCommissionErrors()),
@@ -257,7 +258,7 @@ public class DACompleteScreen extends AppCompatActivity {
         canvas.drawText("Age : " + AgeActivity.age, 150, 250, title);
 
         String gender;
-        if (GenderActivity.gender == 0) {
+        if (GenderActivity.gender == 2) {
             gender = "Male";
         }
         else {
