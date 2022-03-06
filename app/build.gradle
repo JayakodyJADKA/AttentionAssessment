@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId "com.anuththara18.attentionassessment"
         minSdkVersion 24
-        targetSdkVersion 31
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
 

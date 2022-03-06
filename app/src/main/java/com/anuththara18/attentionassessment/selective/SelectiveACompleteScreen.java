@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.pdf.PdfDocument;
@@ -30,6 +31,7 @@ import androidx.core.content.FileProvider;
 import com.anuththara18.attentionassessment.BuildConfig;
 import com.anuththara18.attentionassessment.R;
 import com.anuththara18.attentionassessment.age.AgeActivity;
+import com.anuththara18.attentionassessment.consentform.ParentsConsentDatabaseHelper;
 import com.anuththara18.attentionassessment.gender.GenderActivity;
 import com.anuththara18.attentionassessment.home.NavigationDrawerActivity;
 import com.opencsv.CSVWriter;
@@ -54,12 +56,13 @@ public class SelectiveACompleteScreen extends AppCompatActivity {
 
     // declaring width and height
     // for our PDF file.
-    int pageHeight = 1120;
+    int pageHeight = 1520;
     int pagewidth = 792;
 
     // creating a bitmap variable
     // for storing our images
-    Bitmap bmp, scaledbmp;
+    Bitmap bmp, bmp2, scaledbmp, scaledbmp2;
+    public static ParentsConsentDatabaseHelper sqLiteHelper;
 
     // constant code for runtime permissions
     private static final int PERMISSION_REQUEST_CODE = 200;
@@ -77,6 +80,8 @@ public class SelectiveACompleteScreen extends AppCompatActivity {
         decorView.setSystemUiVisibility(uiOptions);
         setContentView(R.layout.activity_complete_screen2);
 
+        sqLiteHelper = new ParentsConsentDatabaseHelper(this, "ParentsConsent.sqlite", null, 1);
+
         complete = findViewById(R.id.complete);
 
         complete.setOnClickListener(new View.OnClickListener() {
@@ -90,9 +95,25 @@ public class SelectiveACompleteScreen extends AppCompatActivity {
 
         /*******************************************************************************************/
 
+        try {
+            Cursor cursor = sqLiteHelper.getData("SELECT * FROM ParentsConsent");
+
+            while (cursor.moveToNext()) {
+                byte[] image = cursor.getBlob(0);
+                bmp2 = BitmapFactory.decodeByteArray(image, 0, image.length);
+                //fingerprintImageView.setImageBitmap(bmp);
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
         // initializing our variables.
         bmp = BitmapFactory.decodeResource(getResources(), R.drawable.selective);
         scaledbmp = Bitmap.createScaledBitmap(bmp, 140, 140, false);
+        //scaledbmp2 = Bitmap.createScaledBitmap(bmp2, 200, 200, false);
+        scaledbmp2 = BITMAP_RESIZER(bmp2, 400, 400);
 
         // below code is used for
         // checking our permissions.
@@ -186,6 +207,7 @@ public class SelectiveACompleteScreen extends AppCompatActivity {
         Canvas canvas = myPage.getCanvas();
 
         canvas.drawBitmap(scaledbmp, 56, 40, paint);
+        canvas.drawBitmap(scaledbmp2, 400, 0, paint);
 
         title.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
         title.setTextSize(20);
@@ -304,4 +326,22 @@ public class SelectiveACompleteScreen extends AppCompatActivity {
 
     /**************************************************************************************************/
 
+    public Bitmap BITMAP_RESIZER(Bitmap bitmap,int newWidth,int newHeight) {
+        Bitmap scaledBitmap = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
+
+        float ratioX = newWidth / (float) bitmap.getWidth();
+        float ratioY = newHeight / (float) bitmap.getHeight();
+        float middleX = newWidth / 2.0f;
+        float middleY = newHeight / 2.0f;
+
+        Matrix scaleMatrix = new Matrix();
+        scaleMatrix.setScale(ratioX, ratioY, middleX, middleY);
+
+        Canvas canvas = new Canvas(scaledBitmap);
+        canvas.setMatrix(scaleMatrix);
+        canvas.drawBitmap(bitmap, middleX - bitmap.getWidth() / 2, middleY - bitmap.getHeight() / 2, new Paint(Paint.FILTER_BITMAP_FLAG));
+
+        return scaledBitmap;
+
+    }
 }

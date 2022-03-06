@@ -50,7 +50,7 @@ public class AACompleteScreen extends AppCompatActivity {
 
     // declaring width and height
     // for our PDF file.
-    int pageHeight = 1120;
+    int pageHeight = 1520;
     int pagewidth = 792;
 
     // creating a bitmap variable

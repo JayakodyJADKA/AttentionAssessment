@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.anuththara18.attentionassessment.R;
+import com.anuththara18.attentionassessment.consentform.ConsentFormActivity;
 import com.anuththara18.attentionassessment.gender.GenderActivity;
 import com.anuththara18.attentionassessment.home.NavigationDrawerActivity;
 import com.anuththara18.attentionassessment.language.LanguageActivity;
@@ -104,7 +105,7 @@ public class AgeActivity extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AgeActivity.this, NavigationDrawerActivity.class);
+                Intent intent = new Intent(AgeActivity.this, ConsentFormActivity.class);
                 startActivity(intent);
             }
         });

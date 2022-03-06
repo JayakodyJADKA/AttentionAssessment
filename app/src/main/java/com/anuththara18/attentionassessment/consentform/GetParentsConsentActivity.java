@@ -1,11 +1,17 @@
 package com.anuththara18.attentionassessment.consentform;
 
 import android.Manifest;
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -19,9 +25,17 @@ import androidx.core.content.ContextCompat;
 
 
 import com.anuththara18.attentionassessment.R;
+import com.anuththara18.attentionassessment.home.NavigationDrawerActivity;
 import com.anuththara18.attentionassessment.language.LanguageSetter;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+import static android.Manifest.permission.MANAGE_EXTERNAL_STORAGE;
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class GetParentsConsentActivity extends AppCompatActivity {
 
@@ -30,8 +44,11 @@ public class GetParentsConsentActivity extends AppCompatActivity {
     public static ImageView fingerprintImageView;
     static int flag2 = 0;
 
-    private static final int STORAGE_PERMISSION_CODE = 101;
+    // constant code for runtime permissions
+    private static final int PERMISSION_REQUEST_CODE = 200;
 
+    public static ParentsConsentDatabaseHelper sqLiteHelper;
+    private static final int STORAGE_PERMISSION_CODE = 101;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +64,21 @@ public class GetParentsConsentActivity extends AppCompatActivity {
         //btnSaveFingerPrint.setText(LanguageSetter.getresources().getString(R.string.startTest));
         //btnGetSignature.setText(LanguageSetter.getresources().getString(R.string.getSignature));
 
-        checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, STORAGE_PERMISSION_CODE);
+        /*******************************************************************************************/
 
+        // below code is used for
+        // checking our permissions.
+        if (checkPermission()) {
+            //Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
+        } else {
+            requestPermission();
+        }
 
+        /*******************************************************************************************/
+
+        sqLiteHelper = new ParentsConsentDatabaseHelper(this, "ParentsConsent.sqlite", null, 1);
+
+        sqLiteHelper.queryData("CREATE TABLE IF NOT EXISTS ParentsConsent(signature BLOB)");
 
         /************************************************************************************/
 
@@ -58,8 +87,6 @@ public class GetParentsConsentActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if ( flag2 == 1) {
                     saveImage();
-                    //Intent intent = new Intent(getApplicationContext(), QuestionnaireMainScreen.class);
-                    //startActivity(intent);
                 }
                 else if ( flag2 == 0 ){
                     Toast.makeText(getApplicationContext(), "Please Provide your Signature", Toast.LENGTH_SHORT).show();
@@ -86,12 +113,10 @@ public class GetParentsConsentActivity extends AppCompatActivity {
     public void saveImage() {
 
         try{
-            /************************************************
-             * **********************************************
-             * **********************************************
-             */
-
+            sqLiteHelper.insertData(imageViewToByte(fingerprintImageView));
             Toast.makeText(getApplicationContext(), "Consent Saved Successfully!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
+            startActivity(intent);
         }
         catch (Exception e){
             Toast.makeText(getApplicationContext(), "Consent not Saved!", Toast.LENGTH_SHORT).show();
@@ -111,43 +136,54 @@ public class GetParentsConsentActivity extends AppCompatActivity {
         return byteArray;
     }
 
-    /************************************************************************************/
+    /**************************************************************************************************/
 
-
-    // Function to check and request permission.
-    public void checkPermission(String permission, int requestCode)
-    {
-        if (ContextCompat.checkSelfPermission(com.anuththara18.attentionassessment.consentform.GetParentsConsentActivity.this, permission) == PackageManager.PERMISSION_DENIED) {
-
-            // Requesting the permission
-            ActivityCompat.requestPermissions(com.anuththara18.attentionassessment.consentform.GetParentsConsentActivity.this, new String[] { permission }, requestCode);
-        }
-        else {
-            //Toast.makeText(GetParentsConsentActivity.this, "Permission already granted", Toast.LENGTH_SHORT).show();
-        }
+    private boolean checkPermission() {
+        // checking of permissions.
+        int permission1 = ContextCompat.checkSelfPermission(getApplicationContext(), WRITE_EXTERNAL_STORAGE);
+        int permission2 = ContextCompat.checkSelfPermission(getApplicationContext(), READ_EXTERNAL_STORAGE);
+        int permission3 = ContextCompat.checkSelfPermission(getApplicationContext(), MANAGE_EXTERNAL_STORAGE);
+        return permission1 == PackageManager.PERMISSION_GRANTED && permission2 == PackageManager.PERMISSION_GRANTED && permission3 == PackageManager.PERMISSION_GRANTED;
     }
 
-    // This function is called when the user accepts or decline the permission.
-    // Request Code is used to check which permission called this function.
-    // This request code is provided when the user is prompt for permission.
+    /**************************************************************************************************/
+
+    private void requestPermission() {
+        // requesting permissions if not provided.
+        ActivityCompat.requestPermissions(this, new String[]{WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE, MANAGE_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
+    }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String[] permissions,
-                                           @NonNull int[] grantResults)
-    {
-        super.onRequestPermissionsResult(requestCode,
-                permissions,
-                grantResults);
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0) {
 
-        if (requestCode == STORAGE_PERMISSION_CODE) {
-            if (grantResults.length > 0
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(com.anuththara18.attentionassessment.consentform.GetParentsConsentActivity.this, "Storage Permission Granted", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(com.anuththara18.attentionassessment.consentform.GetParentsConsentActivity.this, "Storage Permission Denied", Toast.LENGTH_SHORT).show();
+                /*
+                Intent intent = new Intent();
+                intent.setAction(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+                Uri uri = Uri.fromParts("package", this.getPackageName(), null);
+                intent.setData(uri);
+                startActivity(intent);
+
+                 */
+
+                // after requesting permissions we are showing
+                // users a toast message of permission granted.
+                boolean writeStorage = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                boolean readStorage = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+
+                if (writeStorage && readStorage) {
+                    //Toast.makeText(this, "Permission Granted..", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "Permission Denined.", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
             }
         }
     }
+
+    /**************************************************************************************************/
+
 
 }
