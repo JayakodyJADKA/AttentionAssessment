@@ -67,7 +67,7 @@ public class DividedAttentionGame1 extends AppCompatActivity {
             R.color.green, R.color.pink, R.color.purple,
             R.color.orange, R.color.teal};
 
-    MediaPlayer mp;
+    MediaPlayer mp, mp2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,47 +129,59 @@ public class DividedAttentionGame1 extends AppCompatActivity {
 
                     if ( j.equals("0") || j.equals("8") || j.equals("16") || j.equals("24") || j.equals("32") || j.equals("40") ) {
                         sq2.setImageResource(image[0]);
+                        red_btn.setEnabled(true);
                         sq2.setTag(image[0]);
                     }
                     else if ( j.equals("1") || j.equals("9") || j.equals("17") || j.equals("25") || j.equals("33") || j.equals("41") ) {
                         sq2.setImageResource(image[1]);
+                        red_btn.setEnabled(true);
                         sq2.setTag(image[1]);
                     }
                     else if ( j.equals("2") || j.equals("10") || j.equals("18") || j.equals("26") || j.equals("34") || j.equals("42") ) {
                         sq2.setImageResource(image[2]);
+                        red_btn.setEnabled(true);
                         sq2.setTag(image[2]);
                     }
                     else if ( j.equals("3") || j.equals("11") || j.equals("19") || j.equals("27") || j.equals("35") || j.equals("43") ) {
                         sq2.setImageResource(image[3]);
+                        red_btn.setEnabled(true);
                         sq2.setTag(image[3]);
                     }
                     else if ( j.equals("4") || j.equals("12") || j.equals("20") || j.equals("28") || j.equals("36") || j.equals("44") ) {
                         sq2.setImageResource(image[4]);
+                        red_btn.setEnabled(true);
                         sq2.setTag(image[4]);
                     }
                     else if ( j.equals("5") || j.equals("13") || j.equals("21") || j.equals("29") || j.equals("37") || j.equals("45") ) {
                         sq2.setImageResource(image[5]);
+                        red_btn.setEnabled(true);
                         sq2.setTag(image[5]);
                     }
                     else if ( j.equals("6") || j.equals("14") || j.equals("22") || j.equals("30") || j.equals("38") || j.equals("46") ) {
                         sq2.setImageResource(image[6]);
+                        red_btn.setEnabled(true);
                         sq2.setTag(image[6]);
                     }
                     else if ( j.equals("7") || j.equals("15") || j.equals("23") || j.equals("31") || j.equals("39") || j.equals("47") ) {
                         sq2.setImageResource(image[7]);
+                        red_btn.setEnabled(true);
                         sq2.setTag(image[7]);
                     }
                     startTime = System.currentTimeMillis();
-                    sq2.postDelayed(this, 3000);
+                    sq2.postDelayed(this, 2000);
                     Log.d("int", String.valueOf(i));
-                    duration = duration + 3000;
+                    duration = duration + 2000;
                     i++;
                 }
                 else {
                     long gameEnd = System.currentTimeMillis();
                     long seconds = (gameEnd - gameStart) / 1000;
-                    //meanReactionTime = totalReactionTime / noOfCorrectResponses;
-                    meanReactionTime = totalReactionTime;
+                    if ( noOfCorrectResponses == 0 ) {
+                        meanReactionTime = 0;
+                    }
+                    else {
+                        meanReactionTime = (int) Math.ceil(totalReactionTime / noOfCorrectResponses); // ms
+                    }
                     Log.d("****************************************************", "****************************************************");
                     Log.d("Game Time", String.valueOf(seconds));
                     Log.d("total", String.valueOf(totalCorrectResponses));
@@ -198,6 +210,8 @@ public class DividedAttentionGame1 extends AppCompatActivity {
                     case MotionEvent.ACTION_DOWN: {
                         red_btn.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
                         view.invalidate();
+                        mp2 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
+                        mp2.start();
                         break;
                     }
                     case MotionEvent.ACTION_UP:
@@ -208,6 +222,7 @@ public class DividedAttentionGame1 extends AppCompatActivity {
                             totalReactionTime = totalReactionTime + reactionTime;
                             Log.d("correct " , startTime + " " + clickedTime + " " + reactionTime);
                             noOfCorrectResponses++;
+                            red_btn.setEnabled(false);
                         }
                         else {
                             Log.d( "wrong" , startTime + " " + clickedTime + " " + reactionTime);

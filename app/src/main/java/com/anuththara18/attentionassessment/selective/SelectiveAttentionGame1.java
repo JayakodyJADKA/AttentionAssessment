@@ -58,6 +58,8 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
     ImageView main_img, cross_btn;
     ImageButton imageButton;
     ArrayList<GridModel> gridModelArrayList;
+    GVAdapter adapter;
+
     public static ArrayList<Integer> correctResponses;
     public static ArrayList<Integer> incorrectResponses;
     public static int columns;
@@ -87,6 +89,7 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
     Random random;
 
     MediaPlayer mp;
+    int clickCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +109,7 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
         cross_btn = (ImageView) findViewById(R.id.cross_btn);
         textview = findViewById(R.id.textview);
 
-        textview.setText(LanguageSetter.getresources().getString(R.string.select));
+        //textview.setText(LanguageSetter.getresources().getString(R.string.select));
 
         mp = MediaPlayer.create(getApplicationContext(), R.raw.selective);
         mp.start();
@@ -134,56 +137,6 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
         g = R.drawable.pink_pig;
         g1 = "pink_pig";
 
-        /*
-        // level 3 - 4 & 6 (2 same)
-
-        g = R.drawable.white_cow;
-        g1 = "white_cow";
-        h = R.drawable.brown_donkey;
-        h1 = "brown_donkey";
-        ii = R.drawable.grey_goat;
-        i1 = "grey_goat";
-        j = R.drawable.blue_elephant;
-        j1 = "blue_elephant";
-        k = R.drawable.blue_hippo;
-        k1 = "blue_hippo";
-
-        // level 4 - 4 (2 same) & 6 (3 same)
-        l = R.drawable.white_zebra;
-        l1 = "white_zebra";
-        m = R.drawable.orange_tiger;
-        m1 = "orange_tiger";
-        n = R.drawable.brown_ox;
-        n1 = "brown_ox";
-        o = R.drawable.green_dino;
-        o1 = "green_dino";
-        p = R.drawable.green_snake;
-        p1 = "green_snake";
-        q = R.drawable.green_croc;
-        q1 = "green_croc";
-
-        // level 5 - 5 (2 same) & 7 (4 same)
-        r = R.drawable.brown_lion;
-        r1 = "brown_lion";
-        s = R.drawable.grey_elephant;
-        s1 = "grey_elephant";
-        t = R.drawable.blue_peacock;
-        t1 = "blue_peacock";
-        u = R.drawable.yellow_chicken;
-        u1 = "yellow_chicken";
-        v = R.drawable.yellow_dino;
-        v1 = "yellow_dino";
-        w = R.drawable.yellow_girraffe;
-        w1 = "yellow_girraffe";
-        x = R.drawable.yellow_leapoard;
-        x1 = "yellow_leapoard";
-        y = R.drawable.white_cow;
-        y1 = "white_cow";
-        z = R.drawable.pink_pig;
-        z1 = "pink_pig";
-
-         */
-
         image =  num = random.nextInt(100);
 
         if ( age >= 4 && age <= 5 ) {
@@ -203,13 +156,16 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
                 // 3 objects
                 num = random.nextInt(120);
                 if(num >= 0 && num < 40) {
-                    main_img.setImageResource(c);
+                    main_img.setImageResource(a);
+                    image_name = a1;
                 }
                 else if(num >= 40 && num < 80) {
-                    main_img.setImageResource(d);
+                    main_img.setImageResource(b);
+                    image_name = b1;
                 }
                 else if(num >= 80 && num < 120) {
-                    main_img.setImageResource(e);
+                    main_img.setImageResource(c);
+                    image_name = c1;
                 }
             }
             else if (level == 3) {
@@ -217,48 +173,61 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
                 num = random.nextInt(120);
                 if(num >= 0 && num < 30) {
                     main_img.setImageResource(a);
+                    image_name = a1;
                 }
                 else if(num >= 30 && num < 60) {
                     main_img.setImageResource(b);
+                    image_name = b1;
                 }
                 else if(num >= 60 && num < 90) {
                     main_img.setImageResource(c);
+                    image_name = c1;
                 }
                 else if(num >= 90 && num < 120) {
                     main_img.setImageResource(d);
+                    image_name = d1;
                 }
             }
             else if (level == 4) {
                 num = random.nextInt(120);
                 if(num >= 0 && num < 30) {
                     main_img.setImageResource(a);
+                    image_name = a1;
                 }
                 else if(num >= 30 && num < 60) {
                     main_img.setImageResource(b);
+                    image_name = b1;
                 }
                 else if(num >= 60 && num < 90) {
                     main_img.setImageResource(c);
+                    image_name = c1;
                 }
                 else if(num >= 90 && num < 120) {
                     main_img.setImageResource(d);
+                    image_name = d1;
                 }
             }
             else if (level == 5) {
                 num = random.nextInt(100);
                 if(num >= 0 && num < 20) {
                     main_img.setImageResource(a);
+                    image_name = a1;
                 }
                 else if(num >= 20 && num < 40) {
                     main_img.setImageResource(b);
+                    image_name = b1;
                 }
                 else if(num >= 40 && num < 60) {
                     main_img.setImageResource(c);
+                    image_name = c1;
                 }
                 else if(num >= 60 && num < 80) {
                     main_img.setImageResource(d);
+                    image_name = d1;
                 }
                 else if(num >= 80 && num < 100) {
                     main_img.setImageResource(e);
+                    image_name = e1;
                 }
             }
         }
@@ -269,139 +238,228 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
                 num = random.nextInt(120);
                 if (num >= 0 && num < 30) {
                     main_img.setImageResource(a);
-                } else if (num >= 30 && num < 60) {
+                    image_name = a1;
+                }
+                else if (num >= 30 && num < 60) {
                     main_img.setImageResource(b);
-                } else if (num >= 60 && num < 90) {
+                    image_name = b1;
+                }
+                else if (num >= 60 && num < 90) {
                     main_img.setImageResource(c);
-                } else if (num >= 90 && num < 120) {
+                    image_name = c1;
+                }
+                else if (num >= 90 && num < 120) {
                     main_img.setImageResource(d);
+                    image_name = d1;
                 }
             } else if (level == 2) {
                 // 5 objects
                 num = random.nextInt(100);
                 if (num >= 0 && num < 20) {
                     main_img.setImageResource(a);
-                } else if (num >= 20 && num < 40) {
+                    image_name = a1;
+                }
+                else if (num >= 20 && num < 40) {
                     main_img.setImageResource(b);
-                } else if (num >= 40 && num < 60) {
+                    image_name = b1;
+                }
+                else if (num >= 40 && num < 60) {
                     main_img.setImageResource(c);
-                } else if (num >= 60 && num < 80) {
+                    image_name = c1;
+                }
+                else if (num >= 60 && num < 80) {
                     main_img.setImageResource(d);
-                } else if (num >= 80 && num < 100) {
+                    image_name = d1;
+                }
+                else if (num >= 80 && num < 100) {
                     main_img.setImageResource(e);
+                    image_name = e1;
                 }
             } else if (level == 3) {
                 // 6 objects
                 num = random.nextInt(120);
                 if (num >= 0 && num < 20) {
                     main_img.setImageResource(a);
+                    image_name = a1;
                 } else if (num >= 20 && num < 40) {
                     main_img.setImageResource(b);
+                    image_name = b1;
                 } else if (num >= 40 && num < 60) {
                     main_img.setImageResource(c);
+                    image_name = c1;
                 } else if (num >= 60 && num < 80) {
                     main_img.setImageResource(d);
+                    image_name = d1;
                 } else if (num >= 80 && num < 100) {
                     main_img.setImageResource(e);
+                    image_name = e1;
                 } else if (num >= 100 && num < 120) {
                     main_img.setImageResource(f);
+                    image_name = f1;
                 }
             } else if (level == 4) {
                 // 6 objects
                 num = random.nextInt(120);
                 if (num >= 0 && num < 20) {
                     main_img.setImageResource(a);
+                    image_name = a1;
                 } else if (num >= 20 && num < 40) {
                     main_img.setImageResource(b);
+                    image_name = b1;
                 } else if (num >= 40 && num < 60) {
                     main_img.setImageResource(c);
+                    image_name = c1;
                 } else if (num >= 60 && num < 80) {
                     main_img.setImageResource(d);
+                    image_name = d1;
                 } else if (num >= 80 && num < 100) {
                     main_img.setImageResource(e);
+                    image_name = e1;
                 } else if (num >= 100 && num < 120) {
                     main_img.setImageResource(f);
+                    image_name = f1;
                 }
             } else if (level == 5) {
                 // 7 objects
                 num = random.nextInt(140);
                 if (num >= 0 && num < 20) {
                     main_img.setImageResource(a);
+                    image_name = a1;
                 } else if (num >= 20 && num < 40) {
                     main_img.setImageResource(b);
+                    image_name = b1;
                 } else if (num >= 40 && num < 60) {
                     main_img.setImageResource(c);
+                    image_name = c1;
                 } else if (num >= 60 && num < 80) {
                     main_img.setImageResource(d);
+                    image_name = d1;
                 } else if (num >= 80 && num < 100) {
                     main_img.setImageResource(e);
+                    image_name = e1;
                 } else if (num >= 100 && num < 120) {
                     main_img.setImageResource(f);
+                    image_name = f1;
                 } else if (num >= 120 && num < 140) {
                     main_img.setImageResource(g);
+                    image_name = g1;
                 }
             }
         }
 
-        /*
-                if ( age == 1 && level == 1 ) {
-            num = random.nextInt(120);
-            if(num >= 0 && num < 20) {
-                main_img.setImageResource(a);
-                image_name = a1;
-            }
-            else if(num >= 20 && num < 40) {
-                main_img.setImageResource(b);
-                image_name = b1;
-            }
-            else if(num >= 40 && num < 60) {
-                main_img.setImageResource(c);
-                image_name = c1;
-            }
-            else if(num >= 60 && num < 80) {
-                main_img.setImageResource(d);
-                image_name = d1;
-            }
-            else if(num >= 80 && num < 100) {
-                main_img.setImageResource(e);
-                image_name = e1;
-            }
-            else if(num >= 100 && num < 120) {
-                main_img.setImageResource(aa);
-                image_name = aa1;
-            }
-        }
-         */
-
         getGridSize();
 
-        ArrayList<GridModel> gridModelArrayList = new ArrayList<GridModel>();
+
+        do  {
+            totalCorrectResponses = 0;
+            formGrid();
+            for ( int i = 0; i < gridSize; i++) {
+                GridModel data = (GridModel) gridModelArrayList.get(i);
+                if ( data.getImage_name().equals(image_name)){
+                    totalCorrectResponses++;
+                }
+            }
+            Log.d("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", String.valueOf(totalCorrectResponses));
+        } while (totalCorrectResponses < 6);
+
+        try {
+            calendar = Calendar.getInstance();
+            simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
+            startDate = simpleDateFormat.parse(String.valueOf(simpleDateFormat.format(calendar.getTime())));
+            Log.d("startTime", String.valueOf(simpleDateFormat.format(calendar.getTime())));
+        } catch (ParseException parseException) {
+            parseException.printStackTrace();
+        }
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView parent, View v, int position, long id) {
+                GridModel data = (GridModel) gridModelArrayList.get(position);
+                //Toast.makeText(SelectiveAttentionGame1.this, "" + position + data.getImage_name() + data.getImgid(), Toast.LENGTH_SHORT).show();
+                if ( data.getImage_name().equals(image_name) ) {
+                    noOfCorrectResponses++;
+                    correctResponses.add(position);
+                    gridView.setAdapter(adapter);
+                }
+                else {
+                    // incorrect clicks
+                    noOfCommissionErrors++;
+                    incorrectResponses.add(position);
+                    gridView.setAdapter(adapter);
+                }
+            }
+        });
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if ( clickCount == 0 ) {
+                    try {
+                        calendar = Calendar.getInstance();
+                        simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
+                        endDate = simpleDateFormat.parse(String.valueOf(simpleDateFormat.format(calendar.getTime())));
+                        Log.d("endTime", String.valueOf(simpleDateFormat.format(calendar.getTime())));
+                    } catch (ParseException parseException) {
+                        parseException.printStackTrace();
+                    }
+                    // missed clicks
+                    noOfOmmissionErrors = totalCorrectResponses - noOfCorrectResponses;
+                    Log.d("total", String.valueOf(totalCorrectResponses));
+                    Log.d("correctResponses", String.valueOf(noOfCorrectResponses));
+                    Log.d("omissionErrors", String.valueOf(totalCorrectResponses - noOfCorrectResponses));
+                    Log.d("commissionErrors", String.valueOf(noOfCommissionErrors));
+                    Log.d("duration", String.valueOf(getCompletionTime()));
+
+                    completionTime = getCompletionTime();
+
+                    GVAdapter2 adapter = new GVAdapter2(getApplicationContext(), gridModelArrayList);
+                    gridView.setAdapter(adapter);
+
+                    saveDataToOnlineDB();
+                    createTable();
+                    saveDataToLocalDB();
+                    clickCount++;
+                }
+                else {
+                    Intent intent = new Intent(getApplicationContext(), SelectiveACompleteScreen.class);
+                    finish();
+                    mp.pause();
+                    startActivity(intent);
+                }
+            }
+        });
+
+        cross_btn.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN: {
+                        cross_btn.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
+                        view.invalidate();
+                        break;
+                    }
+                    case MotionEvent.ACTION_UP:
+                        alert();
+                        mp.pause();
+                    case MotionEvent.ACTION_CANCEL: {
+                        cross_btn.getBackground().clearColorFilter();
+                        view.invalidate();
+                        break;
+                    }
+                }
+                return true;
+            }
+        });
+
+    }
+
+    /*************************************************************************************************/
+
+    private void formGrid() {
+
+        gridModelArrayList = new ArrayList<GridModel>();
 
         for ( int i = 1; i <= gridSize; i++) {
-
-            /*
-            // 7 objects - 4 same coloured
-            num = random.nextInt(120);
-            if(num >= 0 && num < 20) {
-                gridModelArrayList.add(new GridModel(a1, a));
-            }
-            else if(num >= 20 && num < 40) {
-                gridModelArrayList.add(new GridModel(b1, b));
-            }
-            else if(num >= 40 && num < 60) {
-                gridModelArrayList.add(new GridModel(c1, c));
-            }
-            else if(num >= 60 && num < 80) {
-                gridModelArrayList.add(new GridModel(d1, d));
-            }
-            else if(num >= 80 && num < 100) {
-                gridModelArrayList.add(new GridModel(e1, e));
-            }
-            else if(num >= 100 && num < 120) {
-                gridModelArrayList.add(new GridModel(aa1, aa));
-            }
-             */
-
             if ( age >= 4 && age <= 5 ) {
                 if (level == 1) {
                     // 2 objects
@@ -588,100 +646,8 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
 
         }
 
-        GVAdapter adapter = new GVAdapter(this, gridModelArrayList);
+        adapter = new GVAdapter(this, gridModelArrayList);
         gridView.setAdapter(adapter);
-
-        try {
-            calendar = Calendar.getInstance();
-            simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
-            startDate = simpleDateFormat.parse(String.valueOf(simpleDateFormat.format(calendar.getTime())));
-            Log.d("startTime", String.valueOf(simpleDateFormat.format(calendar.getTime())));
-        } catch (ParseException parseException) {
-            parseException.printStackTrace();
-        }
-
-        for ( int i = 0; i < gridSize; i++) {
-            GridModel data = (GridModel) gridModelArrayList.get(i);
-            if ( data.getImage_name().equals(image_name)){
-                totalCorrectResponses++;
-            }
-        }
-
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView parent, View v, int position, long id) {
-                GridModel data = (GridModel) gridModelArrayList.get(position);
-                //Toast.makeText(SelectiveAttentionGame1.this, "" + position + data.getImage_name() + data.getImgid(), Toast.LENGTH_SHORT).show();
-                if ( data.getImage_name().equals(image_name) ) {
-                    noOfCorrectResponses++;
-                    correctResponses.add(position);
-                    gridView.setAdapter(adapter);
-                }
-                else {
-                    // incorrect clicks
-                    noOfCommissionErrors++;
-                    incorrectResponses.add(position);
-                    gridView.setAdapter(adapter);
-                }
-            }
-        });
-
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    calendar = Calendar.getInstance();
-                    simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
-                    endDate = simpleDateFormat.parse(String.valueOf(simpleDateFormat.format(calendar.getTime())));
-                    Log.d("endTime", String.valueOf(simpleDateFormat.format(calendar.getTime())));
-                } catch (ParseException parseException) {
-                    parseException.printStackTrace();
-                }
-                // missed clicks
-                noOfOmmissionErrors = totalCorrectResponses - noOfCorrectResponses;
-                Log.d("total", String.valueOf(totalCorrectResponses));
-                Log.d("correctResponses", String.valueOf(noOfCorrectResponses));
-                Log.d("omissionErrors", String.valueOf(totalCorrectResponses - noOfCorrectResponses));
-                Log.d("commissionErrors", String.valueOf(noOfCommissionErrors));
-                Log.d("duration", String.valueOf(getCompletionTime()));
-
-                completionTime = getCompletionTime();
-
-                GVAdapter2 adapter = new GVAdapter2(getApplicationContext(), gridModelArrayList);
-                gridView.setAdapter(adapter);
-
-                saveDataToOnlineDB();
-                createTable();
-                saveDataToLocalDB();
-
-                Intent intent = new Intent(getApplicationContext(), SelectiveACompleteScreen.class);
-                finish();
-                mp.pause();
-                startActivity(intent);
-
-            }
-        });
-
-        cross_btn.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                switch (motionEvent.getAction()) {
-                    case MotionEvent.ACTION_DOWN: {
-                        cross_btn.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
-                        view.invalidate();
-                        break;
-                    }
-                    case MotionEvent.ACTION_UP:
-                        alert();
-                        mp.pause();
-                    case MotionEvent.ACTION_CANCEL: {
-                        cross_btn.getBackground().clearColorFilter();
-                        view.invalidate();
-                        break;
-                    }
-                }
-                return true;
-            }
-        });
 
     }
 

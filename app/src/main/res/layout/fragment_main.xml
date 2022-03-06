@@ -221,7 +221,7 @@
                         android:textSize="20dp"
                         android:layout_marginRight="15dp"
                         android:fontFamily="@font/aclonica"
-                        android:text="Sustained Attention I"
+                        android:text="Sustained Attention"
                         android:textStyle="bold"/>
 
                     <ImageView
@@ -234,6 +234,8 @@
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
+
+        <!--
 
         <androidx.cardview.widget.CardView
             android:id="@+id/alternatingAttention"
@@ -289,6 +291,8 @@
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
+
+        -->
 
         <androidx.cardview.widget.CardView
             android:id="@+id/alternatingAttention2"

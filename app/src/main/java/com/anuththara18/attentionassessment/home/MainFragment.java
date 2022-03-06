@@ -17,10 +17,7 @@ import com.anuththara18.attentionassessment.alternating.AlternatingAttentionGame
 import com.anuththara18.attentionassessment.dividedattention.DividedAttentionGame1;
 import com.anuththara18.attentionassessment.focused.FocusedAttentionGame1;
 import com.anuththara18.attentionassessment.map.Map2Activity;
-import com.anuththara18.attentionassessment.selective.BirdChoosingActivity;
-import com.anuththara18.attentionassessment.selective.SelectiveAttentionGame1;
-import com.anuththara18.attentionassessment.sustained.SustainedAttentionGame1;
-import com.anuththara18.attentionassessment.sustained.SustainedAttentionGame2;
+import com.anuththara18.attentionassessment.sustained.BirdChoosingActivity;
 
 @SuppressLint("ValidFragment")
 
@@ -46,7 +43,7 @@ public class MainFragment extends Fragment {
         selectiveAttention = view.findViewById(R.id.selectiveAttention);
         dividedAttention = view.findViewById(R.id.dividedAttention);
         sustainedAttention = view.findViewById(R.id.sustainedAttention);
-        alternatingAttention = view.findViewById(R.id.alternatingAttention);
+        //alternatingAttention = view.findViewById(R.id.alternatingAttention);
         alternatingAttention2 = view.findViewById(R.id.alternatingAttention2);
 
         final MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.button1);
@@ -87,14 +84,6 @@ public class MainFragment extends Fragment {
             }
         });
 
-        alternatingAttention.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mp.start();
-                Intent intent = new Intent(getContext(), SustainedAttentionGame2.class);
-                startActivity(intent);
-            }
-        });
 
         alternatingAttention2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,6 +97,7 @@ public class MainFragment extends Fragment {
         return view;
 
     }
+
 
 }
 /*

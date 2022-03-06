@@ -84,7 +84,7 @@ public class AlternatingAttentionGame1 extends AppCompatActivity {
 
     //Integer[] sequence1 = { 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1, 0};
 
-    MediaPlayer mp;
+    MediaPlayer mp, mp2, mp3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,6 +154,8 @@ public class AlternatingAttentionGame1 extends AppCompatActivity {
                             leftcount = 0;
                         }
                         imageView1.setImageResource(left_images[leftcount]);
+                        red_btn_left.setEnabled(true);
+                        red_btn_right.setEnabled(true);
                         leftcount++;
                         startTime = System.currentTimeMillis();
                         clickedSide = "left";
@@ -172,6 +174,8 @@ public class AlternatingAttentionGame1 extends AppCompatActivity {
                             rightcount = 0;
                         }
                         imageView2.setImageResource(right_images[rightcount]);
+                        red_btn_left.setEnabled(true);
+                        red_btn_right.setEnabled(true);
                         rightcount++;
                         startTime = System.currentTimeMillis();
                         clickedSide = "right";
@@ -220,6 +224,8 @@ public class AlternatingAttentionGame1 extends AppCompatActivity {
                     case MotionEvent.ACTION_DOWN: {
                         red_btn_left.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
                         view.invalidate();
+                        mp2 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
+                        mp2.start();
                         break;
                     }
                     case MotionEvent.ACTION_UP:
@@ -230,6 +236,7 @@ public class AlternatingAttentionGame1 extends AppCompatActivity {
                             totalReactionTime = totalReactionTime + reactionTime;
                             Log.d("correct " , startTime + " " + clickedTime + " " + reactionTime);
                             noOfCorrectResponses++;
+                            red_btn_left.setEnabled(false);
                         }
                         else {
                             Log.d( "wrong" , startTime + " " + clickedTime + " " + reactionTime);
@@ -253,6 +260,8 @@ public class AlternatingAttentionGame1 extends AppCompatActivity {
                     case MotionEvent.ACTION_DOWN: {
                         red_btn_right.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
                         view.invalidate();
+                        mp3 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
+                        mp3.start();
                         break;
                     }
                     case MotionEvent.ACTION_UP:
@@ -263,6 +272,7 @@ public class AlternatingAttentionGame1 extends AppCompatActivity {
                             totalReactionTime = totalReactionTime + reactionTime;
                             Log.d("correct " , startTime + " " + clickedTime + " " + reactionTime);
                             noOfCorrectResponses++;
+                            red_btn_right.setEnabled(false);
                         }
                         else {
                             Log.d( "wrong" , startTime + " " + clickedTime + " " + reactionTime);

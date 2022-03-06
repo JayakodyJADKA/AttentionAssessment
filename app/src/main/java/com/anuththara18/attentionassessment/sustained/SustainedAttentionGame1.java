@@ -7,25 +7,19 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.anuththara18.attentionassessment.CompleteScreen2;
 import com.anuththara18.attentionassessment.R;
 import com.anuththara18.attentionassessment.age.AgeActivity;
 import com.anuththara18.attentionassessment.db.Api;
@@ -33,14 +27,11 @@ import com.anuththara18.attentionassessment.db.RequestHandler;
 import com.anuththara18.attentionassessment.gender.GenderActivity;
 import com.anuththara18.attentionassessment.home.NavigationDrawerActivity;
 import com.anuththara18.attentionassessment.language.LanguageSetter;
-import com.anuththara18.attentionassessment.selective.BirdChoosingActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Random;
 
 public class SustainedAttentionGame1 extends AppCompatActivity {
@@ -57,12 +48,12 @@ public class SustainedAttentionGame1 extends AppCompatActivity {
 
     // isi = 10 - 60 secs
 
-    Integer[] isi = { 10000, 45000, 25000, 50000, 20000, 35000, 60000, 15000, 30000, 55000, 40000,
+    /*Integer[] isi = { 10000, 45000, 25000, 50000, 20000, 35000, 60000, 15000, 30000, 55000, 40000,
                       10000, 45000, 25000, 50000, 20000, 35000, 60000, 15000, 30000, 55000, 40000,
-                      10000, 15000, 10000, 15000 };
-    /*Integer[] isi = { 1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000,
+                      10000, 15000, 10000, 15000 };*/
+    Integer[] isi = { 1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000,
             1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000,
-            1000, 1500, 1000, 1500 };*/
+            1000, 1500, 1000, 1500 };
 
     Integer[] image = { R.drawable.red_bird_gif,
             R.drawable.blue_bird_gif,
@@ -88,7 +79,7 @@ public class SustainedAttentionGame1 extends AppCompatActivity {
     long totalReactionTime = 0;
     int meanReactionTime = 0;
 
-    MediaPlayer mp;
+    MediaPlayer mp, mp2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,6 +125,7 @@ public class SustainedAttentionGame1 extends AppCompatActivity {
                         randomImage = random.nextInt(6);
                         bird.setVisibility(View.INVISIBLE);
                         gifImageView.setVisibility(View.VISIBLE);
+                        red_btn.setEnabled(true);
                         gifImageView.setImageResource(image[randomImage]);
                         clickedImage = image[randomImage];
                         updateInterval = isi[j];
@@ -145,7 +137,7 @@ public class SustainedAttentionGame1 extends AppCompatActivity {
                     }
                     // appearance - 0.5s * 25 times
                     else if ( totalCorrectResponses <= 25 ) {
-                        Log.d("radomTimer", String.valueOf(i + " 2000" ));
+                        Log.d("radomTimer", String.valueOf(i + " 3000" ));
                         Log.d("******************************", "start 1");
 
                         if (BirdChoosingActivity.birdSelected == 1) {
@@ -167,11 +159,12 @@ public class SustainedAttentionGame1 extends AppCompatActivity {
                         }
 
                         bird.setVisibility(View.VISIBLE);
+                        red_btn.setEnabled(true);
                         gifImageView.setVisibility(View.INVISIBLE);
                         startTime = System.currentTimeMillis();
-                        gifImageView.postDelayed(this, 2000);
+                        gifImageView.postDelayed(this, 3000);
                         totalCorrectResponses++;
-                        duration = duration + 2000;
+                        duration = duration + 3000;
                         i++;
                     }
 
@@ -219,15 +212,13 @@ public class SustainedAttentionGame1 extends AppCompatActivity {
             public void onClick(View view) {
                 clickedTime = System.currentTimeMillis();
                 reactionTime = ( clickedTime - startTime );
+                mp2 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
+                mp2.start();
                 if (correctImage == clickedImage) {
                     totalReactionTime = (long) (totalReactionTime + reactionTime);
                     Log.d("correct " , startTime + " " + clickedTime + " " + reactionTime);
                     noOfCorrectResponses++;
-                }
-                else if (reactionTime < 4000) {
-                    totalReactionTime = (long) (totalReactionTime + reactionTime);
-                    Log.d("correct " , startTime + " " + clickedTime + " " + reactionTime);
-                    noOfCorrectResponses++;
+                    red_btn.setEnabled(false);
                 }
                 else {
                     noOfCommissionErrors++;

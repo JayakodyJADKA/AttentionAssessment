@@ -67,9 +67,11 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
     ImageButton red_btn;
     TextView textView;
 
+    String clicked = "null";
+
     Integer[] isi = { 3000, 3500, 4000, 4500, 5000, 5500, 6000 };
 
-    MediaPlayer mp;
+    MediaPlayer mp, mp2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +111,8 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
                     if ( i % 2 != 0 ) {
 
                         imageView.setVisibility(View.INVISIBLE);
+                        clicked = "null";
+                        red_btn.setEnabled(true);
                         radomTimer = random.nextInt(5);
                         updateInterval = isi[radomTimer];
                         imageView.postDelayed(this, updateInterval);
@@ -120,11 +124,13 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
                     else {
                         Log.d("***************radomTimer******************", String.valueOf(i + " 1000" ));
                         imageView.setVisibility(View.VISIBLE);
+                        red_btn.setEnabled(true);
                         imageView.setImageResource(R.drawable.monkey);
+                        clicked = "monkey";
                         startTime = System.currentTimeMillis();
-                        imageView.postDelayed(this, 1000);
+                        imageView.postDelayed(this, 3000);
                         totalCorrectResponses++;
-                        duration = duration + 1000;
+                        duration = duration + 3000;
                         i++;
                     }
 
@@ -164,19 +170,21 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 switch (motionEvent.getAction()) {
                     case MotionEvent.ACTION_DOWN: {
-
                         red_btn.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
                         view.invalidate();
+                        mp2 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
+                        mp2.start();
                         break;
                     }
                     case MotionEvent.ACTION_UP:
                         // Your action here on button click
                         clickedTime = System.currentTimeMillis();
                         reactionTime = ( clickedTime - startTime );
-                        if (reactionTime < 4000) {
+                        if (clicked.equals("monkey")) {
                             totalReactionTime = totalReactionTime + reactionTime;
                             Log.d("correct " , startTime + " " + clickedTime + " " + reactionTime);
                             noOfCorrectResponses++;
+                            red_btn.setEnabled(false);
                         }
                         else {
                             Log.d( "wrong" , startTime + " " + clickedTime + " " + reactionTime);

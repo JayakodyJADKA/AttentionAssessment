@@ -45,7 +45,8 @@
         <activity
             android:name=".alternating.AlternatingAttentionGame1"
             android:screenOrientation="landscape"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+        </activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -58,9 +59,11 @@
         </provider>
 
         <activity
-            android:name=".selective.BirdChoosingActivity"
+            android:name=".sustained.BirdChoosingActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar" >
+
+        </activity>
         <activity
             android:name=".dividedattention.DACompleteScreen"
             android:screenOrientation="portrait"
@@ -93,7 +96,6 @@
             android:name=".CompleteScreen2"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" >
-
         </activity>
         <activity
             android:name=".CompleteScreen"
@@ -104,19 +106,25 @@
         <activity
             android:name=".dividedattention.DividedAttentionGame1"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar" >
+        </activity>
         <activity
             android:name=".sustained.SustainedAttentionGame1"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar" >
+        </activity>
         <activity
             android:name=".focused.FocusedAttentionGame2"
             android:screenOrientation="landscape"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar" >
+
+        </activity>
         <activity
             android:name=".map.Map2Activity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar" >
+
+        </activity>
         <activity
             android:name=".map.Map1Activity"
             android:screenOrientation="portrait"
@@ -129,7 +137,8 @@
         <activity
             android:name=".focused.FocusedAttentionGame1"
             android:screenOrientation="landscape"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar" >
+        </activity>
         <activity
             android:name=".loginregistration.RegistrationActivity"
             android:screenOrientation="portrait"
@@ -153,7 +162,9 @@
         <activity
             android:name=".selective.SelectiveAttentionGame1"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar" >
+
+        </activity>
         <activity
             android:name=".splashscreen.SplashActivity"
             android:screenOrientation="landscape"

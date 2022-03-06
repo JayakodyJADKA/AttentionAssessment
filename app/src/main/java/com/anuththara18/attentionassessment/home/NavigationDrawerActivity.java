@@ -1,20 +1,29 @@
 package com.anuththara18.attentionassessment.home;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.anuththara18.attentionassessment.R;
 import com.anuththara18.attentionassessment.consentform.ConsentFormActivity;
 import com.google.android.material.navigation.NavigationView;
+
+import static android.Manifest.permission.MANAGE_EXTERNAL_STORAGE;
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class NavigationDrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -31,6 +40,9 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
     //FOR DATAS
     private static final int FRAGMENT_MAINDASHBOARD = 0;
 
+    // constant code for runtime permissions
+    private static final int PERMISSION_REQUEST_CODE = 200;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +55,14 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
 
         // Show First Fragment
         this.showFirstFragment();
+
+        // below code is used for
+        // checking our permissions.
+        if (checkPermission()) {
+            //Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
+        } else {
+            requestPermission();
+        }
 
     }
 
@@ -107,6 +127,8 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
         return true;
     }
 
+    /**************************************************************************************************/
+
     private void logout() {
 
         //closing activity
@@ -117,15 +139,15 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
 
     }
 
-    // ---------------------
-    // CONFIGURATION
-    // ---------------------
+    /**************************************************************************************************/
 
     // Configure Toolbar
     private void configureToolBar(){
         this.toolbar = (Toolbar) findViewById(R.id.activity_main_toolbar);
         setSupportActionBar(toolbar);
     }
+
+    /**************************************************************************************************/
 
     //Configure Drawer Layout
     private void configureDrawerLayout(){
@@ -135,15 +157,15 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
         toggle.syncState();
     }
 
+    /**************************************************************************************************/
+
     //Configure NavigationView
     private void configureNavigationView(){
         this.navigationView = (NavigationView) findViewById(R.id.activity_main_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    // ---------------------
-    // FRAGMENTS
-    // ---------------------
+    /**************************************************************************************************/
 
     // Show first fragment when activity is created
     private void showFirstFragment(){
@@ -156,8 +178,9 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
         }
     }
 
-    // Show fragment according an Identifier
+    /**************************************************************************************************/
 
+    // Show fragment according an Identifier
     private void showFragment(int fragmentIdentifier){
         switch (fragmentIdentifier){
             case FRAGMENT_MAINDASHBOARD :
@@ -180,7 +203,7 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
         }
     }
 
-    // ---
+    /**************************************************************************************************/
 
     // Create each fragment page and show it
 
@@ -189,8 +212,7 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
         this.startTransactionFragment(this.fragmentMainDashboard);
     }
 
-
-    // ---
+    /**************************************************************************************************/
 
     // Generic method that will replace and show a fragment inside the MainActivity Frame Layout
     private void startTransactionFragment(Fragment fragment){
@@ -199,4 +221,54 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
                     .replace(R.id.activity_main_frame_layout, fragment).commit();
         }
     }
+
+    /**************************************************************************************************/
+
+    private boolean checkPermission() {
+        // checking of permissions.
+        int permission1 = ContextCompat.checkSelfPermission(getApplicationContext(), WRITE_EXTERNAL_STORAGE);
+        int permission2 = ContextCompat.checkSelfPermission(getApplicationContext(), READ_EXTERNAL_STORAGE);
+        int permission3 = ContextCompat.checkSelfPermission(getApplicationContext(), MANAGE_EXTERNAL_STORAGE);
+        return permission1 == PackageManager.PERMISSION_GRANTED && permission2 == PackageManager.PERMISSION_GRANTED && permission3 == PackageManager.PERMISSION_GRANTED;
+    }
+
+    /**************************************************************************************************/
+
+    private void requestPermission() {
+        // requesting permissions if not provided.
+        ActivityCompat.requestPermissions(this, new String[]{WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE, MANAGE_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0) {
+
+                /*
+                Intent intent = new Intent();
+                intent.setAction(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+                Uri uri = Uri.fromParts("package", this.getPackageName(), null);
+                intent.setData(uri);
+                startActivity(intent);
+
+                 */
+
+                // after requesting permissions we are showing
+                // users a toast message of permission granted.
+                boolean writeStorage = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                boolean readStorage = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+
+                if (writeStorage && readStorage) {
+                    //Toast.makeText(this, "Permission Granted..", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "Permission Denied.", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            }
+        }
+    }
+
+    /**************************************************************************************************/
+
 }
