@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.pdf.PdfDocument;
@@ -26,11 +27,15 @@ import androidx.core.content.ContextCompat;
 
 import com.anuththara18.attentionassessment.R;
 import com.anuththara18.attentionassessment.age.AgeActivity;
+import com.anuththara18.attentionassessment.consentform.ParentsConsentDatabaseHelper;
 import com.anuththara18.attentionassessment.gender.GenderActivity;
 import com.anuththara18.attentionassessment.home.NavigationDrawerActivity;
+import com.anuththara18.attentionassessment.selective.Selective;
+import com.opencsv.CSVWriter;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +60,8 @@ public class AACompleteScreen extends AppCompatActivity {
 
     // creating a bitmap variable
     // for storing our images
-    Bitmap bmp, scaledbmp;
+    Bitmap bmp, bmp2, scaledbmp, scaledbmp2;
+    public static ParentsConsentDatabaseHelper sqLiteHelper;
 
     // constant code for runtime permissions
     private static final int PERMISSION_REQUEST_CODE = 200;
@@ -73,6 +79,8 @@ public class AACompleteScreen extends AppCompatActivity {
         decorView.setSystemUiVisibility(uiOptions);
         setContentView(R.layout.activity_complete_screen2);
 
+        sqLiteHelper = new ParentsConsentDatabaseHelper(this, "ParentsConsent.sqlite", null, 1);
+
         complete = findViewById(R.id.complete);
 
         complete.setOnClickListener(new View.OnClickListener() {
@@ -84,16 +92,27 @@ public class AACompleteScreen extends AppCompatActivity {
             }
         });
 
-        dataList = new ArrayList<>();
+         /*******************************************************************************************/
 
-        //opening the database
-        mDatabase = openOrCreateDatabase(AlternatingAttentionGame1.DATABASE_NAME, MODE_PRIVATE, null);
+        try {
+            Cursor cursor = sqLiteHelper.getData("SELECT * FROM ParentsConsent");
 
-        /*******************************************************************************************/
+            while (cursor.moveToNext()) {
+                byte[] image = cursor.getBlob(0);
+                bmp2 = BitmapFactory.decodeByteArray(image, 0, image.length);
+                //fingerprintImageView.setImageBitmap(bmp);
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
         // initializing our variables.
-        bmp = BitmapFactory.decodeResource(getResources(), R.drawable.focused);
+        bmp = BitmapFactory.decodeResource(getResources(), R.drawable.alternative);
         scaledbmp = Bitmap.createScaledBitmap(bmp, 140, 140, false);
+        //scaledbmp2 = Bitmap.createScaledBitmap(bmp2, 200, 200, false);
+        scaledbmp2 = BITMAP_RESIZER(bmp2, 400, 400);
 
         // below code is used for
         // checking our permissions.
@@ -102,6 +121,14 @@ public class AACompleteScreen extends AppCompatActivity {
         } else {
             requestPermission();
         }
+
+        /*******************************************************************************************/
+
+
+        dataList = new ArrayList<>();
+
+        //opening the database
+        mDatabase = openOrCreateDatabase(AlternatingAttentionGame1.DATABASE_NAME, MODE_PRIVATE, null);
 
         /*******************************************************************************************/
 
@@ -129,6 +156,42 @@ public class AACompleteScreen extends AppCompatActivity {
         }
         //closing the cursor
         cursorEmployees.close();
+
+        /*******************************************************************************************/
+
+        String csv = (Environment.getExternalStorageDirectory().getAbsolutePath() + "/AlternatingAttention.csv"); // Here csv file name is MyCsvFile.csv
+
+        // csv will create inside phone storage.
+        CSVWriter writer = null;
+        try {
+            writer = new CSVWriter(new FileWriter(csv));
+
+            String[] entries = {"id","child_id","total_correct_responses","correct_responses","commission_errors","omission_errors","mean_reaction_time","total_duration"};
+            writer.writeNext(entries);
+
+            List<String[]> data = new ArrayList<String[]>();
+
+            for (int i = 0; i < dataList.size(); i++) {
+
+                Alternating gameData = dataList.get(i);
+                data.add(new String[]{ String.valueOf(gameData.getId()),
+                        String.valueOf(gameData.getChildID()),
+                        String.valueOf(gameData.getTotalCorrectResponses()),
+                        String.valueOf(gameData.getNoOfCorrectResponses()),
+                        String.valueOf(gameData.getNoOfCommissionErrors()),
+                        String.valueOf(gameData.getNoOfOmmissionErrors()),
+                        String.valueOf(gameData.getMeanReactionTime()),
+                        String.valueOf(gameData.getTotalDuration())
+                });
+            }
+
+            writer.writeAll(data); // data is adding to csv
+
+            writer.close();
+            //callRead();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         /*******************************************************************************************/
 
@@ -164,6 +227,7 @@ public class AACompleteScreen extends AppCompatActivity {
         // third parameter is position from top and last
         // one is our variable for paint.
         canvas.drawBitmap(scaledbmp, 56, 40, paint);
+        canvas.drawBitmap(scaledbmp2, 400, 0, paint);
 
         // below line is used for adding typeface for
         // our text which we will be adding in our PDF file.
@@ -338,4 +402,22 @@ public class AACompleteScreen extends AppCompatActivity {
 
     /**************************************************************************************************/
 
+    public Bitmap BITMAP_RESIZER(Bitmap bitmap,int newWidth,int newHeight) {
+        Bitmap scaledBitmap = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
+
+        float ratioX = newWidth / (float) bitmap.getWidth();
+        float ratioY = newHeight / (float) bitmap.getHeight();
+        float middleX = newWidth / 2.0f;
+        float middleY = newHeight / 2.0f;
+
+        Matrix scaleMatrix = new Matrix();
+        scaleMatrix.setScale(ratioX, ratioY, middleX, middleY);
+
+        Canvas canvas = new Canvas(scaledBitmap);
+        canvas.setMatrix(scaleMatrix);
+        canvas.drawBitmap(bitmap, middleX - bitmap.getWidth() / 2, middleY - bitmap.getHeight() / 2, new Paint(Paint.FILTER_BITMAP_FLAG));
+
+        return scaledBitmap;
+
+    }
 }
