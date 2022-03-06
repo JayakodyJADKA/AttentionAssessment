@@ -42,4 +42,7 @@ dependencies {
     // giff images
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.17'
 
+    implementation 'com.opencsv:opencsv:4.6' // Here is opencsv library
+
+
 }

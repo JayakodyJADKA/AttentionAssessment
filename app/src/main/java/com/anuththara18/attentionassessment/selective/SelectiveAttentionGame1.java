@@ -426,6 +426,7 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
                     mp.pause();
                     startActivity(intent);
                 }
+
             }
         });
 

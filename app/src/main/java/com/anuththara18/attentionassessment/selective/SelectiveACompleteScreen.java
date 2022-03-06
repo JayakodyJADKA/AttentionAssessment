@@ -32,9 +32,11 @@ import com.anuththara18.attentionassessment.R;
 import com.anuththara18.attentionassessment.age.AgeActivity;
 import com.anuththara18.attentionassessment.gender.GenderActivity;
 import com.anuththara18.attentionassessment.home.NavigationDrawerActivity;
+import com.opencsv.CSVWriter;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -86,11 +88,6 @@ public class SelectiveACompleteScreen extends AppCompatActivity {
             }
         });
 
-        dataList = new ArrayList<>();
-
-        //opening the database
-        mDatabase = openOrCreateDatabase(SelectiveAttentionGame1.DATABASE_NAME, MODE_PRIVATE, null);
-
         /*******************************************************************************************/
 
         // initializing our variables.
@@ -104,6 +101,13 @@ public class SelectiveACompleteScreen extends AppCompatActivity {
         } else {
             requestPermission();
         }
+
+        /*******************************************************************************************/
+
+        dataList = new ArrayList<>();
+
+        //opening the database
+        mDatabase = openOrCreateDatabase(SelectiveAttentionGame1.DATABASE_NAME, MODE_PRIVATE, null);
 
         /*******************************************************************************************/
 
@@ -134,57 +138,60 @@ public class SelectiveACompleteScreen extends AppCompatActivity {
 
         /*******************************************************************************************/
 
-        // generate our PDF file.
-        // creating an object variable
-        // for our PDF document.
+        String csv = (Environment.getExternalStorageDirectory().getAbsolutePath() + "/SelectiveAttention.csv"); // Here csv file name is MyCsvFile.csv
+
+        // csv will create inside phone storage.
+        CSVWriter writer = null;
+        try {
+            writer = new CSVWriter(new FileWriter(csv));
+
+            String[] entries = {"id","child_id","total_correct_responses","correct_responses","commission_errors","omission_errors","mean_reaction_time","total_duration"};
+            writer.writeNext(entries);
+
+            List<String[]> data = new ArrayList<String[]>();
+
+            for (int i = 0; i < dataList.size(); i++) {
+
+                Selective gameData = dataList.get(i);
+                data.add(new String[]{ String.valueOf(gameData.getId()),
+                        String.valueOf(gameData.getChildID()),
+                        String.valueOf(gameData.getTotalCorrectResponses()),
+                        String.valueOf(gameData.getNoOfCorrectResponses()),
+                        String.valueOf(gameData.getNoOfCommissionErrors()),
+                        String.valueOf(gameData.getNoOfOmmissionErrors()),
+                        String.valueOf(gameData.getMeanReactionTime()),
+                        String.valueOf(gameData.getTotalDuration())
+                });
+            }
+
+            writer.writeAll(data); // data is adding to csv
+
+            writer.close();
+            //callRead();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        /*******************************************************************************************/
+
         PdfDocument pdfDocument = new PdfDocument();
 
-        // two variables for paint "paint" is used
-        // for drawing shapes and we will use "title"
-        // for adding text in our PDF file.
         Paint paint = new Paint();
         Paint title = new Paint();
 
-        // we are adding page info to our PDF file
-        // in which we will be passing our pageWidth,
-        // pageHeight and number of pages and after that
-        // we are calling it to create our PDF.
         PdfDocument.PageInfo mypageInfo = new PdfDocument.PageInfo.Builder(pagewidth, pageHeight, 1).create();
 
-        // below line is used for setting
-        // start page for our PDF file.
         PdfDocument.Page myPage = pdfDocument.startPage(mypageInfo);
 
-        // creating a variable for canvas
-        // from our page of PDF.
         Canvas canvas = myPage.getCanvas();
 
-        // below line is used to draw our image on our PDF file.
-        // the first parameter of our drawbitmap method is
-        // our bitmap
-        // second parameter is position from left
-        // third parameter is position from top and last
-        // one is our variable for paint.
         canvas.drawBitmap(scaledbmp, 56, 40, paint);
 
-        // below line is used for adding typeface for
-        // our text which we will be adding in our PDF file.
         title.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-
-        // below line is used for setting text size
-        // which we will be displaying in our PDF file.
         title.setTextSize(20);
-
-        // below line is sued for setting color
-        // of our text inside our PDF file.
         title.setColor(ContextCompat.getColor(this, R.color.orange));
 
-        // below line is used to draw text in our PDF file.
-        // the first parameter is our text, second parameter
-        // is position from start, third parameter is position from top
-        // and then we are passing our variable of paint which is title.
         canvas.drawText("Selective Attention", 250, 80, title);
-
 
         title.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
         title.setColor(ContextCompat.getColor(this, R.color.black));
@@ -206,16 +213,12 @@ public class SelectiveACompleteScreen extends AppCompatActivity {
         canvas.drawText("Contact No: " + gender, 150, 450, title);
         canvas.drawText("Email: " + gender, 150, 500, title);
 
-         */
+        */
 
-        // similarly we are creating another text and in this
-        // we are aligning this text to center of our PDF file.
         title.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
         title.setColor(ContextCompat.getColor(this, R.color.black));
         title.setTextSize(15);
 
-        // below line is used for setting
-        // our text to center of PDF.
         //title.setTextAlign(Paint.Align.CENTER);
 
         int space = 0;
@@ -245,47 +248,17 @@ public class SelectiveACompleteScreen extends AppCompatActivity {
             space = space + 50;
         }
 
-        // after adding all attributes to our
-        // PDF file we will be finishing our page.
         pdfDocument.finishPage(myPage);
 
-        // below line is used to set the name of
-        // our PDF file and its path.
         File file = new File(Environment.getExternalStorageDirectory(), "SelectiveAttention.pdf");
 
         try {
-            // after creating a file name we will
-            // write our PDF file to that location.
             pdfDocument.writeTo(new FileOutputStream(file));
-
-            /*
-           // Uri path = Uri.fromFile(file);
-            Uri path = FileProvider.getUriForFile(SelectiveACompleteScreen.this, BuildConfig.APPLICATION_ID + ".provider", file);
-
-            Intent pdfIntent = new Intent(Intent.ACTION_VIEW);
-            pdfIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            pdfIntent.setDataAndType(path, "application/pdf");
-            pdfIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-            try{
-                startActivity(pdfIntent);
-            }catch(ActivityNotFoundException e){
-                Toast.makeText(getApplicationContext(), "No Application available to view PDF", Toast.LENGTH_SHORT).show();
-            }
-
-             */
-
-            // below line is to print toast message
-            // on completion of PDF generation.
             Toast.makeText(getApplicationContext(), "PDF file generated successfully.", Toast.LENGTH_LONG).show();
 
         } catch (IOException e) {
-            // below line is used
-            // to handle error
             e.printStackTrace();
         }
-        // after storing our pdf to that
-        // location we are closing our PDF file.
         pdfDocument.close();
 
     }
@@ -313,15 +286,6 @@ public class SelectiveACompleteScreen extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == PERMISSION_REQUEST_CODE) {
             if (grantResults.length > 0) {
-
-                /*
-                Intent intent = new Intent();
-                intent.setAction(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-                Uri uri = Uri.fromParts("package", this.getPackageName(), null);
-                intent.setData(uri);
-                startActivity(intent);
-
-                 */
 
                 // after requesting permissions we are showing
                 // users a toast message of permission granted.
