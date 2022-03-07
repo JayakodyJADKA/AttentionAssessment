@@ -1,5 +1,7 @@
 package com.anuththara18.attentionassessment.focused;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -37,8 +39,14 @@ import com.anuththara18.attentionassessment.sustained.SustainedAttentionGame1;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 public class FocusedAttentionGame1 extends AppCompatActivity {
 
@@ -50,6 +58,7 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
 
     Random random = new Random();
     int radomTimer = 0;
+    int rand = 0;
 
     int i = 1;
     private long startTime, clickedTime = 0;
@@ -63,13 +72,16 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
     int meanReactionTime = 0;
     int duration = 0;
 
-    ImageView imageView, cross_btn;
+    ImageView imageView, cross_btn, imageView2, imageView3, imageView4, imageView5, imageView6;
     ImageButton red_btn;
     TextView textView;
 
     String clicked = "null";
 
     Integer[] isi = { 3000, 3500, 4000, 4500, 5000, 5500, 6000 };
+
+    Integer[] images = {R.drawable.monkey, R.drawable.baby_zebra, R.drawable.elephant, R.drawable.pig, R.drawable.giraffe,
+                        R.drawable.cow, R.drawable.horse, R.drawable.dino, R.drawable.lion, R.drawable.dog};
 
     MediaPlayer mp, mp2;
 
@@ -86,11 +98,16 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
         setContentView(R.layout.activity_focused_attention_game1);
 
         imageView = (ImageView) findViewById(R.id.imageView);
+        imageView2 = (ImageView) findViewById(R.id.imageView2);
+        imageView3 = (ImageView) findViewById(R.id.imageView3);
+        imageView4 = (ImageView) findViewById(R.id.imageView4);
+        imageView5 = (ImageView) findViewById(R.id.imageView5);
+        imageView6 = (ImageView) findViewById(R.id.imageView6);
         cross_btn = (ImageView) findViewById(R.id.cross_btn);
         red_btn = (ImageButton) findViewById(R.id.red_btn);
         textView = (TextView) findViewById(R.id.textView);
 
-        textView.setText(LanguageSetter.getresources().getString(R.string.focg1));
+        //textView.setText(LanguageSetter.getresources().getString(R.string.focg1));
 
         mp = MediaPlayer.create(getApplicationContext(), R.raw.focused);
         mp.start();
@@ -99,6 +116,18 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
 
         //creating a database
         mDatabase = openOrCreateDatabase(DATABASE_NAME, MODE_PRIVATE, null);
+
+        List<Integer> unpickedNumbers = new ArrayList<Integer>();
+        unpickedNumbers.add(0);
+        unpickedNumbers.add(1);
+        unpickedNumbers.add(2);
+        unpickedNumbers.add(3);
+        unpickedNumbers.add(4);
+        unpickedNumbers.add(5);
+        unpickedNumbers.add(6);
+        unpickedNumbers.add(7);
+        unpickedNumbers.add(8);
+        unpickedNumbers.add(9);
 
         new Runnable() {
             int updateInterval;
@@ -109,8 +138,12 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
                 if ( i <= 41 ) { // 41 times
 
                     if ( i % 2 != 0 ) {
-
                         imageView.setVisibility(View.INVISIBLE);
+                        imageView2.setVisibility(View.INVISIBLE);
+                        imageView3.setVisibility(View.INVISIBLE);
+                        imageView4.setVisibility(View.INVISIBLE);
+                        imageView5.setVisibility(View.INVISIBLE);
+                        imageView6.setVisibility(View.INVISIBLE);
                         clicked = "null";
                         red_btn.setEnabled(true);
                         radomTimer = random.nextInt(5);
@@ -122,10 +155,78 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
                     }
                     // appearance - 1s * 20 times
                     else {
-                        Log.d("***************radomTimer******************", String.valueOf(i + " 1000" ));
-                        imageView.setVisibility(View.VISIBLE);
+                        Log.d("***************radomTimer******************", String.valueOf(i + " 3000" ));
+
+                        if ( i == 22 ) {
+                            unpickedNumbers.add(0);
+                            unpickedNumbers.add(1);
+                            unpickedNumbers.add(2);
+                            unpickedNumbers.add(3);
+                            unpickedNumbers.add(4);
+                            unpickedNumbers.add(5);
+                            unpickedNumbers.add(6);
+                            unpickedNumbers.add(7);
+                            unpickedNumbers.add(8);
+                            unpickedNumbers.add(9);
+                        }
+                        rand = getRandomElement(unpickedNumbers);
+
+                        if ( i == 2 || i == 14 || i == 26 || i == 38 ) {
+                            imageView.setVisibility(View.VISIBLE);
+                            imageView2.setVisibility(View.INVISIBLE);
+                            imageView3.setVisibility(View.INVISIBLE);
+                            imageView4.setVisibility(View.INVISIBLE);
+                            imageView5.setVisibility(View.INVISIBLE);
+                            imageView6.setVisibility(View.INVISIBLE);
+                            imageView.setImageResource(images[rand]);
+                        }
+                        else if ( i == 4 || i == 16 || i == 28 || i == 40 ) {
+                            imageView2.setVisibility(View.VISIBLE);
+                            imageView.setVisibility(View.INVISIBLE);
+                            imageView3.setVisibility(View.INVISIBLE);
+                            imageView4.setVisibility(View.INVISIBLE);
+                            imageView5.setVisibility(View.INVISIBLE);
+                            imageView6.setVisibility(View.INVISIBLE);
+                            imageView2.setImageResource(images[rand]);
+                        }
+                        else if ( i == 6 || i == 18 || i == 30 ) {
+                            imageView3.setVisibility(View.VISIBLE);
+                            imageView2.setVisibility(View.INVISIBLE);
+                            imageView.setVisibility(View.INVISIBLE);
+                            imageView4.setVisibility(View.INVISIBLE);
+                            imageView5.setVisibility(View.INVISIBLE);
+                            imageView6.setVisibility(View.INVISIBLE);
+                            imageView3.setImageResource(images[rand]);
+                        }
+                        else if ( i == 8 || i == 20 || i == 32 ) {
+                            imageView4.setVisibility(View.VISIBLE);
+                            imageView2.setVisibility(View.INVISIBLE);
+                            imageView3.setVisibility(View.INVISIBLE);
+                            imageView.setVisibility(View.INVISIBLE);
+                            imageView5.setVisibility(View.INVISIBLE);
+                            imageView6.setVisibility(View.INVISIBLE);
+                            imageView4.setImageResource(images[rand]);
+                        }
+                        else if ( i == 10 || i == 22 || i == 34 ) {
+                            imageView5.setVisibility(View.VISIBLE);
+                            imageView2.setVisibility(View.INVISIBLE);
+                            imageView3.setVisibility(View.INVISIBLE);
+                            imageView4.setVisibility(View.INVISIBLE);
+                            imageView.setVisibility(View.INVISIBLE);
+                            imageView6.setVisibility(View.INVISIBLE);
+                            imageView5.setImageResource(images[rand]);
+                        }
+                        else if ( i == 12 || i == 24 || i == 36 ) {
+                            imageView6.setVisibility(View.VISIBLE);
+                            imageView2.setVisibility(View.INVISIBLE);
+                            imageView3.setVisibility(View.INVISIBLE);
+                            imageView4.setVisibility(View.INVISIBLE);
+                            imageView5.setVisibility(View.INVISIBLE);
+                            imageView.setVisibility(View.INVISIBLE);
+                            imageView6.setImageResource(images[rand]);
+                        }
+
                         red_btn.setEnabled(true);
-                        imageView.setImageResource(R.drawable.monkey);
                         clicked = "monkey";
                         startTime = System.currentTimeMillis();
                         imageView.postDelayed(this, 3000);
@@ -223,6 +324,25 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
             }
         });
 
+    }
+
+    // Function select an element base on index
+    // and return an element
+    public int getRandomElement(List<Integer> list) {
+        Random rand = new Random();
+        //int val = rand.nextInt(list.size());
+        int val = list.get(rand.nextInt(list.size()));
+        //list.remove("val");
+
+        Iterator itr = list.iterator();
+        while (itr.hasNext()) {
+            int data = (Integer)itr.next();
+            if (data == val)
+                itr.remove();
+        }
+
+        Log.d("1111111111111111111111111", val + "----" + list);
+        return val;
     }
 
     /*************************************************************************************************/
