@@ -105,7 +105,6 @@ public class DividedAttentionGame1 extends AppCompatActivity {
         mDatabase = openOrCreateDatabase(DATABASE_NAME, MODE_PRIVATE, null);
 
         totalCorrectResponses = 8;
-        AgeActivity.age = 4;
 
         new Runnable() {
 

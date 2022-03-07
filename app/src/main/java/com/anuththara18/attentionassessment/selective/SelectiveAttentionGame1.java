@@ -87,6 +87,7 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
     int age = AgeActivity.age;
     int level = Map2Activity.level;
     Random random;
+    long gameEnd;
 
     MediaPlayer mp;
     int clickCount = 0;
@@ -113,6 +114,9 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
 
         mp = MediaPlayer.create(getApplicationContext(), R.raw.selective);
         mp.start();
+
+        long gameStart = System.currentTimeMillis();
+        Log.d("startTime", String.valueOf(gameStart));
 
         //creating a database
         mDatabase = openOrCreateDatabase(DATABASE_NAME, MODE_PRIVATE, null);
@@ -395,22 +399,19 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
 
                 if ( clickCount == 0 ) {
                     try {
-                        calendar = Calendar.getInstance();
-                        simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
-                        endDate = simpleDateFormat.parse(String.valueOf(simpleDateFormat.format(calendar.getTime())));
-                        Log.d("endTime", String.valueOf(simpleDateFormat.format(calendar.getTime())));
-                    } catch (ParseException parseException) {
+                        gameEnd = System.currentTimeMillis();
+                        Log.d("endTime", String.valueOf(gameEnd));
+                    } catch (Exception parseException) {
                         parseException.printStackTrace();
                     }
+                    completionTime = gameEnd - gameStart;
                     // missed clicks
                     noOfOmmissionErrors = totalCorrectResponses - noOfCorrectResponses;
                     Log.d("total", String.valueOf(totalCorrectResponses));
                     Log.d("correctResponses", String.valueOf(noOfCorrectResponses));
                     Log.d("omissionErrors", String.valueOf(totalCorrectResponses - noOfCorrectResponses));
                     Log.d("commissionErrors", String.valueOf(noOfCommissionErrors));
-                    Log.d("duration", String.valueOf(getCompletionTime()));
-
-                    completionTime = getCompletionTime();
+                    Log.d("duration", String.valueOf(completionTime));
 
                     GVAdapter2 adapter = new GVAdapter2(getApplicationContext(), gridModelArrayList);
                     gridView.setAdapter(adapter);
@@ -685,34 +686,6 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
 
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
-    }
-
-    /*************************************************************************************************/
-
-
-    public long getCompletionTime() {
-        long difference = 0;
-
-        try {
-            difference = endDate.getTime() - startDate.getTime();
-            if(difference<0)
-            {
-                Date dateMax = simpleDateFormat.parse("24:00:00");
-                Date dateMin = simpleDateFormat.parse("00:00:00");
-                difference=(dateMax.getTime() -startDate.getTime() )+(endDate.getTime()-dateMin.getTime());
-            }
-            int days = (int) (difference / (1000*60*60*24));
-            int hours = (int) ((difference - (1000*60*60*24*days)) / (1000*60*60));
-            int min = (int) (difference - (1000*60*60*24*days) - (1000*60*60*hours)) / (1000*60);
-            int sec = (int) (difference - (1000*60*60*24*days) - (1000*60*60*hours) - (1000*60*min)) / (1000);
-            Log.i("log_tag","Hours: "+hours+", Mins: "+min+", Secs: "+sec + "diff: " + difference);
-            completionTime = difference;
-
-        } catch (ParseException parseException) {
-            parseException.printStackTrace();
-        }
-
-        return difference;
     }
 
     /*************************************************************************************************/
