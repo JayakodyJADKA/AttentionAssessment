@@ -21,14 +21,14 @@
         android:layout_height="wrap_content"
         android:id="@+id/btnclear"
         android:layout_gravity="center"
-        android:text="Clear"/>
+        android:text="@string/clear"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnsave"
         android:layout_gravity="center"
-        android:text="Save"/>
+        android:text="@string/save"/>
 
 
 </LinearLayout>

@@ -30,7 +30,8 @@
     <string name="getSignature">Sign Here</string>
     <string name="proceed">Proceed</string>
     <string name="consentForm">Consent Form To Participate in a Research Study</string>
-
+    <string name="clear">Clear</string>
+    <string name="save">Save</string>
 
     <!-- Login Screen -->
     <string name="welcome">Welcome!</string>

@@ -109,7 +109,7 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
         cross_btn = (ImageView) findViewById(R.id.cross_btn);
         textview = findViewById(R.id.textview);
 
-        //textview.setText(LanguageSetter.getresources().getString(R.string.select));
+        textview.setText(LanguageSetter.getresources().getString(R.string.select));
 
         mp = MediaPlayer.create(getApplicationContext(), R.raw.selective);
         mp.start();

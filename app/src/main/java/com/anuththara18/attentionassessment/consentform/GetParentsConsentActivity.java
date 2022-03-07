@@ -10,9 +10,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -53,12 +55,23 @@ public class GetParentsConsentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT < 16) {
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
         setContentView(R.layout.activity_get_parents_consent);
 
         textView3 = (TextView) findViewById(R.id.textView3);
         next = (TextView) findViewById(R.id.next);
         btnGetSignature = (Button)findViewById(R.id.btnGetSignature);
         fingerprintImageView = (ImageView)findViewById(R.id.fingerprintImageView);
+
+        textView3.setText(LanguageSetter.getresources().getString(R.string.provideconsent));
+        next.setText(LanguageSetter.getresources().getString(R.string.proceed));
+        btnGetSignature.setText(LanguageSetter.getresources().getString(R.string.getSignature));
 
         //textView3.setText(LanguageSetter.getresources().getString(R.string.provideConsent));
         //btnSaveFingerPrint.setText(LanguageSetter.getresources().getString(R.string.startTest));

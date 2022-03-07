@@ -27,11 +27,12 @@
     <string name="susg1">කුරුල්ලා අත්ත මත වාඩි වූ විට රතු බොත්තම ඔබන්න</string>
     <string name="altg1">සතා පෙනෙන පැත්තේ ඇති රතු බොත්තම ඔබන්න</string>
 
-    <string name="provideconsent">I have read this consent form and my questions have been answered. My signature below means that I do want my child to be in the study. I know that I can withdraw my child from the study at any time without any problems.</string>
+    <string name="provideconsent">මම මේ කැමති පත්‍රය කියවා ඒ සම්බන්ධව ඇති වූ ගැටළු නිරාකරණය කර ගත්තෙමි. පහත සඳහන් අත්සනින් මම මගේ දරුවා මෙම අධ්‍යයනයට සම්බන්ධ කරවීමට කැමති බව ප්‍රකාශ කර සිටිමි. මා කැමති ඕනෑම අවස්ථාවක කිසිදු ගැටලුවකින් තොරව මෙම අධ්‍යයනයෙන් මගේ දරුවා ඉවත්කරගැනීමේ හැකියාවද ඇති බව මම දනිමි.</string>
     <string name="getSignature">මෙහි අත්සන් කරන්න</string>
     <string name="proceed">ඉදිරියට</string>
     <string name="consentForm">පර්යේෂණ අධ්‍යයනයකට සහභාගී වීමට කැමැත්ත දක්වන පෝරමය</string>
-
+    <string name="clear">මකා දමන්න</string>
+    <string name="save">සුරකින්න</string>
 
     <!-- Login Screen -->
     <string name="welcome">ආයුබෝවන්!</string>

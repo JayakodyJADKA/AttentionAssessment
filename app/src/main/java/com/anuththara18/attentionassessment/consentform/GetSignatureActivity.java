@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.AttributeSet;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -21,6 +23,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.anuththara18.attentionassessment.R;
+import com.anuththara18.attentionassessment.language.LanguageSetter;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -45,6 +48,13 @@ public class GetSignatureActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT < 16) {
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
         setContentView(R.layout.activity_get_signature);
 
         canvasLL = (LinearLayout) findViewById(R.id.canvasLL);
@@ -54,6 +64,9 @@ public class GetSignatureActivity extends AppCompatActivity {
         canvasLL.addView(mSignature, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         btnClear = (Button) findViewById(R.id.btnclear);
         btnSave = (Button) findViewById(R.id.btnsave);
+
+        btnClear.setText(LanguageSetter.getresources().getString(R.string.clear));
+        btnSave.setText(LanguageSetter.getresources().getString(R.string.save));
 
         view = canvasLL;
 

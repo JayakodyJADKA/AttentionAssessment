@@ -48,7 +48,7 @@ public class BirdChoosingActivity extends AppCompatActivity {
         l3 = findViewById(R.id.l3);
         l4 = findViewById(R.id.l4);
 
-        //textView8.setText(LanguageSetter.getresources().getString(R.string.birdselect));
+        textView8.setText(LanguageSetter.getresources().getString(R.string.birdselect));
 
         bird1.setOnClickListener(new View.OnClickListener() {
             @Override
