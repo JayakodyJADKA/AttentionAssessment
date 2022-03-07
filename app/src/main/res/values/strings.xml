@@ -23,6 +23,7 @@
     <string name="birdselect">Pick your favourite character</string>
     <string name="focg1">Press the red button when the monkey appears</string>
     <string name="divg1">Press the red button when the colours match</string>
+    <string name="divg2">Press the red button when the animals match</string>
     <string name="susg1">Press the red button when the bird sits on the branch</string>
     <string name="altg1">Press the red button on the same side where the animal appears</string>
 

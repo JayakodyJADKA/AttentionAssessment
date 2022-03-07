@@ -106,13 +106,15 @@ public class AgeActivity extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                /*
                 if ( LanguageActivity.text.equals("English")) {
                     startActivity(new Intent(AgeActivity.this, ConsentFormActivity.class));
                 }
                 else {
                     startActivity(new Intent(AgeActivity.this, SinhalaConsentFormActivity.class));
                 }
-
+                */
+                startActivity(new Intent(AgeActivity.this, NavigationDrawerActivity.class));
             }
         });
 

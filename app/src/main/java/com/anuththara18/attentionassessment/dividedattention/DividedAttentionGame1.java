@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,9 +64,15 @@ public class DividedAttentionGame1 extends AppCompatActivity {
     public static final String DATABASE_NAME = "dividedAttention";
     SQLiteDatabase mDatabase;
 
-    Integer[] image = { R.color.red, R.color.blue, R.color.yellow,
-            R.color.green, R.color.pink, R.color.purple,
-            R.color.orange, R.color.teal};
+    Integer[] image = { R.color.red, R.color.blue, R.color.yellow, R.color.green,
+            R.color.pink, R.color.purple, R.color.orange, R.color.teal};
+
+    Integer[] animal5 = {R.drawable.red_snake, R.drawable.blue_elephant, R.drawable.yelllow_giraffe, R.drawable.green_dino,
+            R.drawable.pink_pig, R.drawable.purple_hippo, R.drawable.orange_tiger, R.drawable.brown_donkey};
+
+
+    Integer[] animal7 = {R.drawable.cute_deer, R.drawable.cute_donkey, R.drawable.cute_elephant, R.drawable.cute_zebra,
+            R.drawable.cute_giraffe, R.drawable.cute_horse, R.drawable.cute_snail, R.drawable.cute_unicorn};
 
     MediaPlayer mp, mp2;
 
@@ -87,7 +94,7 @@ public class DividedAttentionGame1 extends AppCompatActivity {
         red_btn = (ImageButton) findViewById(R.id.red_btn);
         textView2 = (TextView) findViewById(R.id.textView2);
 
-        textView2.setText(LanguageSetter.getresources().getString(R.string.divg1));
+        //textView2.setText(LanguageSetter.getresources().getString(R.string.divg1));
 
         mp = MediaPlayer.create(getApplicationContext(), R.raw.divided);
         mp.start();
@@ -97,81 +104,231 @@ public class DividedAttentionGame1 extends AppCompatActivity {
         //creating a database
         mDatabase = openOrCreateDatabase(DATABASE_NAME, MODE_PRIVATE, null);
 
-        totalCorrectResponses = 5;
+        totalCorrectResponses = 8;
+        AgeActivity.age = 4;
 
         new Runnable() {
 
             @Override
             public void run() {
                 if ( i < 40 ) { // 40 times
-                    if ( i >=0 && i < 8 ) {
-                        sq1.setImageResource(R.color.pink);
-                        correctImage = R.color.pink;
-                    }
-                    else if ( i >= 8 && i < 16 ) {
-                        sq1.setImageResource(R.color.blue);
-                        correctImage = R.color.blue;
-                    }
-                    else if ( i >= 16 && i < 24 ) {
-                        sq1.setImageResource(R.color.yellow);
-                        correctImage = R.color.yellow;
-                    }
-                    else if ( i >= 24 && i < 32 ) {
-                        sq1.setImageResource(R.color.green);
-                        correctImage = R.color.green;
-                    }
-                    else if ( i >= 32 && i < 40 ) {
-                        sq1.setImageResource(R.color.orange);
-                        correctImage = R.color.orange;
+
+                    if (AgeActivity.age == 4) {
+
+                        if (i >= 0 && i < 5) {
+                            sq1.setImageResource(R.color.pink);
+                            correctImage = R.color.pink;
+                        } else if (i >= 5 && i < 10) {
+                            sq1.setImageResource(R.color.blue);
+                            correctImage = R.color.blue;
+                        } else if (i >= 10 && i < 15) {
+                            sq1.setImageResource(R.color.yellow);
+                            correctImage = R.color.yellow;
+                        } else if (i >= 15 && i < 20) {
+                            sq1.setImageResource(R.color.green);
+                            correctImage = R.color.green;
+                        } else if (i >= 20 && i < 25) {
+                            sq1.setImageResource(R.color.red);
+                            correctImage = R.color.red;
+                        } else if (i >= 25 && i < 30) {
+                            sq1.setImageResource(R.color.purple);
+                            correctImage = R.color.purple;
+                        } else if (i >= 30 && i < 35) {
+                            sq1.setImageResource(R.color.orange);
+                            correctImage = R.color.orange;
+                        } else if (i >= 35 && i < 40) {
+                            sq1.setImageResource(R.color.teal);
+                            correctImage = R.color.teal;
+                        }
+
+                        String j = String.valueOf(i);
+
+                        if (j.equals("0") || j.equals("8") || j.equals("16") || j.equals("24") || j.equals("34") || j.equals("40")) {
+                            sq2.setImageResource(image[0]);
+                            red_btn.setEnabled(true);
+                            sq2.setTag(image[0]);
+                        } else if (j.equals("1") || j.equals("6") || j.equals("17") || j.equals("25") || j.equals("33") || j.equals("41")) {
+                            sq2.setImageResource(image[1]);
+                            red_btn.setEnabled(true);
+                            sq2.setTag(image[1]);
+                        } else if (j.equals("2") || j.equals("14") || j.equals("19") || j.equals("26") || j.equals("30") || j.equals("42")) {
+                            sq2.setImageResource(image[2]);
+                            red_btn.setEnabled(true);
+                            sq2.setTag(image[2]);
+                        } else if (j.equals("4") || j.equals("11") || j.equals("18") || j.equals("27") || j.equals("35") || j.equals("43")) {
+                            sq2.setImageResource(image[3]);
+                            red_btn.setEnabled(true);
+                            sq2.setTag(image[3]);
+                        } else if (j.equals("3") || j.equals("12") || j.equals("20") || j.equals("29") || j.equals("36") || j.equals("44")) {
+                            sq2.setImageResource(image[4]);
+                            red_btn.setEnabled(true);
+                            sq2.setTag(image[4]);
+                        } else if (j.equals("5") || j.equals("13") || j.equals("21") || j.equals("28") || j.equals("37") || j.equals("45")) {
+                            sq2.setImageResource(image[5]);
+                            red_btn.setEnabled(true);
+                            sq2.setTag(image[5]);
+                        } else if (j.equals("9") || j.equals("15") || j.equals("22") || j.equals("32") || j.equals("39") || j.equals("46")) {
+                            sq2.setImageResource(image[6]);
+                            red_btn.setEnabled(true);
+                            sq2.setTag(image[6]);
+                        } else if (j.equals("7") || j.equals("10") || j.equals("23") || j.equals("31") || j.equals("38") || j.equals("47")) {
+                            sq2.setImageResource(image[7]);
+                            red_btn.setEnabled(true);
+                            sq2.setTag(image[7]);
+                        }
+                        startTime = System.currentTimeMillis();
+                        sq2.postDelayed(this, 2000);
+                        Log.d("int", String.valueOf(i));
+                        duration = duration + 2000;
+                        i++;
                     }
 
-                    String j = String.valueOf(i);
+                    /*---------------------------------------------------------------------------------*/
 
-                    if ( j.equals("0") || j.equals("8") || j.equals("16") || j.equals("24") || j.equals("32") || j.equals("40") ) {
-                        sq2.setImageResource(image[0]);
-                        red_btn.setEnabled(true);
-                        sq2.setTag(image[0]);
+                    if (AgeActivity.age == 5) {
+
+                        textView2.setText(LanguageSetter.getresources().getString(R.string.divg2));
+
+                        if (i >= 0 && i < 5) {
+                            sq1.setImageResource(R.drawable.pink_pig);
+                            correctImage = R.drawable.pink_pig;
+                        } else if (i >= 5 && i < 10) {
+                            sq1.setImageResource(R.drawable.blue_elephant);
+                            correctImage = R.drawable.blue_elephant;
+                        } else if (i >= 10 && i < 15) {
+                            sq1.setImageResource(R.drawable.yelllow_giraffe);
+                            correctImage = R.drawable.yelllow_giraffe;
+                        } else if (i >= 15 && i < 20) {
+                            sq1.setImageResource(R.drawable.green_dino);
+                            correctImage = R.drawable.green_dino;
+                        } else if (i >= 20 && i < 25) {
+                            sq1.setImageResource(R.drawable.red_snake);
+                            correctImage = R.drawable.red_snake;
+                        } else if (i >= 25 && i < 30) {
+                            sq1.setImageResource(R.drawable.purple_hippo);
+                            correctImage = R.drawable.purple_hippo;
+                        } else if (i >= 30 && i < 35) {
+                            sq1.setImageResource(R.drawable.orange_tiger);
+                            correctImage = R.drawable.orange_tiger;
+                        } else if (i >= 35 && i < 40) {
+                            sq1.setImageResource(R.drawable.brown_donkey);
+                            correctImage = R.drawable.brown_donkey;
+                        }
+
+                        String j = String.valueOf(i);
+
+                        if (j.equals("0") || j.equals("8") || j.equals("16") || j.equals("24") || j.equals("34") || j.equals("40")) {
+                            sq2.setImageResource(animal5[0]);
+                            red_btn.setEnabled(true);
+                            sq2.setTag(animal5[0]);
+                        } else if (j.equals("1") || j.equals("6") || j.equals("17") || j.equals("25") || j.equals("33") || j.equals("41")) {
+                            sq2.setImageResource(animal5[1]);
+                            red_btn.setEnabled(true);
+                            sq2.setTag(animal5[1]);
+                        } else if (j.equals("2") || j.equals("14") || j.equals("19") || j.equals("26") || j.equals("30") || j.equals("42")) {
+                            sq2.setImageResource(animal5[2]);
+                            red_btn.setEnabled(true);
+                            sq2.setTag(animal5[2]);
+                        } else if (j.equals("4") || j.equals("11") || j.equals("18") || j.equals("27") || j.equals("35") || j.equals("43")) {
+                            sq2.setImageResource(animal5[3]);
+                            red_btn.setEnabled(true);
+                            sq2.setTag(animal5[3]);
+                        } else if (j.equals("3") || j.equals("12") || j.equals("20") || j.equals("29") || j.equals("36") || j.equals("44")) {
+                            sq2.setImageResource(animal5[4]);
+                            red_btn.setEnabled(true);
+                            sq2.setTag(animal5[4]);
+                        } else if (j.equals("5") || j.equals("13") || j.equals("21") || j.equals("28") || j.equals("37") || j.equals("45")) {
+                            sq2.setImageResource(animal5[5]);
+                            red_btn.setEnabled(true);
+                            sq2.setTag(animal5[5]);
+                        } else if (j.equals("9") || j.equals("15") || j.equals("22") || j.equals("32") || j.equals("39") || j.equals("46")) {
+                            sq2.setImageResource(animal5[6]);
+                            red_btn.setEnabled(true);
+                            sq2.setTag(animal5[6]);
+                        } else if (j.equals("7") || j.equals("10") || j.equals("23") || j.equals("31") || j.equals("38") || j.equals("47")) {
+                            sq2.setImageResource(animal5[7]);
+                            red_btn.setEnabled(true);
+                            sq2.setTag(animal5[7]);
+                        }
+                        startTime = System.currentTimeMillis();
+                        sq2.postDelayed(this, 1750);
+                        Log.d("int", String.valueOf(i));
+                        duration = duration + 1750;
+                        i++;
                     }
-                    else if ( j.equals("1") || j.equals("9") || j.equals("17") || j.equals("25") || j.equals("33") || j.equals("41") ) {
-                        sq2.setImageResource(image[1]);
-                        red_btn.setEnabled(true);
-                        sq2.setTag(image[1]);
+
+                    /*---------------------------------------------------------------------------------*/
+
+                    if (AgeActivity.age == 6 || AgeActivity.age == 7) {
+                        textView2.setText(LanguageSetter.getresources().getString(R.string.divg2));
+
+                        if (i >= 0 && i < 5) {
+                            sq1.setImageResource(R.drawable.cute_giraffe);
+                            correctImage = R.drawable.cute_giraffe;
+                        } else if (i >= 5 && i < 10) {
+                            sq1.setImageResource(R.drawable.cute_donkey);
+                            correctImage = R.drawable.cute_donkey;
+                        } else if (i >= 10 && i < 15) {
+                            sq1.setImageResource(R.drawable.cute_elephant);
+                            correctImage = R.drawable.cute_elephant;
+                        } else if (i >= 15 && i < 20) {
+                            sq1.setImageResource(R.drawable.cute_zebra);
+                            correctImage = R.drawable.cute_zebra;
+                        } else if (i >= 20 && i < 25) {
+                            sq1.setImageResource(R.drawable.cute_deer);
+                            correctImage = R.drawable.cute_deer;
+                        } else if (i >= 25 && i < 30) {
+                            sq1.setImageResource(R.drawable.cute_horse);
+                            correctImage = R.drawable.cute_horse;
+                        } else if (i >= 30 && i < 35) {
+                            sq1.setImageResource(R.drawable.cute_snail);
+                            correctImage = R.drawable.cute_snail;
+                        } else if (i >= 35 && i < 40) {
+                            sq1.setImageResource(R.drawable.cute_unicorn);
+                            correctImage = R.drawable.cute_unicorn;
+                        }
+
+                        String j = String.valueOf(i);
+
+                        if (j.equals("0") || j.equals("8") || j.equals("16") || j.equals("24") || j.equals("34") || j.equals("40")) {
+                            sq2.setImageResource(animal7[0]);
+                            red_btn.setEnabled(true);
+                            sq2.setTag(animal7[0]);
+                        } else if (j.equals("1") || j.equals("6") || j.equals("17") || j.equals("25") || j.equals("33") || j.equals("41")) {
+                            sq2.setImageResource(animal7[1]);
+                            red_btn.setEnabled(true);
+                            sq2.setTag(animal7[1]);
+                        } else if (j.equals("2") || j.equals("14") || j.equals("19") || j.equals("26") || j.equals("30") || j.equals("42")) {
+                            sq2.setImageResource(animal7[2]);
+                            red_btn.setEnabled(true);
+                            sq2.setTag(animal7[2]);
+                        } else if (j.equals("4") || j.equals("11") || j.equals("18") || j.equals("27") || j.equals("35") || j.equals("43")) {
+                            sq2.setImageResource(animal7[3]);
+                            red_btn.setEnabled(true);
+                            sq2.setTag(animal7[3]);
+                        } else if (j.equals("3") || j.equals("12") || j.equals("20") || j.equals("29") || j.equals("36") || j.equals("44")) {
+                            sq2.setImageResource(animal7[4]);
+                            red_btn.setEnabled(true);
+                            sq2.setTag(animal7[4]);
+                        } else if (j.equals("5") || j.equals("13") || j.equals("21") || j.equals("28") || j.equals("37") || j.equals("45")) {
+                            sq2.setImageResource(animal7[5]);
+                            red_btn.setEnabled(true);
+                            sq2.setTag(animal7[5]);
+                        } else if (j.equals("9") || j.equals("15") || j.equals("22") || j.equals("32") || j.equals("39") || j.equals("46")) {
+                            sq2.setImageResource(animal7[6]);
+                            red_btn.setEnabled(true);
+                            sq2.setTag(animal7[6]);
+                        } else if (j.equals("7") || j.equals("10") || j.equals("23") || j.equals("31") || j.equals("38") || j.equals("47")) {
+                            sq2.setImageResource(animal7[7]);
+                            red_btn.setEnabled(true);
+                            sq2.setTag(animal7[7]);
+                        }
+                        startTime = System.currentTimeMillis();
+                        sq2.postDelayed(this, 1500);
+                        Log.d("int", String.valueOf(i));
+                        duration = duration + 1500;
+                        i++;
                     }
-                    else if ( j.equals("2") || j.equals("10") || j.equals("18") || j.equals("26") || j.equals("34") || j.equals("42") ) {
-                        sq2.setImageResource(image[2]);
-                        red_btn.setEnabled(true);
-                        sq2.setTag(image[2]);
-                    }
-                    else if ( j.equals("3") || j.equals("11") || j.equals("19") || j.equals("27") || j.equals("35") || j.equals("43") ) {
-                        sq2.setImageResource(image[3]);
-                        red_btn.setEnabled(true);
-                        sq2.setTag(image[3]);
-                    }
-                    else if ( j.equals("4") || j.equals("12") || j.equals("20") || j.equals("28") || j.equals("36") || j.equals("44") ) {
-                        sq2.setImageResource(image[4]);
-                        red_btn.setEnabled(true);
-                        sq2.setTag(image[4]);
-                    }
-                    else if ( j.equals("5") || j.equals("13") || j.equals("21") || j.equals("29") || j.equals("37") || j.equals("45") ) {
-                        sq2.setImageResource(image[5]);
-                        red_btn.setEnabled(true);
-                        sq2.setTag(image[5]);
-                    }
-                    else if ( j.equals("6") || j.equals("14") || j.equals("22") || j.equals("30") || j.equals("38") || j.equals("46") ) {
-                        sq2.setImageResource(image[6]);
-                        red_btn.setEnabled(true);
-                        sq2.setTag(image[6]);
-                    }
-                    else if ( j.equals("7") || j.equals("15") || j.equals("23") || j.equals("31") || j.equals("39") || j.equals("47") ) {
-                        sq2.setImageResource(image[7]);
-                        red_btn.setEnabled(true);
-                        sq2.setTag(image[7]);
-                    }
-                    startTime = System.currentTimeMillis();
-                    sq2.postDelayed(this, 2000);
-                    Log.d("int", String.valueOf(i));
-                    duration = duration + 2000;
-                    i++;
                 }
                 else {
                     long gameEnd = System.currentTimeMillis();
@@ -180,7 +337,8 @@ public class DividedAttentionGame1 extends AppCompatActivity {
                         meanReactionTime = 0;
                     }
                     else {
-                        meanReactionTime = (int) Math.ceil(totalReactionTime / noOfCorrectResponses); // ms
+                        meanReactionTime = (int) Math.ceil(totalReactionTime / noOfCorrectResponses); // ms Error = +/- 0.10 ms
+                        // 1111.000 -> rounded to floor value 1111
                     }
                     Log.d("****************************************************", "****************************************************");
                     Log.d("Game Time", String.valueOf(seconds));
