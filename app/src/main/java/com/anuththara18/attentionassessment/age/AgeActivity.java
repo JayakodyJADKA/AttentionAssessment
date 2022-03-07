@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -16,15 +18,25 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.anuththara18.attentionassessment.R;
 import com.anuththara18.attentionassessment.consentform.ConsentFormActivity;
 import com.anuththara18.attentionassessment.consentform.SinhalaConsentFormActivity;
+import com.anuththara18.attentionassessment.db.Api;
+import com.anuththara18.attentionassessment.db.RequestHandler;
+import com.anuththara18.attentionassessment.details.ParentDetailsActivity;
+import com.anuththara18.attentionassessment.focused.FocusedAttentionGame1;
 import com.anuththara18.attentionassessment.gender.GenderActivity;
 import com.anuththara18.attentionassessment.home.NavigationDrawerActivity;
 import com.anuththara18.attentionassessment.language.LanguageActivity;
 import com.anuththara18.attentionassessment.language.LanguageSetter;
 import com.anuththara18.attentionassessment.selective.SelectiveAttentionGame1;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 
 public class AgeActivity extends AppCompatActivity {
 
@@ -36,6 +48,12 @@ public class AgeActivity extends AppCompatActivity {
     int width;
     int count;
     float rightFromXDelta, rightToXDelta, leftFromXDelta, leftToXDelta;
+
+    public static final String DATABASE_NAME = "childData";
+    SQLiteDatabase mDatabase;
+
+    private static final int CODE_GET_REQUEST = 1024;
+    private static final int CODE_POST_REQUEST = 1025;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +74,8 @@ public class AgeActivity extends AppCompatActivity {
         next = (TextView)findViewById(R.id.next);
         previous = (TextView)findViewById(R.id.previous);
         selectAge = (TextView)findViewById(R.id.selectAge);
+
+        mDatabase = openOrCreateDatabase(DATABASE_NAME, MODE_PRIVATE, null);
 
         next.setText(LanguageSetter.getresources().getString(R.string.next));
         previous.setText(LanguageSetter.getresources().getString(R.string.previous));
@@ -106,15 +126,17 @@ public class AgeActivity extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*
+                //saveDataToOnlineDB();
+                createTable();
+                saveDataToLocalDB();
                 if ( LanguageActivity.text.equals("English")) {
                     startActivity(new Intent(AgeActivity.this, ConsentFormActivity.class));
                 }
                 else {
                     startActivity(new Intent(AgeActivity.this, SinhalaConsentFormActivity.class));
                 }
-                */
-                startActivity(new Intent(AgeActivity.this, NavigationDrawerActivity.class));
+
+                //startActivity(new Intent(AgeActivity.this, NavigationDrawerActivity.class));
             }
         });
 
@@ -127,6 +149,8 @@ public class AgeActivity extends AppCompatActivity {
         });
 
     }
+
+    /*************************************************************************************************/
 
     public void getDimensions() {
         if ( count == 1 ) {
@@ -152,6 +176,8 @@ public class AgeActivity extends AppCompatActivity {
             leftToXDelta = 2 * (width / 5.5f);
         }
     }
+
+    /*************************************************************************************************/
 
     public void setAge() {
         if ( count == 1 ) {
@@ -179,4 +205,142 @@ public class AgeActivity extends AppCompatActivity {
             Log.d("age", String.valueOf(age));
         }
     }
+
+    /*************************************************************************************************/
+
+    /*
+    private void saveDataToOnlineDB() {
+
+        String gender;
+        if (GenderActivity.gender == 2) {
+            gender = "Male";
+        }
+        else {
+            gender = "Female";
+        }
+        String age = String.valueOf(AgeActivity.age);
+        String name = ParentDetailsActivity.child_name;
+        String email = ParentDetailsActivity.parent_email;
+        String contact = ParentDetailsActivity.parent_contact;
+
+        HashMap<String, String> params = new HashMap<>();
+        params.put("child_gender", gender);
+        params.put("child_age", age);
+        params.put("child_name", name);
+        params.put("parent_email", email);
+        params.put("parent_contact", contact);
+
+        PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_FOCUSED_ATTENTION, params, CODE_POST_REQUEST);
+        request.execute();
+    }
+    */
+
+    /*************************************************************************************************/
+
+    /*
+    //inner class to perform network request extending an AsyncTask
+    private class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
+
+        //the url where we need to send the request
+        String url;
+
+        //the parameters
+        HashMap<String, String> params;
+
+        //the request code to define whether it is a GET or POST
+        int requestCode;
+
+        //constructor to initialize values
+        PerformNetworkRequest(String url, HashMap<String, String> params, int requestCode) {
+            this.url = url;
+            this.params = params;
+            this.requestCode = requestCode;
+        }
+
+        //when the task started displaying a progressbar
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+
+        //this method will give the response from the request
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            try {
+                JSONObject object = new JSONObject(s);
+                if (!object.getBoolean("error")) {
+                    Toast.makeText(getApplicationContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
+                    //refreshing the herolist after every operation
+                    //so we get an updated list
+                    //we will create this method right now it is commented
+                    //because we haven't created it yet
+                    //refreshHeroList(object.getJSONArray("heroes"));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        //the network operation will be performed in background
+        @Override
+        protected String doInBackground(Void... voids) {
+            RequestHandler requestHandler = new RequestHandler();
+
+            if (requestCode == CODE_POST_REQUEST)
+                return requestHandler.sendPostRequest(url, params);
+
+
+            if (requestCode == CODE_GET_REQUEST)
+                return requestHandler.sendGetRequest(url);
+
+            return null;
+        }
+    }
+    */
+
+    /*************************************************************************************************/
+
+    private void createTable() {
+        mDatabase.execSQL(
+                "CREATE TABLE IF NOT EXISTS childData (\n" +
+                        "    id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                        "    child_gender String NOT NULL,\n" +
+                        "    child_age String NOT NULL,\n" +
+                        "    child_name String ,\n" +
+                        "    parent_email String ,\n" +
+                        "    parent_contact String \n" +
+                        ");"
+        );
+    }
+
+    /*************************************************************************************************/
+
+    private void saveDataToLocalDB() {
+
+        String gender;
+        if (GenderActivity.gender == 2) {
+            gender = "Male";
+        }
+        else {
+            gender = "Female";
+        }
+        String age = String.valueOf(AgeActivity.age);
+        String name = ParentDetailsActivity.child_name;
+        String email = ParentDetailsActivity.parent_email;
+        String contact = ParentDetailsActivity.parent_contact;
+
+        String insertSQL = "INSERT INTO childData \n" +
+                "(child_gender, child_age, child_name, parent_email, parent_contact)\n" +
+                "VALUES \n" +
+                "(?, ?, ?, ?, ?);";
+
+        mDatabase.execSQL(insertSQL, new String[]{gender, age, name, email, contact});
+
+        Toast.makeText(this, "Data Added Successfully", Toast.LENGTH_SHORT).show();
+    }
+
+    /*************************************************************************************************/
+
 }

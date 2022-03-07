@@ -28,6 +28,7 @@ import androidx.core.content.ContextCompat;
 import com.anuththara18.attentionassessment.R;
 import com.anuththara18.attentionassessment.age.AgeActivity;
 import com.anuththara18.attentionassessment.consentform.ParentsConsentDatabaseHelper;
+import com.anuththara18.attentionassessment.details.ParentDetailsActivity;
 import com.anuththara18.attentionassessment.gender.GenderActivity;
 import com.anuththara18.attentionassessment.home.NavigationDrawerActivity;
 import com.anuththara18.attentionassessment.selective.Selective;
@@ -263,13 +264,9 @@ public class AACompleteScreen extends AppCompatActivity {
             gender = "Female";
         }
         canvas.drawText("Gender: " + gender, 150, 300, title);
-        /*
-        canvas.drawText("Child Name: " + gender, 150, 350, title);
-        canvas.drawText("Parent Name: " + gender, 150, 400, title);
-        canvas.drawText("Contact No: " + gender, 150, 450, title);
-        canvas.drawText("Email: " + gender, 150, 500, title);
-
-         */
+        canvas.drawText("Child Name: " + ParentDetailsActivity.child_name, 150, 350, title);
+        canvas.drawText("Contact No: " + ParentDetailsActivity.parent_contact, 150, 450, title);
+        canvas.drawText("Email: " + ParentDetailsActivity.parent_email, 150, 500, title);
 
         // similarly we are creating another text and in this
         // we are aligning this text to center of our PDF file.
@@ -303,7 +300,7 @@ public class AACompleteScreen extends AppCompatActivity {
                     "CE: " + String.valueOf(data.getNoOfCommissionErrors()) + ", \t" +
                     "OE: " + String.valueOf(data.getNoOfOmmissionErrors()) + ", \t" +
                     "MRT: " + String.valueOf(data.getMeanReactionTime()) + ", \t" +
-                    "TD: " + String.valueOf(data.getTotalDuration()) + " ", 150, 350 + space, title);
+                    "TD: " + String.valueOf(data.getTotalDuration()) + " ", 150, 550 + space, title);
 
             space = space + 50;
         }

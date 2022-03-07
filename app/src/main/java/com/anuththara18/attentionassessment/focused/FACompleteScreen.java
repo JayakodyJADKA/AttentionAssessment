@@ -32,6 +32,7 @@ import com.anuththara18.attentionassessment.BuildConfig;
 import com.anuththara18.attentionassessment.R;
 import com.anuththara18.attentionassessment.age.AgeActivity;;
 import com.anuththara18.attentionassessment.consentform.ParentsConsentDatabaseHelper;
+import com.anuththara18.attentionassessment.details.ParentDetailsActivity;
 import com.anuththara18.attentionassessment.gender.GenderActivity;
 import com.anuththara18.attentionassessment.home.NavigationDrawerActivity;
 import com.anuththara18.attentionassessment.selective.Selective;
@@ -266,13 +267,9 @@ public class FACompleteScreen extends AppCompatActivity {
             gender = "Female";
         }
         canvas.drawText("Gender: " + gender, 150, 300, title);
-        /*
-        canvas.drawText("Child Name: " + gender, 150, 350, title);
-        canvas.drawText("Parent Name: " + gender, 150, 400, title);
-        canvas.drawText("Contact No: " + gender, 150, 450, title);
-        canvas.drawText("Email: " + gender, 150, 500, title);
-
-         */
+        canvas.drawText("Child Name: " + ParentDetailsActivity.child_name, 150, 350, title);
+        canvas.drawText("Contact No: " + ParentDetailsActivity.parent_contact, 150, 450, title);
+        canvas.drawText("Email: " + ParentDetailsActivity.parent_email, 150, 500, title);
 
         // similarly we are creating another text and in this
         // we are aligning this text to center of our PDF file.
@@ -306,7 +303,7 @@ public class FACompleteScreen extends AppCompatActivity {
                     "CE: " + String.valueOf(data.getNoOfCommissionErrors()) + ", \t" +
                     "OE: " + String.valueOf(data.getNoOfOmmissionErrors()) + ", \t" +
                     "MRT: " + String.valueOf(data.getMeanReactionTime()) + ", \t" +
-                    "TD: " + String.valueOf(data.getTotalDuration()) + " ", 150, 350 + space, title);
+                    "TD: " + String.valueOf(data.getTotalDuration()) + " ", 150,550 + space, title);
 
             space = space + 50;
         }
@@ -323,23 +320,6 @@ public class FACompleteScreen extends AppCompatActivity {
             // after creating a file name we will
             // write our PDF file to that location.
             pdfDocument.writeTo(new FileOutputStream(file));
-
-            /*
-           // Uri path = Uri.fromFile(file);
-            Uri path = FileProvider.getUriForFile(FACompleteScreen.this, BuildConfig.APPLICATION_ID + ".provider", file);
-
-            Intent pdfIntent = new Intent(Intent.ACTION_VIEW);
-            pdfIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            pdfIntent.setDataAndType(path, "application/pdf");
-            pdfIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-            try{
-                startActivity(pdfIntent);
-            }catch(ActivityNotFoundException e){
-                Toast.makeText(getApplicationContext(), "No Application available to view PDF", Toast.LENGTH_SHORT).show();
-            }
-
-             */
 
             // below line is to print toast message
             // on completion of PDF generation.
@@ -379,15 +359,6 @@ public class FACompleteScreen extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == PERMISSION_REQUEST_CODE) {
             if (grantResults.length > 0) {
-
-                /*
-                Intent intent = new Intent();
-                intent.setAction(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-                Uri uri = Uri.fromParts("package", this.getPackageName(), null);
-                intent.setData(uri);
-                startActivity(intent);
-
-                 */
 
                 // after requesting permissions we are showing
                 // users a toast message of permission granted.

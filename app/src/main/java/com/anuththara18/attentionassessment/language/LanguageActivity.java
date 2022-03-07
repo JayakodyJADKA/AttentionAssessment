@@ -21,7 +21,7 @@ public class LanguageActivity extends AppCompatActivity {
 
     ImageButton english_btn, sinhala_btn, sinhala_txt_btn;
     TextView english_txt;
-    public static String text = "English";
+    public static String text = null;
     TextView selectLanguage, next;
 
     @Override
