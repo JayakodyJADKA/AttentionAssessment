@@ -18,6 +18,7 @@
     <string name="parentEmail">Email :</string>
     <string name="parentContact">Contact Number :</string>
     <string name="optional">* Optional</string>
+    <string name="send">Send Data</string>
 
     <string name="select">Select the</string>
     <string name="birdselect">Pick your favourite character</string>

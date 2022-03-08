@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.anuththara18.attentionassessment.R;
 import com.anuththara18.attentionassessment.consentform.ConsentFormActivity;
+import com.anuththara18.attentionassessment.emailfiles.EmailDataFilesActivity;
 import com.google.android.material.navigation.NavigationView;
 
 import static android.Manifest.permission.MANAGE_EXTERNAL_STORAGE;
@@ -88,32 +89,36 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
                 this.showFragment(FRAGMENT_MAINDASHBOARD);
                 break;
             case R.id.parents:
-                Intent intent1 = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
-                startActivity(intent1);
+                //Intent intent1 = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
+                //startActivity(intent1);
                 break;
             case R.id.healthProfessional:
-                Intent intent2 = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
-                startActivity(intent2);
+                //Intent intent2 = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
+                //startActivity(intent2);
                 break;
             case R.id.doctor:
-                Intent intent3 = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
-                startActivity(intent3);
+                //Intent intent3 = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
+                //startActivity(intent3);
                 break;
             case R.id.admin:
-                Intent intent4 = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
-                startActivity(intent4);
+                //Intent intent4 = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
+                //startActivity(intent4);
                 break;
             case R.id.termsAndConditions:
-                Intent intent6 = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
-                startActivity(intent6);
+                //Intent intent6 = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
+                //startActivity(intent6);
                 break;
             case R.id.consentForm:
                 Intent intent7 = new Intent(getApplicationContext(), ConsentFormActivity.class);
                 startActivity(intent7);
                 break;
+            case R.id.sendData:
+                Intent intent9 = new Intent(getApplicationContext(), EmailDataFilesActivity.class);
+                startActivity(intent9);
+                break;
             case R.id.aboutUs:
-                Intent intent8 = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
-                startActivity(intent8);
+                //Intent intent8 = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
+                //startActivity(intent8);
                 break;
             case R.id.logOut:
                 logout();

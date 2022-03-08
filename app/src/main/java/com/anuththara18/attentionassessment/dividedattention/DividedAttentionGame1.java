@@ -52,7 +52,6 @@ public class DividedAttentionGame1 extends AppCompatActivity {
     private long startTime, clickedTime = 0;
     long reactionTime;
 
-
     int totalCorrectResponses = 0;
     int noOfCorrectResponses = 0;
     int noOfCommissionErrors = 0;
@@ -94,7 +93,7 @@ public class DividedAttentionGame1 extends AppCompatActivity {
         red_btn = (ImageButton) findViewById(R.id.red_btn);
         textView2 = (TextView) findViewById(R.id.textView2);
 
-        //textView2.setText(LanguageSetter.getresources().getString(R.string.divg1));
+        textView2.setText(LanguageSetter.getresources().getString(R.string.divg1));
 
         mp = MediaPlayer.create(getApplicationContext(), R.raw.divided);
         mp.start();

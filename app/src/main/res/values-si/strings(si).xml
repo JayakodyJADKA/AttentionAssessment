@@ -19,6 +19,7 @@
     <string name="parentEmail">විද්යුත් තැපෑල් ලිපිනය:</string>
     <string name="parentContact">දුරකතන අංකය :</string>
     <string name="optional">* විකල්ප</string>
+    <string name="send">දත්ත යවන්න</string>
 
     <string name="select">තෝරන්න</string>
     <string name="birdselect">ඔබ වඩාත්ම කැමති චරිතය තෝරන්න</string>

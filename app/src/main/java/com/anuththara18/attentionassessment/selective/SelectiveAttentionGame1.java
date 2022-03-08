@@ -363,7 +363,7 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
                     totalCorrectResponses++;
                 }
             }
-            Log.d("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", String.valueOf(totalCorrectResponses));
+            Log.d("@@@@@@@@@@@@@@@@@@@", String.valueOf(totalCorrectResponses));
         } while (totalCorrectResponses < 6);
 
         try {
