@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -16,6 +18,9 @@ import com.anuththara18.attentionassessment.age.AgeActivity;
 import com.anuththara18.attentionassessment.gender.GenderActivity;
 import com.anuththara18.attentionassessment.language.LanguageActivity;
 import com.anuththara18.attentionassessment.language.LanguageSetter;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ParentDetailsActivity extends AppCompatActivity {
 
@@ -72,8 +77,13 @@ public class ParentDetailsActivity extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if ( name == null ) {
-                    Toast.makeText(getApplicationContext(), "Please select a language", Toast.LENGTH_SHORT).show();
+               if (!isEmail(parentEmail)) {
+                    Toast.makeText(ParentDetailsActivity.this, "Enter valid email", Toast.LENGTH_SHORT).show();
+                    parentEmail.setError("Enter valid email!");
+                }
+                else if (!isPhone(parentContact)) {
+                    Toast.makeText(ParentDetailsActivity.this, "Enter Valid Number\nEg: 0771234567", Toast.LENGTH_SHORT).show();
+                    parentContact.setError("Enter Valid Number\nEg: 0771234567");
                 }
                 else {
                     Intent intent = new Intent(ParentDetailsActivity.this, GenderActivity.class);
@@ -81,6 +91,18 @@ public class ParentDetailsActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
+
+    boolean isEmail(EditText text) {
+        CharSequence email = text.getText().toString();
+        return (TextUtils.isEmpty(email) || Patterns.EMAIL_ADDRESS.matcher(email).matches());
+    }
+
+    boolean isPhone(EditText text) {
+        CharSequence phone = text.getText().toString();
+        Pattern p = Pattern.compile("(07/91)?[0-9]{10}");
+        Matcher m = p.matcher(phone);
+        return TextUtils.isEmpty(phone) || (m.find() && m.group().equals(phone));
+    }
+
 }
