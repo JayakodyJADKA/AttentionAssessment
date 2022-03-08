@@ -340,7 +340,7 @@ public class DACompleteScreen extends AppCompatActivity {
 
             // below line is to print toast message
             // on completion of PDF generation.
-            Toast.makeText(getApplicationContext(), "PDF file generated successfully.", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "PDF file generated successfully.", Toast.LENGTH_LONG).show();
 
         } catch (IOException e) {
             // below line is used

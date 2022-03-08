@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -44,7 +45,8 @@ public class AgeActivity extends AppCompatActivity {
     ImageView bunny_img;
     TextView age_txt, next, previous, selectAge;
     public static int age = 4;
-
+    SharedPreferences sharedPreferences;
+    int imageCheck;
     int width;
     int count;
     float rightFromXDelta, rightToXDelta, leftFromXDelta, leftToXDelta;
@@ -74,6 +76,8 @@ public class AgeActivity extends AppCompatActivity {
         next = (TextView)findViewById(R.id.next);
         previous = (TextView)findViewById(R.id.previous);
         selectAge = (TextView)findViewById(R.id.selectAge);
+        sharedPreferences = getSharedPreferences("ImageCheck", MODE_PRIVATE);
+        imageCheck = sharedPreferences.getInt("ImageSet", 5);
 
         mDatabase = openOrCreateDatabase(DATABASE_NAME, MODE_PRIVATE, null);
 
@@ -129,12 +133,22 @@ public class AgeActivity extends AppCompatActivity {
                 //saveDataToOnlineDB();
                 createTable();
                 saveDataToLocalDB();
-                if ( LanguageActivity.text.equals("English")) {
+
+                if (LanguageActivity.text.equals("English")) {
                     startActivity(new Intent(AgeActivity.this, ConsentFormActivity.class));
-                }
-                else {
+                } else {
                     startActivity(new Intent(AgeActivity.this, SinhalaConsentFormActivity.class));
                 }
+
+                 /*if(imageCheck==1) {
+                    Intent navInt = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
+                    startActivity(navInt);
+
+                }
+                else{
+
+                }
+                     */
 
                 //startActivity(new Intent(AgeActivity.this, NavigationDrawerActivity.class));
             }
@@ -338,7 +352,7 @@ public class AgeActivity extends AppCompatActivity {
 
         mDatabase.execSQL(insertSQL, new String[]{gender, age, name, email, contact});
 
-        Toast.makeText(this, "Data Added Successfully", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Data Added Successfully", Toast.LENGTH_SHORT).show();
     }
 
     /*************************************************************************************************/

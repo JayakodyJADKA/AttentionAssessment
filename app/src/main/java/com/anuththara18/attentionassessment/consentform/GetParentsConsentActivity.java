@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -45,6 +46,8 @@ public class GetParentsConsentActivity extends AppCompatActivity {
     Button btnGetSignature;
     public static ImageView fingerprintImageView;
     static int flag2 = 0;
+    public SharedPreferences sharedPreferences;
+    public int imageSet = 0;
 
     // constant code for runtime permissions
     private static final int PERMISSION_REQUEST_CODE = 200;
@@ -68,6 +71,7 @@ public class GetParentsConsentActivity extends AppCompatActivity {
         next = (TextView) findViewById(R.id.next);
         btnGetSignature = (Button)findViewById(R.id.btnGetSignature);
         fingerprintImageView = (ImageView)findViewById(R.id.fingerprintImageView);
+        sharedPreferences = getSharedPreferences("ImageSet", MODE_PRIVATE);
 
         textView3.setText(LanguageSetter.getresources().getString(R.string.provideconsent));
         next.setText(LanguageSetter.getresources().getString(R.string.proceed));
@@ -127,13 +131,17 @@ public class GetParentsConsentActivity extends AppCompatActivity {
 
         try{
             sqLiteHelper.insertData(imageViewToByte(fingerprintImageView));
-            Toast.makeText(getApplicationContext(), "Consent Saved Successfully!", Toast.LENGTH_SHORT).show();
+            imageSet = 1;
+            SharedPreferences.Editor ed = sharedPreferences.edit();
+            ed.putInt("ImageSet", imageSet);
+            ed.apply();
+            //Toast.makeText(getApplicationContext(), String.valueOf(imageSet), Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "Consent Saved Successfully!", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
             startActivity(intent);
         }
         catch (Exception e){
             Toast.makeText(getApplicationContext(), "Consent not Saved!", Toast.LENGTH_SHORT).show();
-
             e.printStackTrace();
         }
 
@@ -190,6 +198,13 @@ public class GetParentsConsentActivity extends AppCompatActivity {
                     //Toast.makeText(this, "Permission Granted..", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(this, "Permission Denined.", Toast.LENGTH_SHORT).show();
+                    requestPermission();
+                    /*
+                    if ( !checkPermission() ) {
+                        Toast.makeText(this, "No Use.", Toast.LENGTH_SHORT).show();
+                        System.exit(0);
+                    }
+                    */
                     finish();
                 }
             }

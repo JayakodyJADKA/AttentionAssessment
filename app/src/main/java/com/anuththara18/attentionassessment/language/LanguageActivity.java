@@ -3,6 +3,7 @@ package com.anuththara18.attentionassessment.language;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,8 +22,10 @@ public class LanguageActivity extends AppCompatActivity {
 
     ImageButton english_btn, sinhala_btn, sinhala_txt_btn;
     TextView english_txt;
-    public static String text = null;
+    public static String text = "";
+    public static final String sharedKey = "Language";
     TextView selectLanguage, next;
+    public static SharedPreferences sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,7 @@ public class LanguageActivity extends AppCompatActivity {
         english_txt = (TextView) findViewById(R.id.english_txt);
         selectLanguage = (TextView) findViewById(R.id.selectLanguage);
         next = (TextView) findViewById(R.id.next);
+        sharedPref = getSharedPreferences(sharedKey, MODE_PRIVATE);
 
         english_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +78,7 @@ public class LanguageActivity extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if ( text == null ) {
+                if ( text.isEmpty() ) {
                     Toast.makeText(getApplicationContext(), "Please select a language", Toast.LENGTH_SHORT).show();
                 }
                 else {
@@ -98,6 +102,7 @@ public class LanguageActivity extends AppCompatActivity {
         sinhala_txt_btn.getLayoutParams().width= 394;
         sinhala_txt_btn.requestLayout();
         text = "English";
+        setLangPref();
         changeLanguage();
     }
 
@@ -114,6 +119,7 @@ public class LanguageActivity extends AppCompatActivity {
         sinhala_txt_btn.getLayoutParams().width= 410;
         sinhala_txt_btn.requestLayout();
         text = "සිංහල";
+        setLangPref();
         changeLanguage();
     }
 
@@ -122,7 +128,11 @@ public class LanguageActivity extends AppCompatActivity {
         LanguageSetter.changeLanguage(text, LanguageActivity.this);
         next.setText(LanguageSetter.getresources().getString(R.string.next));
         selectLanguage.setText(LanguageSetter.getresources().getString(R.string.language));
-
     }
 
+    public void setLangPref() {
+        SharedPreferences.Editor edit = sharedPref.edit();
+        edit.putString("Lang", text);
+        edit.apply();
+    }
 }

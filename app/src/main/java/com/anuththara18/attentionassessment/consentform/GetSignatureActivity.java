@@ -90,7 +90,7 @@ public class GetSignatureActivity extends AppCompatActivity {
                 GetParentsConsentActivity.fingerprintImageView.setImageBitmap(bitmap);
                 GetParentsConsentActivity.flag2 = 1;
 
-                Toast.makeText(getApplicationContext(), "Signature Recorded", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "Signature Recorded", Toast.LENGTH_SHORT).show();
                 finish();
 
             }

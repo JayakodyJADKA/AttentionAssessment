@@ -274,7 +274,7 @@ public class SelectiveACompleteScreen extends AppCompatActivity {
 
         try {
             pdfDocument.writeTo(new FileOutputStream(file));
-            Toast.makeText(getApplicationContext(), "PDF file generated successfully.", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "PDF file generated successfully.", Toast.LENGTH_LONG).show();
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -475,7 +475,7 @@ public class AlternatingAttentionGame1 extends AppCompatActivity {
 
         mDatabase.execSQL(insertSQL, new Integer[]{child_ID, total_correct_responses, no_of_correct_responses, no_of_commission_errors, no_of_ommission_errors, mean_reaction_time, total_duration});
 
-        Toast.makeText(this, "Data Added Successfully", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Data Added Successfully", Toast.LENGTH_SHORT).show();
     }
 
     /*************************************************************************************************/
