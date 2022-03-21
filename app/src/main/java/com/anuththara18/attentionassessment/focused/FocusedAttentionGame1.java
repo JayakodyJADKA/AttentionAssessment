@@ -63,6 +63,7 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
     int i = 1;
     private long startTime, clickedTime = 0;
     long reactionTime;
+    int count;
 
     int totalCorrectResponses = 0;
     int noOfCorrectResponses = 0;
@@ -129,13 +130,16 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
         unpickedNumbers.add(8);
         unpickedNumbers.add(9);
 
+        getCount();
+
         new Runnable() {
             int updateInterval;
 
             @Override
             public void run() {
 
-                if ( i <= 41 ) { // 41 times
+
+                if ( i <= count ) { // 41 times
 
                     if ( i % 2 != 0 ) {
                         imageView.setVisibility(View.INVISIBLE);
@@ -323,6 +327,23 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
                 return true;
             }
         });
+
+    }
+
+    private void getCount() {
+
+        if (AgeActivity.age == 4 ) {
+            count = 17;
+        }
+        else if (AgeActivity.age == 5 ) {
+            count = 21;
+        }
+        else if (AgeActivity.age == 6 ) {
+            count = 25;
+        }
+        else {
+            count= 29;
+        }
 
     }
 

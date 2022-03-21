@@ -47,6 +47,18 @@ public class LanguageActivity extends AppCompatActivity {
         next = (TextView) findViewById(R.id.next);
         sharedPref = getSharedPreferences(sharedKey, MODE_PRIVATE);
 
+        sinhala_btn.getLayoutParams().height = 656;
+        sinhala_btn.getLayoutParams().width= 656;
+        sinhala_btn.requestLayout();
+        sinhala_txt_btn.getLayoutParams().height = 184;
+        sinhala_txt_btn.getLayoutParams().width= 394;
+        sinhala_txt_btn.requestLayout();
+        english_btn.getLayoutParams().height = 656;
+        english_btn.getLayoutParams().width= 656;
+        english_btn.requestLayout();
+        english_txt.setPadding(0, 10, 0,0 );
+        english_txt.setTextSize(40);
+
         english_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -17,15 +17,15 @@ import com.anuththara18.attentionassessment.language.LanguageSetter;
 
 public class SplashActivity extends AppCompatActivity {
 
-    SharedPreferences sharedPreferences;
+    //SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        sharedPreferences = getSharedPreferences("Language", MODE_PRIVATE);
-        SharedPreferences.Editor ed = sharedPreferences.edit();
-        String lang = sharedPreferences.getString("Lang", "");
+        //sharedPreferences = getSharedPreferences("Language", MODE_PRIVATE);
+        //SharedPreferences.Editor ed = sharedPreferences.edit();
+        //String lang = sharedPreferences.getString("Lang", "");
         //int check = sharedPreferences.getInt("ImageCheck", 5);
 
         if (Build.VERSION.SDK_INT < 16) {
@@ -42,7 +42,9 @@ public class SplashActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if(lang.isEmpty()){
+                Intent langAct = new Intent(SplashActivity.this, LanguageActivity.class);
+                startActivity(langAct);
+                /*if(lang.isEmpty()){
                     Intent langAct = new Intent(SplashActivity.this, LanguageActivity.class);
                     startActivity(langAct);
                 }
@@ -52,6 +54,7 @@ public class SplashActivity extends AppCompatActivity {
                     LanguageSetter.setLanguage(lang);
                     LanguageSetter.changeLanguage(lang, SplashActivity.this);
                 }
+                */
                 finish();
             }
         },2000);
