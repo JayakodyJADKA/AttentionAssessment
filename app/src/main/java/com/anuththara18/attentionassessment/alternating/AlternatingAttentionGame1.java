@@ -44,7 +44,7 @@ public class AlternatingAttentionGame1 extends AppCompatActivity {
     SQLiteDatabase mDatabase;
 
     ImageView imageView1, imageView2, cross_btn;
-    ImageButton red_btn_left, red_btn_right;
+    //ImageButton red_btn_left, red_btn_right;
     TextView textView;
 
     Random random = new Random();
@@ -100,8 +100,8 @@ public class AlternatingAttentionGame1 extends AppCompatActivity {
 
         imageView1 = findViewById(R.id.imageView1);
         imageView2 = findViewById(R.id.imageView2);
-        red_btn_left = findViewById(R.id.red_btn_left);
-        red_btn_right = findViewById(R.id.red_btn_right);
+        //red_btn_left = findViewById(R.id.red_btn_left);
+        //red_btn_right = findViewById(R.id.red_btn_right);
         textView = findViewById(R.id.textView);
         cross_btn = (ImageView) findViewById(R.id.cross_btn);
 
@@ -148,14 +148,15 @@ public class AlternatingAttentionGame1 extends AppCompatActivity {
 
                     if( side.equals("left")) {
                         radomImage = random.nextInt(4);
-                        imageView2.setVisibility(View.INVISIBLE);
+                        //imageView2.setVisibility(View.INVISIBLE);
+                        imageView2.setImageResource(0);
                         imageView1.setVisibility(View.VISIBLE);
                         if (leftcount > 3 ){
                             leftcount = 0;
                         }
                         imageView1.setImageResource(left_images[leftcount]);
-                        red_btn_left.setEnabled(true);
-                        red_btn_right.setEnabled(true);
+                        imageView1.setEnabled(true);
+                        imageView2.setEnabled(true);
                         leftcount++;
                         startTime = System.currentTimeMillis();
                         clickedSide = "left";
@@ -168,14 +169,15 @@ public class AlternatingAttentionGame1 extends AppCompatActivity {
                     // appearance - 1s * 20 times
                     else {
                         radomImage = random.nextInt(4);
-                        imageView1.setVisibility(View.INVISIBLE);
+                        //imageView1.setVisibility(View.INVISIBLE);
+                        imageView1.setImageResource(0);
                         imageView2.setVisibility(View.VISIBLE);
                         if (rightcount > 3 ){
                             rightcount = 0;
                         }
                         imageView2.setImageResource(right_images[rightcount]);
-                        red_btn_left.setEnabled(true);
-                        red_btn_right.setEnabled(true);
+                        imageView1.setEnabled(true);
+                        imageView2.setEnabled(true);
                         rightcount++;
                         startTime = System.currentTimeMillis();
                         clickedSide = "right";
@@ -217,77 +219,47 @@ public class AlternatingAttentionGame1 extends AppCompatActivity {
             }
         }.run();
 
-        red_btn_left.setOnTouchListener(new View.OnTouchListener() {
+        imageView1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                switch (motionEvent.getAction()) {
-                    case MotionEvent.ACTION_DOWN: {
-                        red_btn_left.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
-                        view.invalidate();
-                        mp2 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
-                        mp2.start();
-                        break;
-                    }
-                    case MotionEvent.ACTION_UP:
-                        // Your action here on button click
-                        clickedTime = System.currentTimeMillis();
-                        reactionTime = ( clickedTime - startTime );
-                        if (clickedSide.equals("left")) {
-                            totalReactionTime = totalReactionTime + reactionTime;
-                            Log.d("correct " , startTime + " " + clickedTime + " " + reactionTime);
-                            noOfCorrectResponses++;
-                            red_btn_left.setEnabled(false);
-                        }
-                        else {
-                            Log.d( "wrong" , startTime + " " + clickedTime + " " + reactionTime);
-                            noOfCommissionErrors++;
-                        }
-
-                    case MotionEvent.ACTION_CANCEL: {
-                        red_btn_left.getBackground().clearColorFilter();
-                        view.invalidate();
-                        break;
-                    }
+            public void onClick(View view) {
+                mp2 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
+                mp2.start();
+                clickedTime = System.currentTimeMillis();
+                reactionTime = ( clickedTime - startTime );
+                if (clickedSide.equals("left")) {
+                    totalReactionTime = totalReactionTime + reactionTime;
+                    Log.d("correct " , startTime + " " + clickedTime + " " + reactionTime);
+                    noOfCorrectResponses++;
+                    imageView1.setEnabled(false);
                 }
-                return true;
+                else {
+                    Log.d( "wrong" , startTime + " " + clickedTime + " " + reactionTime);
+                    noOfCommissionErrors++;
+                }
             }
         });
 
-        red_btn_right.setOnTouchListener(new View.OnTouchListener() {
+        imageView2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                switch (motionEvent.getAction()) {
-                    case MotionEvent.ACTION_DOWN: {
-                        red_btn_right.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
-                        view.invalidate();
-                        mp3 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
-                        mp3.start();
-                        break;
-                    }
-                    case MotionEvent.ACTION_UP:
-                        // Your action here on button click
-                        clickedTime = System.currentTimeMillis();
-                        reactionTime = ( clickedTime - startTime );
-                        if (clickedSide.equals("right")) {
-                            totalReactionTime = totalReactionTime + reactionTime;
-                            Log.d("correct " , startTime + " " + clickedTime + " " + reactionTime);
-                            noOfCorrectResponses++;
-                            red_btn_right.setEnabled(false);
-                        }
-                        else {
-                            Log.d( "wrong" , startTime + " " + clickedTime + " " + reactionTime);
-                            noOfCommissionErrors++;
-                        }
-
-                    case MotionEvent.ACTION_CANCEL: {
-                        red_btn_right.getBackground().clearColorFilter();
-                        view.invalidate();
-                        break;
-                    }
+            public void onClick(View view) {
+                mp3 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
+                mp3.start();
+                clickedTime = System.currentTimeMillis();
+                reactionTime = ( clickedTime - startTime );
+                if (clickedSide.equals("right")) {
+                    totalReactionTime = totalReactionTime + reactionTime;
+                    Log.d("correct " , startTime + " " + clickedTime + " " + reactionTime);
+                    noOfCorrectResponses++;
+                    imageView2.setEnabled(false);
                 }
-                return true;
+                else {
+                    Log.d( "wrong" , startTime + " " + clickedTime + " " + reactionTime);
+                    noOfCommissionErrors++;
+                }
             }
         });
+
+
 
         cross_btn.setOnTouchListener(new View.OnTouchListener() {
             @Override
