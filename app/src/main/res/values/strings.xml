@@ -22,11 +22,11 @@
 
     <string name="select">Select the</string>
     <string name="birdselect">Pick your favourite character</string>
-    <string name="focg1">Press the red button when the animal appears</string>
+    <string name="focg1">Press the animal appearing on the screen</string>
     <string name="divg1">Press the red button when the colours match</string>
-    <string name="divg2">Press the red button when the animals match</string>
+    <string name="divg2">Press the animal at the bottom when both animals match</string>
     <string name="susg1">Press the red button when the bird sits on the branch</string>
-    <string name="altg1">Press the red button on the same side where the animal appears</string>
+    <string name="altg1">Press the animal appearing on the screen</string>
 
     <string name="provideconsent">I have read this consent form and my questions have been answered. My signature below means that I do want my child to be in the study. I know that I can withdraw my child from the study at any time without any problems.</string>
     <string name="getSignature">Sign Here</string>

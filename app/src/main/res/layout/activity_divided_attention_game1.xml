@@ -46,10 +46,9 @@
 
     <ImageView
         android:id="@+id/sq1"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         android:layout_marginTop="15dp"
-        android:src="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,10 +56,9 @@
 
     <ImageView
         android:id="@+id/sq2"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         android:layout_marginTop="25dp"
-        android:src="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -77,6 +75,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <!--
     <ImageButton
         android:id="@+id/red_btn"
         android:layout_width="150dp"
@@ -88,5 +87,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
+     -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

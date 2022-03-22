@@ -82,6 +82,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Child Name"
+        android:textColorHint="#575757"
         android:fontFamily="@font/poppins_bold"
         android:textColor="@color/black"
         android:textSize="18sp"
@@ -121,6 +122,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="xxxxx@gmail.com"
+            android:textColorHint="#575757"
             android:fontFamily="@font/poppins_bold"
             android:textColor="@color/black"
             android:textSize="18sp"
@@ -161,6 +163,7 @@
             android:layout_height="wrap_content"
             android:hint="0771234567"
             android:fontFamily="@font/poppins_bold"
+            android:textColorHint="#575757"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
