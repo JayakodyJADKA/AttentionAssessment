@@ -108,6 +108,7 @@
         app:layout_constraintHorizontal_bias="0.246"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <!--
     <ImageButton
         android:id="@+id/red_btn"
         android:layout_width="150dp"
@@ -117,7 +118,7 @@
         android:background="@drawable/red_btn"
         android:elevation="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" /> -->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

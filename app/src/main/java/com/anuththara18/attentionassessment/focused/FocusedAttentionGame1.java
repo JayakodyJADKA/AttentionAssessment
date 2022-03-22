@@ -149,7 +149,14 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
                         imageView5.setVisibility(View.INVISIBLE);
                         imageView6.setVisibility(View.INVISIBLE);
                         clicked = "null";
-                        red_btn.setEnabled(true);
+
+                        imageView.setEnabled(true);
+                        imageView2.setEnabled(true);
+                        imageView3.setEnabled(true);
+                        imageView4.setEnabled(true);
+                        imageView5.setEnabled(true);
+                        imageView6.setEnabled(true);
+
                         radomTimer = random.nextInt(5);
                         updateInterval = isi[radomTimer];
                         imageView.postDelayed(this, updateInterval);
@@ -230,7 +237,12 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
                             imageView6.setImageResource(images[rand]);
                         }
 
-                        red_btn.setEnabled(true);
+                        imageView.setEnabled(true);
+                        imageView2.setEnabled(true);
+                        imageView3.setEnabled(true);
+                        imageView4.setEnabled(true);
+                        imageView5.setEnabled(true);
+                        imageView6.setEnabled(true);
                         clicked = "monkey";
                         startTime = System.currentTimeMillis();
                         imageView.postDelayed(this, 3000);
@@ -270,41 +282,136 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
             }
         }.run();
 
-        red_btn.setOnTouchListener(new View.OnTouchListener() {
+        imageView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                switch (motionEvent.getAction()) {
-                    case MotionEvent.ACTION_DOWN: {
-                        red_btn.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
-                        view.invalidate();
-                        mp2 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
-                        mp2.start();
-                        break;
+            public void onClick(View view) {
+                    mp2 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
+                    mp2.start();
+                    // Your action here on button click
+                    clickedTime = System.currentTimeMillis();
+                    reactionTime = (clickedTime - startTime);
+                    //if (clicked.equals("monkey")) {
+                    if ( i - 1 == 2 || i - 1 == 14 || i - 1 == 26 || i - 1 == 38 ) {
+                        totalReactionTime = totalReactionTime + reactionTime;
+                        Log.d("correct ", startTime + " " + clickedTime + " " + reactionTime);
+                        noOfCorrectResponses++;
+                        imageView.setEnabled(false);
+                    } else {
+                        Log.d("wrong", startTime + " " + clickedTime + " " + reactionTime);
+                        noOfCommissionErrors++;
                     }
-                    case MotionEvent.ACTION_UP:
-                        // Your action here on button click
-                        clickedTime = System.currentTimeMillis();
-                        reactionTime = ( clickedTime - startTime );
-                        if (clicked.equals("monkey")) {
-                            totalReactionTime = totalReactionTime + reactionTime;
-                            Log.d("correct " , startTime + " " + clickedTime + " " + reactionTime);
-                            noOfCorrectResponses++;
-                            red_btn.setEnabled(false);
-                        }
-                        else {
-                            Log.d( "wrong" , startTime + " " + clickedTime + " " + reactionTime);
-                            noOfCommissionErrors++;
-                        }
-
-                    case MotionEvent.ACTION_CANCEL: {
-                        red_btn.getBackground().clearColorFilter();
-                        view.invalidate();
-                        break;
-                    }
-                }
-                return true;
             }
         });
+
+        imageView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                    mp2 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
+                    mp2.start();
+                    // Your action here on button click
+                    clickedTime = System.currentTimeMillis();
+                    reactionTime = (clickedTime - startTime);
+                    //if (clicked.equals("monkey")) {
+                    if ( i - 1 == 4 || i - 1 == 16 || i - 1 == 28 || i - 1 == 40 ) {
+                        totalReactionTime = totalReactionTime + reactionTime;
+                        Log.d("correct ", startTime + " " + clickedTime + " " + reactionTime);
+                        noOfCorrectResponses++;
+                        imageView2.setEnabled(false);
+                    } else {
+                        Log.d("wrong", startTime + " " + clickedTime + " " + reactionTime);
+                        noOfCommissionErrors++;
+                    }
+            }
+        });
+
+        imageView3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                    mp2 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
+                    mp2.start();
+                    // Your action here on button click
+                    clickedTime = System.currentTimeMillis();
+                    reactionTime = (clickedTime - startTime);
+                    if ( i - 1 == 6 || i - 1 == 18 || i - 1 == 30 ) {
+                        totalReactionTime = totalReactionTime + reactionTime;
+                        Log.d("correct ", startTime + " " + clickedTime + " " + reactionTime);
+                        noOfCorrectResponses++;
+                        imageView3.setEnabled(false);
+                    } else {
+                        Log.d("wrong", startTime + " " + clickedTime + " " + reactionTime);
+                        noOfCommissionErrors++;
+                    }
+
+            }
+        });
+
+        imageView4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                    mp2 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
+                    mp2.start();
+                    // Your action here on button click
+                    clickedTime = System.currentTimeMillis();
+                    reactionTime = (clickedTime - startTime);
+                    if ( i - 1 == 8 || i - 1 == 20 || i - 1 == 32 )  {
+                        totalReactionTime = totalReactionTime + reactionTime;
+                        Log.d("correct ", startTime + " " + clickedTime + " " + reactionTime);
+                        noOfCorrectResponses++;
+                        imageView4.setEnabled(false);
+                    } else {
+                        Log.d("wrong", startTime + " " + clickedTime + " " + reactionTime);
+                        noOfCommissionErrors++;
+                    }
+
+            }
+        });
+
+        imageView5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                    mp2 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
+                    mp2.start();
+                    // Your action here on button click
+                    clickedTime = System.currentTimeMillis();
+                    reactionTime = (clickedTime - startTime);
+                    if ( i - 1 == 10 || i - 1 == 22 || i - 1 == 34 ) {
+                        totalReactionTime = totalReactionTime + reactionTime;
+                        Log.d("correct ", startTime + " " + clickedTime + " " + reactionTime);
+                        noOfCorrectResponses++;
+                        imageView5.setEnabled(false);
+                    } else {
+                        Log.d("wrong", startTime + " " + clickedTime + " " + reactionTime);
+                        noOfCommissionErrors++;
+                    }
+
+            }
+        });
+
+        imageView6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                    mp2 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
+                    mp2.start();
+                    // Your action here on button click
+                    clickedTime = System.currentTimeMillis();
+                    reactionTime = (clickedTime - startTime);
+                    if ( i - 1 == 12 || i - 1 == 24 || i - 1 == 36 ) {
+                        totalReactionTime = totalReactionTime + reactionTime;
+                        Log.d("correct ", startTime + " " + clickedTime + " " + reactionTime);
+                        noOfCorrectResponses++;
+                        imageView6.setEnabled(false);
+                    } else {
+                        Log.d("wrong", startTime + " " + clickedTime + " " + reactionTime);
+                        noOfCommissionErrors++;
+                    }
+
+            }
+        });
+
 
         cross_btn.setOnTouchListener(new View.OnTouchListener() {
             @Override
