@@ -72,14 +72,14 @@ public class AlternatingAttentionGame1 extends AppCompatActivity {
             R.drawable.motor_piggy,
             R.drawable.waving_dog,
             R.drawable.dancing_cat,
-            R.drawable.blue_bird2_gif,
+            R.drawable.walking_unicorn,
             R.drawable.yellow_bird_gif};
 
     Integer[] right_images = { R.drawable.dancing_star,
             R.drawable.blowing_crab,
             R.drawable.swimming_fish,
             R.drawable.blue_fishy,
-            R.drawable.blue_bird2_gif,
+            R.drawable.brown_octopus,
             R.drawable.yellow_bird_gif};
 
     //Integer[] sequence1 = { 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1, 0};
@@ -151,7 +151,7 @@ public class AlternatingAttentionGame1 extends AppCompatActivity {
                         //imageView2.setVisibility(View.INVISIBLE);
                         imageView2.setImageResource(0);
                         imageView1.setVisibility(View.VISIBLE);
-                        if (leftcount > 3 ){
+                        if (leftcount > 4 ){
                             leftcount = 0;
                         }
                         imageView1.setImageResource(left_images[leftcount]);
@@ -172,7 +172,7 @@ public class AlternatingAttentionGame1 extends AppCompatActivity {
                         //imageView1.setVisibility(View.INVISIBLE);
                         imageView1.setImageResource(0);
                         imageView2.setVisibility(View.VISIBLE);
-                        if (rightcount > 3 ){
+                        if (rightcount > 4 ){
                             rightcount = 0;
                         }
                         imageView2.setImageResource(right_images[rightcount]);

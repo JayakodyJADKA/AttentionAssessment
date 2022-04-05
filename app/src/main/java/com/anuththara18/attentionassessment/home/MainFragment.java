@@ -16,6 +16,7 @@ import com.anuththara18.attentionassessment.R;
 import com.anuththara18.attentionassessment.alternating.AlternatingAttentionGame1;
 import com.anuththara18.attentionassessment.dividedattention.DividedAttentionGame1;
 import com.anuththara18.attentionassessment.focused.FocusedAttentionGame1;
+import com.anuththara18.attentionassessment.map.Map1Activity;
 import com.anuththara18.attentionassessment.map.Map2Activity;
 import com.anuththara18.attentionassessment.sustained.BirdChoosingActivity;
 
@@ -52,7 +53,7 @@ public class MainFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 mp.start();
-                Intent intent = new Intent(getContext(), FocusedAttentionGame1.class);
+                Intent intent = new Intent(getContext(), Map1Activity.class);
                 startActivity(intent);
             }
         });

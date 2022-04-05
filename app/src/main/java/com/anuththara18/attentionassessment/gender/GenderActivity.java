@@ -103,7 +103,7 @@ public class GenderActivity extends AppCompatActivity {
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(GenderActivity.this, ParentDetailsActivity.class);
+                Intent intent = new Intent(GenderActivity.this, LanguageActivity.class);
                 startActivity(intent);
             }
         });

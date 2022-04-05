@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.anuththara18.attentionassessment.R;
 import com.anuththara18.attentionassessment.age.AgeActivity;
+import com.anuththara18.attentionassessment.consentform.ConsentFormActivity;
+import com.anuththara18.attentionassessment.consentform.SinhalaConsentFormActivity;
 import com.anuththara18.attentionassessment.gender.GenderActivity;
 import com.anuththara18.attentionassessment.language.LanguageActivity;
 import com.anuththara18.attentionassessment.language.LanguageSetter;
@@ -24,8 +26,8 @@ import java.util.regex.Pattern;
 
 public class ParentDetailsActivity extends AppCompatActivity {
 
-    TextView name, email, contact, next, previous, opt1, opt2, opt3;
-    EditText childName, parentEmail, parentContact;
+    TextView name, email, contact, next, previous, opt1, opt2, opt3, req, diag;
+    EditText childName, parentEmail, parentContact, diagnosis;
     public static String child_name, parent_email, parent_contact;
 
     @Override
@@ -48,6 +50,9 @@ public class ParentDetailsActivity extends AppCompatActivity {
         opt1 = findViewById(R.id.opt1);
         opt2 = findViewById(R.id.opt2);
         opt3 = findViewById(R.id.opt3);
+        req = findViewById(R.id.req);
+        diagnosis = findViewById(R.id.diagnosis);
+        diag = findViewById(R.id.diag);
 
         childName = findViewById(R.id.childName);
         parentEmail  = findViewById(R.id.parentEmail);
@@ -61,6 +66,8 @@ public class ParentDetailsActivity extends AppCompatActivity {
         opt1.setText(LanguageSetter.getresources().getString(R.string.optional));
         opt2.setText(LanguageSetter.getresources().getString(R.string.optional));
         opt3.setText(LanguageSetter.getresources().getString(R.string.optional));
+        req.setText(LanguageSetter.getresources().getString(R.string.req));
+        diag.setText(LanguageSetter.getresources().getString(R.string.diagnosis));
 
         child_name = childName.getText().toString();
         parent_email = parentEmail.getText().toString();
@@ -69,7 +76,7 @@ public class ParentDetailsActivity extends AppCompatActivity {
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ParentDetailsActivity.this, LanguageActivity.class);
+                Intent intent = new Intent(ParentDetailsActivity.this, AgeActivity.class);
                 startActivity(intent);
             }
         });
@@ -86,8 +93,11 @@ public class ParentDetailsActivity extends AppCompatActivity {
                     parentContact.setError("Enter Valid Number\nEg: 0771234567");
                 }
                 else {
-                    Intent intent = new Intent(ParentDetailsActivity.this, GenderActivity.class);
-                    startActivity(intent);
+                   if (LanguageActivity.text.equals("English")) {
+                       startActivity(new Intent(ParentDetailsActivity.this, ConsentFormActivity.class));
+                   } else {
+                       startActivity(new Intent(ParentDetailsActivity.this, SinhalaConsentFormActivity.class));
+                   }
                 }
             }
         });

@@ -415,7 +415,7 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
 
                     GVAdapter2 adapter = new GVAdapter2(getApplicationContext(), gridModelArrayList);
                     gridView.setAdapter(adapter);
-
+                    gridView.setEnabled(false);
                     saveDataToOnlineDB();
                     createTable();
                     saveDataToLocalDB();

@@ -133,12 +133,7 @@ public class AgeActivity extends AppCompatActivity {
                 //saveDataToOnlineDB();
                 createTable();
                 saveDataToLocalDB();
-
-                if (LanguageActivity.text.equals("English")) {
-                    startActivity(new Intent(AgeActivity.this, ConsentFormActivity.class));
-                } else {
-                    startActivity(new Intent(AgeActivity.this, SinhalaConsentFormActivity.class));
-                }
+                startActivity(new Intent(AgeActivity.this, ParentDetailsActivity.class));
 
                  /*if(imageCheck==1) {
                     Intent navInt = new Intent(getApplicationContext(), NavigationDrawerActivity.class);

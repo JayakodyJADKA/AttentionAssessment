@@ -34,6 +34,7 @@ import com.anuththara18.attentionassessment.db.RequestHandler;
 import com.anuththara18.attentionassessment.gender.GenderActivity;
 import com.anuththara18.attentionassessment.home.NavigationDrawerActivity;
 import com.anuththara18.attentionassessment.language.LanguageSetter;
+import com.anuththara18.attentionassessment.map.Map1Activity;
 import com.anuththara18.attentionassessment.sustained.SustainedAttentionGame1;
 
 import org.json.JSONException;
@@ -108,7 +109,7 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
         red_btn = (ImageButton) findViewById(R.id.red_btn);
         textView = (TextView) findViewById(R.id.textView);
 
-        textView.setText(LanguageSetter.getresources().getString(R.string.focg1));
+        //textView.setText(LanguageSetter.getresources().getString(R.string.focg1));
 
         mp = MediaPlayer.create(getApplicationContext(), R.raw.focused);
         mp.start();
@@ -137,7 +138,6 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
 
             @Override
             public void run() {
-
 
                 if ( i <= count ) { // 41 times
 
@@ -182,59 +182,181 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
                         }
                         rand = getRandomElement(unpickedNumbers);
 
-                        if ( i == 2 || i == 14 || i == 26 || i == 38 ) {
-                            imageView.setVisibility(View.VISIBLE);
-                            imageView2.setVisibility(View.INVISIBLE);
-                            imageView3.setVisibility(View.INVISIBLE);
-                            imageView4.setVisibility(View.INVISIBLE);
-                            imageView5.setVisibility(View.INVISIBLE);
-                            imageView6.setVisibility(View.INVISIBLE);
-                            imageView.setImageResource(images[rand]);
+                        if ( Map1Activity.level == 3 ) {
+
+                            if ( i == 2 || i == 14 || i == 26 || i == 38 ) {
+                                imageView.setVisibility(View.VISIBLE);
+                                imageView2.setVisibility(View.INVISIBLE);
+                                imageView3.setVisibility(View.INVISIBLE);
+                                imageView4.setVisibility(View.INVISIBLE);
+                                imageView5.setVisibility(View.INVISIBLE);
+                                imageView6.setVisibility(View.INVISIBLE);
+                                imageView.setImageResource(images[AnimalChoosingActivity.birdSelected]);
+                            }
+                            else if ( i == 4 || i == 16 || i == 28 || i == 40 ) {
+                                imageView2.setVisibility(View.VISIBLE);
+                                imageView.setVisibility(View.INVISIBLE);
+                                imageView3.setVisibility(View.INVISIBLE);
+                                imageView4.setVisibility(View.INVISIBLE);
+                                imageView5.setVisibility(View.INVISIBLE);
+                                imageView6.setVisibility(View.INVISIBLE);
+                                imageView2.setImageResource(images[AnimalChoosingActivity.birdSelected]);
+                            }
+                            else if ( i == 6 || i == 18 || i == 30 ) {
+                                imageView3.setVisibility(View.VISIBLE);
+                                imageView2.setVisibility(View.INVISIBLE);
+                                imageView.setVisibility(View.INVISIBLE);
+                                imageView4.setVisibility(View.INVISIBLE);
+                                imageView5.setVisibility(View.INVISIBLE);
+                                imageView6.setVisibility(View.INVISIBLE);
+                                imageView3.setImageResource(images[AnimalChoosingActivity.birdSelected]);
+                            }
+                            else if ( i == 8 || i == 20 || i == 32 ) {
+                                imageView4.setVisibility(View.VISIBLE);
+                                imageView2.setVisibility(View.INVISIBLE);
+                                imageView3.setVisibility(View.INVISIBLE);
+                                imageView.setVisibility(View.INVISIBLE);
+                                imageView5.setVisibility(View.INVISIBLE);
+                                imageView6.setVisibility(View.INVISIBLE);
+                                imageView4.setImageResource(images[AnimalChoosingActivity.birdSelected]);
+                            }
+                            else if ( i == 10 || i == 22 || i == 34 ) {
+                                imageView5.setVisibility(View.VISIBLE);
+                                imageView2.setVisibility(View.INVISIBLE);
+                                imageView3.setVisibility(View.INVISIBLE);
+                                imageView4.setVisibility(View.INVISIBLE);
+                                imageView.setVisibility(View.INVISIBLE);
+                                imageView6.setVisibility(View.INVISIBLE);
+                                imageView5.setImageResource(images[AnimalChoosingActivity.birdSelected]);
+                            }
+                            else if ( i == 12 || i == 24 || i == 36 ) {
+                                imageView6.setVisibility(View.VISIBLE);
+                                imageView2.setVisibility(View.INVISIBLE);
+                                imageView3.setVisibility(View.INVISIBLE);
+                                imageView4.setVisibility(View.INVISIBLE);
+                                imageView5.setVisibility(View.INVISIBLE);
+                                imageView.setVisibility(View.INVISIBLE);
+                                imageView6.setImageResource(images[AnimalChoosingActivity.birdSelected]);
+                            }
+
                         }
-                        else if ( i == 4 || i == 16 || i == 28 || i == 40 ) {
-                            imageView2.setVisibility(View.VISIBLE);
-                            imageView.setVisibility(View.INVISIBLE);
-                            imageView3.setVisibility(View.INVISIBLE);
-                            imageView4.setVisibility(View.INVISIBLE);
-                            imageView5.setVisibility(View.INVISIBLE);
-                            imageView6.setVisibility(View.INVISIBLE);
-                            imageView2.setImageResource(images[rand]);
+
+                        else if ( Map1Activity.level == 4 ) {
+
+                            if ( i == 2 || i == 14 || i == 26 || i == 38 ) {
+                                imageView.setVisibility(View.VISIBLE);
+                                imageView2.setVisibility(View.INVISIBLE);
+                                imageView3.setVisibility(View.INVISIBLE);
+                                imageView4.setVisibility(View.INVISIBLE);
+                                imageView5.setVisibility(View.INVISIBLE);
+                                imageView6.setVisibility(View.INVISIBLE);
+                                imageView.setImageResource(images[AnimalChoosingActivity.birdSelected]);
+                            }
+                            else if ( i == 4 || i == 16 || i == 28 || i == 40 ) {
+                                imageView2.setVisibility(View.VISIBLE);
+                                imageView.setVisibility(View.INVISIBLE);
+                                imageView3.setVisibility(View.INVISIBLE);
+                                imageView4.setVisibility(View.INVISIBLE);
+                                imageView5.setVisibility(View.INVISIBLE);
+                                imageView6.setVisibility(View.INVISIBLE);
+                                imageView2.setImageResource(images[AnimalChoosingActivity.birdSelected]);
+                            }
+                            else if ( i == 6 || i == 18 || i == 30 ) {
+                                imageView3.setVisibility(View.VISIBLE);
+                                imageView2.setVisibility(View.INVISIBLE);
+                                imageView.setVisibility(View.INVISIBLE);
+                                imageView4.setVisibility(View.INVISIBLE);
+                                imageView5.setVisibility(View.INVISIBLE);
+                                imageView6.setVisibility(View.INVISIBLE);
+                                imageView3.setImageResource(images[AnimalChoosingActivity.birdSelected]);
+                            }
+                            else if ( i == 8 || i == 20 || i == 32 ) {
+                                imageView4.setVisibility(View.VISIBLE);
+                                imageView2.setVisibility(View.INVISIBLE);
+                                imageView3.setVisibility(View.INVISIBLE);
+                                imageView.setVisibility(View.INVISIBLE);
+                                imageView5.setVisibility(View.INVISIBLE);
+                                imageView6.setVisibility(View.INVISIBLE);
+                                imageView4.setImageResource(images[AnimalChoosingActivity.birdSelected]);
+                            }
+                            else if ( i == 10 || i == 22 || i == 34 ) {
+                                imageView5.setVisibility(View.VISIBLE);
+                                imageView2.setVisibility(View.INVISIBLE);
+                                imageView3.setVisibility(View.INVISIBLE);
+                                imageView4.setVisibility(View.INVISIBLE);
+                                imageView.setVisibility(View.INVISIBLE);
+                                imageView6.setVisibility(View.INVISIBLE);
+                                imageView5.setImageResource(images[AnimalChoosingActivity.birdSelected]);
+                            }
+                            else if ( i == 12 || i == 24 || i == 36 ) {
+                                imageView6.setVisibility(View.VISIBLE);
+                                imageView2.setVisibility(View.INVISIBLE);
+                                imageView3.setVisibility(View.INVISIBLE);
+                                imageView4.setVisibility(View.INVISIBLE);
+                                imageView5.setVisibility(View.INVISIBLE);
+                                imageView.setVisibility(View.INVISIBLE);
+                                imageView6.setImageResource(images[AnimalChoosingActivity.birdSelected]);
+                            }
+
                         }
-                        else if ( i == 6 || i == 18 || i == 30 ) {
-                            imageView3.setVisibility(View.VISIBLE);
-                            imageView2.setVisibility(View.INVISIBLE);
-                            imageView.setVisibility(View.INVISIBLE);
-                            imageView4.setVisibility(View.INVISIBLE);
-                            imageView5.setVisibility(View.INVISIBLE);
-                            imageView6.setVisibility(View.INVISIBLE);
-                            imageView3.setImageResource(images[rand]);
-                        }
-                        else if ( i == 8 || i == 20 || i == 32 ) {
-                            imageView4.setVisibility(View.VISIBLE);
-                            imageView2.setVisibility(View.INVISIBLE);
-                            imageView3.setVisibility(View.INVISIBLE);
-                            imageView.setVisibility(View.INVISIBLE);
-                            imageView5.setVisibility(View.INVISIBLE);
-                            imageView6.setVisibility(View.INVISIBLE);
-                            imageView4.setImageResource(images[rand]);
-                        }
-                        else if ( i == 10 || i == 22 || i == 34 ) {
-                            imageView5.setVisibility(View.VISIBLE);
-                            imageView2.setVisibility(View.INVISIBLE);
-                            imageView3.setVisibility(View.INVISIBLE);
-                            imageView4.setVisibility(View.INVISIBLE);
-                            imageView.setVisibility(View.INVISIBLE);
-                            imageView6.setVisibility(View.INVISIBLE);
-                            imageView5.setImageResource(images[rand]);
-                        }
-                        else if ( i == 12 || i == 24 || i == 36 ) {
-                            imageView6.setVisibility(View.VISIBLE);
-                            imageView2.setVisibility(View.INVISIBLE);
-                            imageView3.setVisibility(View.INVISIBLE);
-                            imageView4.setVisibility(View.INVISIBLE);
-                            imageView5.setVisibility(View.INVISIBLE);
-                            imageView.setVisibility(View.INVISIBLE);
-                            imageView6.setImageResource(images[rand]);
+
+                        else if ( Map1Activity.level == 5 ) {
+
+                            if ( i == 2 || i == 14 || i == 26 || i == 38 ) {
+                                imageView.setVisibility(View.VISIBLE);
+                                imageView2.setVisibility(View.INVISIBLE);
+                                imageView3.setVisibility(View.INVISIBLE);
+                                imageView4.setVisibility(View.INVISIBLE);
+                                imageView5.setVisibility(View.INVISIBLE);
+                                imageView6.setVisibility(View.INVISIBLE);
+                                imageView.setImageResource(images[rand]);
+                            }
+                            else if ( i == 4 || i == 16 || i == 28 || i == 40 ) {
+                                imageView2.setVisibility(View.VISIBLE);
+                                imageView.setVisibility(View.INVISIBLE);
+                                imageView3.setVisibility(View.INVISIBLE);
+                                imageView4.setVisibility(View.INVISIBLE);
+                                imageView5.setVisibility(View.INVISIBLE);
+                                imageView6.setVisibility(View.INVISIBLE);
+                                imageView2.setImageResource(images[rand]);
+                            }
+                            else if ( i == 6 || i == 18 || i == 30 ) {
+                                imageView3.setVisibility(View.VISIBLE);
+                                imageView2.setVisibility(View.INVISIBLE);
+                                imageView.setVisibility(View.INVISIBLE);
+                                imageView4.setVisibility(View.INVISIBLE);
+                                imageView5.setVisibility(View.INVISIBLE);
+                                imageView6.setVisibility(View.INVISIBLE);
+                                imageView3.setImageResource(images[rand]);
+                            }
+                            else if ( i == 8 || i == 20 || i == 32 ) {
+                                imageView4.setVisibility(View.VISIBLE);
+                                imageView2.setVisibility(View.INVISIBLE);
+                                imageView3.setVisibility(View.INVISIBLE);
+                                imageView.setVisibility(View.INVISIBLE);
+                                imageView5.setVisibility(View.INVISIBLE);
+                                imageView6.setVisibility(View.INVISIBLE);
+                                imageView4.setImageResource(images[rand]);
+                            }
+                            else if ( i == 10 || i == 22 || i == 34 ) {
+                                imageView5.setVisibility(View.VISIBLE);
+                                imageView2.setVisibility(View.INVISIBLE);
+                                imageView3.setVisibility(View.INVISIBLE);
+                                imageView4.setVisibility(View.INVISIBLE);
+                                imageView.setVisibility(View.INVISIBLE);
+                                imageView6.setVisibility(View.INVISIBLE);
+                                imageView5.setImageResource(images[rand]);
+                            }
+                            else if ( i == 12 || i == 24 || i == 36 ) {
+                                imageView6.setVisibility(View.VISIBLE);
+                                imageView2.setVisibility(View.INVISIBLE);
+                                imageView3.setVisibility(View.INVISIBLE);
+                                imageView4.setVisibility(View.INVISIBLE);
+                                imageView5.setVisibility(View.INVISIBLE);
+                                imageView.setVisibility(View.INVISIBLE);
+                                imageView6.setImageResource(images[rand]);
+                            }
+
                         }
 
                         imageView.setEnabled(true);

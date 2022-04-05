@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg1"
+    android:background="@drawable/bg5"
     tools:context=".details.ParentDetailsActivity">
 
     <TextView
         android:id="@+id/previous"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="25dp"
         android:drawableStart="@drawable/icon_left"
         android:drawableTint="@color/black"
         android:fontFamily="@font/poppins_medium"
@@ -27,7 +27,7 @@
         android:id="@+id/next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="25dp"
         android:drawableEnd="@drawable/icon_right"
         android:drawableTint="@color/black"
         android:fontFamily="@font/poppins_medium"
@@ -53,6 +53,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
             android:orientation="horizontal" >
 
             <TextView
@@ -83,14 +84,14 @@
         android:layout_height="wrap_content"
         android:hint="Child Name"
         android:textColorHint="#575757"
-        android:fontFamily="@font/poppins_bold"
+        android:fontFamily="@font/poppins_medium"
         android:textColor="@color/black"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textSize="18sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal" >
 
         <TextView
@@ -123,14 +124,14 @@
             android:layout_height="wrap_content"
             android:hint="xxxxx@gmail.com"
             android:textColorHint="#575757"
-            android:fontFamily="@font/poppins_bold"
+            android:fontFamily="@font/poppins_medium"
             android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textSize="18sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal" >
 
         <TextView
@@ -162,11 +163,50 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="0771234567"
-            android:fontFamily="@font/poppins_bold"
+            android:fontFamily="@font/poppins_medium"
             android:textColorHint="#575757"
             android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/diag"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/diagnosis"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/req"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:layout_marginLeft="20dp"
+                android:text="@string/req"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/red"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/diagnosis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Yes / No"
+            android:fontFamily="@font/poppins_medium"
+            android:textColorHint="#575757"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
     </LinearLayout>
 
@@ -174,8 +214,8 @@
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="110dp"
-        android:layout_marginBottom="-8dp"
-        android:src="@drawable/grass1"
+        android:layout_marginBottom="-15dp"
+        android:src="@drawable/grass2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
