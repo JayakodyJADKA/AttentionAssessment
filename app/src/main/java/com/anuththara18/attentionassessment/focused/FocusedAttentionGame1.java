@@ -109,7 +109,7 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
         red_btn = (ImageButton) findViewById(R.id.red_btn);
         textView = (TextView) findViewById(R.id.textView);
 
-        //textView.setText(LanguageSetter.getresources().getString(R.string.focg1));
+        textView.setText(LanguageSetter.getresources().getString(R.string.focg1));
 
         mp = MediaPlayer.create(getApplicationContext(), R.raw.focused);
         mp.start();
