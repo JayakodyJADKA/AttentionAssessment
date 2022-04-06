@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.anuththara18.attentionassessment.R;
+import com.anuththara18.attentionassessment.details.ParentDetailsActivity;
+import com.anuththara18.attentionassessment.home.NavigationDrawerActivity;
 import com.anuththara18.attentionassessment.language.LanguageSetter;
 
 import java.util.ArrayList;
@@ -41,13 +43,21 @@ public class ConsentFormActivity extends AppCompatActivity {
         textView = findViewById(R.id.textView);
         next = findViewById(R.id.next);
 
+        if (ParentDetailsActivity.nav == 0) {
+            next.setVisibility(View.INVISIBLE);
+            next.setEnabled(false);
+        }
+        else {
+            next.setVisibility(View.VISIBLE);
+            next.setEnabled(true);
+        }
+
         textView.setText(LanguageSetter.getresources().getString(R.string.consentForm));
         next.setText(LanguageSetter.getresources().getString(R.string.proceed));
 
         initData();
         initRecyclerView();
 
-        TextView next = findViewById(R.id.next);
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

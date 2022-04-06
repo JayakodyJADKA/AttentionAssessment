@@ -30,6 +30,8 @@ public class ParentDetailsActivity extends AppCompatActivity {
     EditText childName, parentEmail, parentContact, diagnosis;
     public static String child_name, parent_email, parent_contact;
 
+    public static int nav = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +95,7 @@ public class ParentDetailsActivity extends AppCompatActivity {
                     parentContact.setError("Enter Valid Number\nEg: 0771234567");
                 }
                 else {
+                   nav = 1;
                    if (LanguageActivity.text.equals("English")) {
                        startActivity(new Intent(ParentDetailsActivity.this, ConsentFormActivity.class));
                    } else {

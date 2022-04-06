@@ -19,7 +19,10 @@ import android.widget.Toast;
 
 import com.anuththara18.attentionassessment.R;
 import com.anuththara18.attentionassessment.consentform.ConsentFormActivity;
+import com.anuththara18.attentionassessment.consentform.SinhalaConsentFormActivity;
+import com.anuththara18.attentionassessment.details.ParentDetailsActivity;
 import com.anuththara18.attentionassessment.emailfiles.EmailDataFilesActivity;
+import com.anuththara18.attentionassessment.language.LanguageActivity;
 import com.google.android.material.navigation.NavigationView;
 
 import static android.Manifest.permission.MANAGE_EXTERNAL_STORAGE;
@@ -109,8 +112,12 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
                 //startActivity(intent6);
                 break;
             case R.id.consentForm:
-                Intent intent7 = new Intent(getApplicationContext(), ConsentFormActivity.class);
-                startActivity(intent7);
+                ParentDetailsActivity.nav = 0;
+                if (LanguageActivity.text.equals("English")) {
+                    startActivity(new Intent(getApplicationContext(), ConsentFormActivity.class));
+                } else {
+                    startActivity(new Intent(getApplicationContext(), SinhalaConsentFormActivity.class));
+                }
                 break;
             case R.id.sendData:
                 Intent intent9 = new Intent(getApplicationContext(), EmailDataFilesActivity.class);
