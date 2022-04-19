@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import com.anuththara18.attentionassessment.R;
 import com.anuththara18.attentionassessment.home.NavigationDrawerActivity;
 import com.anuththara18.attentionassessment.selective.SelectiveAttentionGame1;
+import com.anuththara18.attentionassessment.videos.IntroductoryVideoPortraitActivity;
 
 public class Map2Activity extends AppCompatActivity {
 
@@ -41,7 +42,7 @@ public class Map2Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 level = 1;
-                Intent intent = new Intent(getApplicationContext(), SelectiveAttentionGame1.class);
+                Intent intent = new Intent(getApplicationContext(), IntroductoryVideoPortraitActivity.class);
                 finish();
                 startActivity(intent);
             }
@@ -51,7 +52,7 @@ public class Map2Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 level = 2;
-                Intent intent = new Intent(getApplicationContext(), SelectiveAttentionGame1.class);
+                Intent intent = new Intent(getApplicationContext(), IntroductoryVideoPortraitActivity.class);
                 finish();
                 startActivity(intent);
             }
@@ -61,7 +62,7 @@ public class Map2Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 level = 3;
-                Intent intent = new Intent(getApplicationContext(), SelectiveAttentionGame1.class);
+                Intent intent = new Intent(getApplicationContext(), IntroductoryVideoPortraitActivity.class);
                 finish();
                 startActivity(intent);
             }
@@ -71,7 +72,7 @@ public class Map2Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 level = 4;
-                Intent intent = new Intent(getApplicationContext(), SelectiveAttentionGame1.class);
+                Intent intent = new Intent(getApplicationContext(), IntroductoryVideoPortraitActivity.class);
                 finish();
                 startActivity(intent);
             }
@@ -81,7 +82,7 @@ public class Map2Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 level = 5;
-                Intent intent = new Intent(getApplicationContext(), SelectiveAttentionGame1.class);
+                Intent intent = new Intent(getApplicationContext(), IntroductoryVideoPortraitActivity.class);
                 finish();
                 startActivity(intent);
             }

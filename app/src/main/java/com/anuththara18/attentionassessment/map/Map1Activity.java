@@ -12,6 +12,8 @@ import com.anuththara18.attentionassessment.focused.AnimalChoosingActivity;
 import com.anuththara18.attentionassessment.focused.FocusedAttentionGame1;
 import com.anuththara18.attentionassessment.focused.FocusedAttentionGame2;
 import com.anuththara18.attentionassessment.selective.SelectiveAttentionGame1;
+import com.anuththara18.attentionassessment.videos.IntroductoryVideoLandscapeActivity;
+import com.anuththara18.attentionassessment.videos.IntroductoryVideoPortraitActivity;
 
 public class Map1Activity extends AppCompatActivity {
 
@@ -34,7 +36,7 @@ public class Map1Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 level = 1;
-                Intent intent = new Intent(getApplicationContext(), FocusedAttentionGame2.class);
+                Intent intent = new Intent(getApplicationContext(), IntroductoryVideoLandscapeActivity.class);
                 finish();
                 startActivity(intent);
             }
@@ -44,7 +46,7 @@ public class Map1Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 level = 2;
-                Intent intent = new Intent(getApplicationContext(), FocusedAttentionGame2.class);
+                Intent intent = new Intent(getApplicationContext(), IntroductoryVideoLandscapeActivity.class);
                 finish();
                 startActivity(intent);
             }
@@ -54,7 +56,7 @@ public class Map1Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 level = 3;
-                Intent intent = new Intent(getApplicationContext(), AnimalChoosingActivity.class);
+                Intent intent = new Intent(getApplicationContext(), IntroductoryVideoPortraitActivity.class);
                 finish();
                 startActivity(intent);
             }
@@ -64,7 +66,7 @@ public class Map1Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 level = 4;
-                Intent intent = new Intent(getApplicationContext(), AnimalChoosingActivity.class);
+                Intent intent = new Intent(getApplicationContext(), IntroductoryVideoPortraitActivity.class);
                 finish();
                 startActivity(intent);
             }
@@ -74,7 +76,7 @@ public class Map1Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 level = 5;
-                Intent intent = new Intent(getApplicationContext(), AnimalChoosingActivity.class);
+                Intent intent = new Intent(getApplicationContext(), IntroductoryVideoLandscapeActivity.class);
                 finish();
                 startActivity(intent);
             }

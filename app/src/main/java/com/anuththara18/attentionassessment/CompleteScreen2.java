@@ -11,9 +11,15 @@ import android.widget.ImageView;
 
 import com.anuththara18.attentionassessment.home.NavigationDrawerActivity;
 
+import java.util.Random;
+
 public class CompleteScreen2 extends AppCompatActivity {
 
-    ImageView complete;
+    Random random;
+    ImageView complete, gifImageView;
+    int gifs[] = {R.drawable.complete_gif, R.drawable.complete_gif2, R.drawable.complete_gif3,
+            R.drawable.complete_gif4, R.drawable.complete_gif5, R.drawable.complete_gif6,
+            R.drawable.complete_gif7, R.drawable.complete_gif8};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +34,10 @@ public class CompleteScreen2 extends AppCompatActivity {
         setContentView(R.layout.activity_complete_screen2);
 
         complete = findViewById(R.id.complete);
+        gifImageView = findViewById(R.id.gifImageView);
+
+        random = new Random();
+        gifImageView.setImageResource(gifs[random.nextInt(8)]);
 
         complete.setOnClickListener(new View.OnClickListener() {
             @Override

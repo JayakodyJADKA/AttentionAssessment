@@ -144,14 +144,14 @@ public class FocusedAttentionGame2 extends AppCompatActivity {
                                 bear4.setVisibility(View.INVISIBLE);
                             }
                             else if ( i == 4 || i == 16 || i == 28 || i == 40 ) {
-                                bear2.setVisibility(View.VISIBLE);
+                                bear3.setVisibility(View.VISIBLE);
                                 bear1.setVisibility(View.INVISIBLE);
-                                bear3.setVisibility(View.INVISIBLE);
+                                bear2.setVisibility(View.INVISIBLE);
                                 bear4.setVisibility(View.INVISIBLE);
                             }
                             else if ( i == 6 || i == 18 || i == 30 ) {
-                                bear3.setVisibility(View.VISIBLE);
-                                bear2.setVisibility(View.INVISIBLE);
+                                bear2.setVisibility(View.VISIBLE);
+                                bear3.setVisibility(View.INVISIBLE);
                                 bear1.setVisibility(View.INVISIBLE);
                                 bear4.setVisibility(View.INVISIBLE);
                             }
@@ -168,10 +168,10 @@ public class FocusedAttentionGame2 extends AppCompatActivity {
                                 bear4.setVisibility(View.INVISIBLE);
                             }
                             else if ( i == 12 || i == 24 || i == 36 ) {
-                                bear3.setVisibility(View.VISIBLE);
+                                bear4.setVisibility(View.VISIBLE);
                                 bear1.setVisibility(View.INVISIBLE);
                                 bear2.setVisibility(View.INVISIBLE);
-                                bear4.setVisibility(View.INVISIBLE);
+                                bear1.setVisibility(View.INVISIBLE);
                             }
 
                         }
@@ -249,7 +249,7 @@ public class FocusedAttentionGame2 extends AppCompatActivity {
                 clickedTime = System.currentTimeMillis();
                 reactionTime = (clickedTime - startTime);
                 //if (clicked.equals("monkey")) {
-                if ( i - 1 == 4 || i - 1 == 16 || i - 1 == 28 || i - 1 == 40 ) {
+                if ( i - 1 == 6 || i - 1 == 18 || i - 1 == 30 || i - 1 == 42 ) {
                     totalReactionTime = totalReactionTime + reactionTime;
                     Log.d("correct ", startTime + " " + clickedTime + " " + reactionTime);
                     noOfCorrectResponses++;
@@ -270,7 +270,7 @@ public class FocusedAttentionGame2 extends AppCompatActivity {
                 // Your action here on button click
                 clickedTime = System.currentTimeMillis();
                 reactionTime = (clickedTime - startTime);
-                if ( i - 1 == 6 || i - 1 == 18 || i - 1 == 30 || i - 1 == 12 || i - 1 == 24 || i - 1 == 36) {
+                if ( i - 1 == 4 || i - 1 == 16 || i - 1 == 28 || i - 1 == 40 ) {
                     totalReactionTime = totalReactionTime + reactionTime;
                     Log.d("correct ", startTime + " " + clickedTime + " " + reactionTime);
                     noOfCorrectResponses++;
@@ -292,7 +292,7 @@ public class FocusedAttentionGame2 extends AppCompatActivity {
                 // Your action here on button click
                 clickedTime = System.currentTimeMillis();
                 reactionTime = (clickedTime - startTime);
-                if ( i - 1 == 8 || i - 1 == 20 || i - 1 == 32 )  {
+                if ( i - 1 == 8 || i - 1 == 20 || i - 1 == 32 || i - 1 == 12 || i - 1 == 24 || i - 1 == 36 )  {
                     totalReactionTime = totalReactionTime + reactionTime;
                     Log.d("correct ", startTime + " " + clickedTime + " " + reactionTime);
                     noOfCorrectResponses++;

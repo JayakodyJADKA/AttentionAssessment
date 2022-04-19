@@ -19,10 +19,14 @@ import com.anuththara18.attentionassessment.focused.FocusedAttentionGame1;
 import com.anuththara18.attentionassessment.map.Map1Activity;
 import com.anuththara18.attentionassessment.map.Map2Activity;
 import com.anuththara18.attentionassessment.sustained.BirdChoosingActivity;
+import com.anuththara18.attentionassessment.videos.IntroductoryVideoLandscapeActivity;
+import com.anuththara18.attentionassessment.videos.IntroductoryVideoPortraitActivity;
 
 @SuppressLint("ValidFragment")
 
 public class MainFragment extends Fragment {
+
+    public static String game = " ";
 
     CardView focusedAttention, selectiveAttention, dividedAttention, sustainedAttention, alternatingAttention, alternatingAttention2;
 
@@ -53,6 +57,7 @@ public class MainFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 mp.start();
+                game = "focused";
                 Intent intent = new Intent(getContext(), Map1Activity.class);
                 startActivity(intent);
             }
@@ -62,7 +67,8 @@ public class MainFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 mp.start();
-                Intent intent = new Intent(getContext(), BirdChoosingActivity.class);
+                game = "sustained";
+                Intent intent = new Intent(getContext(), IntroductoryVideoPortraitActivity.class);
                 startActivity(intent);
             }
         });
@@ -71,6 +77,7 @@ public class MainFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 mp.start();
+                game = "selective";
                 Intent intent = new Intent(getContext(), Map2Activity.class);
                 startActivity(intent);
             }
@@ -80,17 +87,18 @@ public class MainFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 mp.start();
-                Intent intent = new Intent(getContext(), DividedAttentionGame1.class);
+                game = "divided";
+                Intent intent = new Intent(getContext(), IntroductoryVideoPortraitActivity.class);
                 startActivity(intent);
             }
         });
-
 
         alternatingAttention2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mp.start();
-                Intent intent = new Intent(getContext(), AlternatingAttentionGame1.class);
+                game = "alternating";
+                Intent intent = new Intent(getContext(), IntroductoryVideoLandscapeActivity.class);
                 startActivity(intent);
             }
         });

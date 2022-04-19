@@ -10,6 +10,8 @@ import android.util.Patterns;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,8 +29,10 @@ import java.util.regex.Pattern;
 public class ParentDetailsActivity extends AppCompatActivity {
 
     TextView name, email, contact, next, previous, opt1, opt2, opt3, req, diag;
-    EditText childName, parentEmail, parentContact, diagnosis;
-    public static String child_name, parent_email, parent_contact;
+    EditText childName, parentEmail, parentContact;
+    public static String child_name, parent_email, parent_contact, diagnosis;
+    RadioGroup radioGroup;
+    RadioButton genderradioButton;
 
     public static int nav = 1;
 
@@ -53,8 +57,8 @@ public class ParentDetailsActivity extends AppCompatActivity {
         opt2 = findViewById(R.id.opt2);
         opt3 = findViewById(R.id.opt3);
         req = findViewById(R.id.req);
-        diagnosis = findViewById(R.id.diagnosis);
         diag = findViewById(R.id.diag);
+        radioGroup=(RadioGroup)findViewById(R.id.radioGroup);
 
         childName = findViewById(R.id.childName);
         parentEmail  = findViewById(R.id.parentEmail);
@@ -86,6 +90,8 @@ public class ParentDetailsActivity extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                genderradioButton = (RadioButton) findViewById(selectedId);
                if (!isEmail(parentEmail)) {
                     Toast.makeText(ParentDetailsActivity.this, "Enter valid email", Toast.LENGTH_SHORT).show();
                     parentEmail.setError("Enter valid email!");
@@ -94,7 +100,12 @@ public class ParentDetailsActivity extends AppCompatActivity {
                     Toast.makeText(ParentDetailsActivity.this, "Enter Valid Number\nEg: 0771234567", Toast.LENGTH_SHORT).show();
                     parentContact.setError("Enter Valid Number\nEg: 0771234567");
                 }
-                else {
+                else if(selectedId == -1){
+                    Toast.makeText(ParentDetailsActivity.this,"Nothing selected", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    diagnosis = (String) genderradioButton.getText();
+                    //Toast.makeText(ParentDetailsActivity.this,genderradioButton.getText(), Toast.LENGTH_SHORT).show();
                    nav = 1;
                    if (LanguageActivity.text.equals("English")) {
                        startActivity(new Intent(ParentDetailsActivity.this, ConsentFormActivity.class));

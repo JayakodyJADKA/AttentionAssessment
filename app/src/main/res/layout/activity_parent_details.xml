@@ -198,15 +198,34 @@
 
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/diagnosis"
-            android:layout_width="match_parent"
+        <RadioGroup
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Yes / No"
-            android:fontFamily="@font/poppins_medium"
-            android:textColorHint="#575757"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:id="@+id/radioGroup">
+
+            <RadioButton
+                android:id="@+id/yes"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="  Yes"
+                android:buttonTint="@color/black"
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"
+                android:checked="false"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/no"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="   No"
+                android:buttonTint="@color/black"
+                android:textColor="@color/black"
+                android:layout_marginTop="20dp"
+                android:checked="false"
+                android:textSize="18sp" />
+
+        </RadioGroup>
 
     </LinearLayout>
 
