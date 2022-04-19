@@ -105,7 +105,7 @@ public class ParentDetailsActivity extends AppCompatActivity {
                 }
                 else{
                     diagnosis = (String) genderradioButton.getText();
-                    //Toast.makeText(ParentDetailsActivity.this,genderradioButton.getText(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ParentDetailsActivity.this,genderradioButton.getText(), Toast.LENGTH_SHORT).show();
                    nav = 1;
                    if (LanguageActivity.text.equals("English")) {
                        startActivity(new Intent(ParentDetailsActivity.this, ConsentFormActivity.class));

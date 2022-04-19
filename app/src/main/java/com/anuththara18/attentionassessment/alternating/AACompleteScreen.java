@@ -167,7 +167,7 @@ public class AACompleteScreen extends AppCompatActivity {
         try {
             writer = new CSVWriter(new FileWriter(csv));
 
-            String[] entries = {"id","child_gender","child_age","total_correct_responses","correct_responses","commission_errors","omission_errors","mean_reaction_time","total_duration"};
+            String[] entries = {"id","child_gender","child_age","total_correct_responses","correct_responses","commission_errors","omission_errors","mean_reaction_time","total_duration","diagnosis"};
             writer.writeNext(entries);
 
             List<String[]> data = new ArrayList<String[]>();
@@ -183,7 +183,9 @@ public class AACompleteScreen extends AppCompatActivity {
                         String.valueOf(gameData.getNoOfCommissionErrors()),
                         String.valueOf(gameData.getNoOfOmmissionErrors()),
                         String.valueOf(gameData.getMeanReactionTime()),
-                        String.valueOf(gameData.getTotalDuration())
+                        String.valueOf(gameData.getTotalDuration()),
+                        String.valueOf(ParentDetailsActivity.diagnosis)
+
                 });
             }
 
