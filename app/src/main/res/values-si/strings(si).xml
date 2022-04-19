@@ -21,7 +21,7 @@
     <string name="optional">* විකල්ප</string>
     <string name="req">* අවශ්යයි</string>
     <string name="send">දත්ත යවන්න</string>
-    <string name="diagnosis">ඔබේ දරුවා අවධානය යොමු කිරීමේ දුර්වලතාවයකින් පෙළෙනවාද?</string>
+    <string name="diagnosis">ඔබේ දරුවා අවධානය යොමු කිරිමේදී යම් දුර්වලතාවයක් පෙන්නුම් කරන්නේද?</string>
 
     <string name="select">තෝරන්න</string>
     <string name="birdselect">ඔබ වඩාත්ම කැමති චරිතය තෝරන්න</string>

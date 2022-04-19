@@ -20,7 +20,7 @@
     <string name="optional">* Optional</string>
     <string name="req">* Required</string>
     <string name="send">Send Data</string>
-    <string name="diagnosis">Is your child suffering from any attention impairements?</string>
+    <string name="diagnosis">Does your child show any symptoms of attention impairements?</string>
 
     <string name="select">Select the</string>
     <string name="birdselect">Pick your favourite character</string>

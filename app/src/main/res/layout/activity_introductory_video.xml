@@ -7,11 +7,11 @@
     android:orientation="vertical"
     tools:context=".videos.IntroductoryVideoPortraitActivity">
 
-    <VideoView android:id="@+id/videoView"
+    <WebView android:id="@+id/videoView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true">
-    </VideoView>
+    </WebView>
 
 </LinearLayout>

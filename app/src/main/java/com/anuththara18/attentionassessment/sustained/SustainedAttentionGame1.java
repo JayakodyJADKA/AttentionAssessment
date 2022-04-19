@@ -51,9 +51,9 @@ public class SustainedAttentionGame1 extends AppCompatActivity {
     /*Integer[] isi = { 10000, 45000, 25000, 50000, 20000, 35000, 60000, 15000, 30000, 55000, 40000,
                       10000, 45000, 25000, 50000, 20000, 35000, 60000, 15000, 30000, 55000, 40000,
                       10000, 15000, 10000, 15000 };*/
-    Integer[] isi = { 1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000,
-            1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000,
-            1000, 1500, 1000, 1500 };
+    Integer[] isi = { 1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000, 1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000, 1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000, 1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000, 1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000, 1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000, 1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000, 1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000, 1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000, 1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000, 1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000, 1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000,
+            1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000, 1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000, 1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000, 1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000, 1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000, 1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000, 1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000, 1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000, 1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000, 1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000, 1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000, 1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000,
+            1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000, };
 
     Integer[] image = { R.drawable.red_bird_gif,
             R.drawable.blue_bird_gif,
@@ -78,6 +78,8 @@ public class SustainedAttentionGame1 extends AppCompatActivity {
     int noOfOmmissionErrors = 0;
     long totalReactionTime = 0;
     int meanReactionTime = 0;
+
+    long seconds;
 
     MediaPlayer mp, mp2;
 
@@ -118,14 +120,21 @@ public class SustainedAttentionGame1 extends AppCompatActivity {
             @Override
             public void run() {
 
-                if ( i <= 51 ) { // tot duration - 14.5 mins = 870000
-                    //385000 , 770000, (50000)
+                // ms -> s /1000
+                // s -> m /60
 
-                    if ( i % 2 != 0 || totalCorrectResponses > 25 ) {
+                if ( i <= 269 ) { // tot duration - 14.534 mins = 872000
+                //if (duration <= 870000) {
+                    //385000 , 770000, (50000) = 1 205 000
+                    // 38500, 77000
+
+                    // 75000
+
+                    if ( i % 2 != 0  ) {
                         randomImage = random.nextInt(6);
                         bird.setVisibility(View.INVISIBLE);
                         gifImageView.setVisibility(View.VISIBLE);
-                        red_btn.setEnabled(true);
+                        bird.setEnabled(true);
                         gifImageView.setImageResource(image[randomImage]);
                         clickedImage = image[randomImage];
                         updateInterval = isi[j];
@@ -136,10 +145,11 @@ public class SustainedAttentionGame1 extends AppCompatActivity {
                         j++;
                     }
                     // appearance - 0.5s * 25 times
-                    else if ( totalCorrectResponses <= 25 ) {
+                    else {
                         Log.d("radomTimer", String.valueOf(i + " 3000" ));
                         Log.d("******************************", "start 1");
 
+                        bird.setVisibility(View.VISIBLE);
                         if (BirdChoosingActivity.birdSelected == 1) {
                             bird.setImageResource(R.drawable.blue_bird);
                             clickedImage = R.drawable.blue_bird;
@@ -159,7 +169,7 @@ public class SustainedAttentionGame1 extends AppCompatActivity {
                         }
 
                         bird.setVisibility(View.VISIBLE);
-                        red_btn.setEnabled(true);
+                        bird.setEnabled(true);
                         gifImageView.setVisibility(View.INVISIBLE);
                         startTime = System.currentTimeMillis();
                         gifImageView.postDelayed(this, 3000);
@@ -171,17 +181,22 @@ public class SustainedAttentionGame1 extends AppCompatActivity {
                 }
                 else {
                     long gameEnd = System.currentTimeMillis();
-                    long seconds = (gameEnd - gameStart) / 1000;
-                    meanReactionTime = (int) Math.ceil(totalReactionTime / noOfCorrectResponses); // ms
+                    seconds = (gameEnd - gameStart);
+                    if ( noOfCorrectResponses == 0 ) {
+                        meanReactionTime = 0;
+                    }
+                    else {
+                        meanReactionTime = (int) Math.ceil(totalReactionTime / noOfCorrectResponses); // ms
+                    }
                     Log.d("****************************************************", "****************************************************");
-                    Log.d("Game Time", String.valueOf(seconds));
+                    Log.d("Game Time", String.valueOf(duration));
                     Log.d("total", String.valueOf(totalCorrectResponses));
                     Log.d("correctResponses", String.valueOf(noOfCorrectResponses));
                     noOfOmmissionErrors = totalCorrectResponses - noOfCorrectResponses;
                     Log.d("omissionErrors", String.valueOf(totalCorrectResponses - noOfCorrectResponses));
                     Log.d("commissionErrors", String.valueOf(noOfCommissionErrors));
                     Log.d("meanReactionTime", String.valueOf(meanReactionTime));
-                    Log.d("duration", String.valueOf(duration));
+                    Log.d("duration", String.valueOf(seconds));
                     saveDataToOnlineDB();
                     createTable();
                     saveDataToLocalDB();
@@ -210,6 +225,36 @@ public class SustainedAttentionGame1 extends AppCompatActivity {
         red_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                long gameEnd = System.currentTimeMillis();
+                seconds = (gameEnd - gameStart);
+                if ( noOfCorrectResponses == 0 ) {
+                    meanReactionTime = 0;
+                }
+                else {
+                    meanReactionTime = (int) Math.ceil(totalReactionTime / noOfCorrectResponses); // ms
+                }
+                Log.d("****************************************************", "****************************************************");
+                Log.d("Game Time", String.valueOf(seconds));
+                Log.d("total", String.valueOf(totalCorrectResponses));
+                Log.d("correctResponses", String.valueOf(noOfCorrectResponses));
+                noOfOmmissionErrors = totalCorrectResponses - noOfCorrectResponses;
+                Log.d("omissionErrors", String.valueOf(totalCorrectResponses - noOfCorrectResponses));
+                Log.d("commissionErrors", String.valueOf(noOfCommissionErrors));
+                Log.d("meanReactionTime", String.valueOf(meanReactionTime));
+                Log.d("duration", String.valueOf(seconds));
+                saveDataToOnlineDB();
+                createTable();
+                saveDataToLocalDB();
+                Intent intent = new Intent(getApplicationContext(), SA1CompleteScreen.class);
+                finish();
+                mp.pause();
+                startActivity(intent);
+            }
+        });
+
+        bird.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 clickedTime = System.currentTimeMillis();
                 reactionTime = ( clickedTime - startTime );
                 mp2 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
@@ -218,7 +263,7 @@ public class SustainedAttentionGame1 extends AppCompatActivity {
                     totalReactionTime = (long) (totalReactionTime + reactionTime);
                     Log.d("correct " , startTime + " " + clickedTime + " " + reactionTime);
                     noOfCorrectResponses++;
-                    red_btn.setEnabled(false);
+                    bird.setEnabled(false);
                 }
                 else {
                     noOfCommissionErrors++;
@@ -297,7 +342,7 @@ public class SustainedAttentionGame1 extends AppCompatActivity {
         int no_of_ommission_errors = noOfOmmissionErrors;
         int no_of_commission_errors = noOfCommissionErrors;
         int mean_reaction_time = (int) meanReactionTime;
-        int total_duration = duration;
+        int total_duration = (int) seconds;
 
         HashMap<String, Integer> params = new HashMap<>();
         params.put("childID", child_ID);
@@ -399,7 +444,7 @@ public class SustainedAttentionGame1 extends AppCompatActivity {
         int no_of_ommission_errors = noOfOmmissionErrors;
         int no_of_commission_errors = noOfCommissionErrors;
         int mean_reaction_time = (int) meanReactionTime;
-        int total_duration = duration;
+        int total_duration = (int) seconds;
 
         String insertSQL = "INSERT INTO sustainedAttention \n" +
                 "(childID, totalCorrectResponses, noOfCorrectResponses, noOfCommissionErrors, noOfOmmissionErrors, meanReactionTime, totalDuration)\n" +

@@ -74,7 +74,9 @@
         <activity
             android:name=".sustained.BirdChoosingActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar" >
+
+        </activity>
         <activity
             android:name=".focused.AnimalChoosingActivity"
             android:screenOrientation="portrait"
@@ -122,7 +124,8 @@
         <activity
             android:name=".sustained.SustainedAttentionGame1"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar" >
+        </activity>
         <activity
             android:name=".focused.FocusedAttentionGame2"
             android:screenOrientation="landscape"
