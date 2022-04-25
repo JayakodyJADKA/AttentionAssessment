@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "642347843728",
+    "project_id": "attention-assessment",
+    "storage_bucket": "attention-assessment.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:642347843728:android:c7e91fc87a80c3a5b61815",
+        "android_client_info": {
+          "package_name": "com.anuththara18.attentionassessment"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "642347843728-u7co8a3vsktblmr57r5r6ees4uof65d4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDth7XK-DMLvkNCziMz55eQkSuNCPzWsZk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "642347843728-u7co8a3vsktblmr57r5r6ees4uof65d4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

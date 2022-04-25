@@ -83,7 +83,7 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
     Integer[] isi = { 3000, 3500, 4000, 4500, 5000, 5500, 6000 };
 
     Integer[] images = {R.drawable.monkey, R.drawable.baby_zebra, R.drawable.elephant, R.drawable.pig, R.drawable.giraffe,
-                        R.drawable.cow, R.drawable.horse, R.drawable.dino, R.drawable.lion, R.drawable.dog};
+            R.drawable.cow, R.drawable.horse, R.drawable.dino, R.drawable.lion, R.drawable.dog};
 
     MediaPlayer mp, mp2;
 
@@ -407,42 +407,42 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    mp2 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
-                    mp2.start();
-                    // Your action here on button click
-                    clickedTime = System.currentTimeMillis();
-                    reactionTime = (clickedTime - startTime);
-                    //if (clicked.equals("monkey")) {
-                    if ( i - 1 == 2 || i - 1 == 14 || i - 1 == 26 || i - 1 == 38 ) {
-                        totalReactionTime = totalReactionTime + reactionTime;
-                        Log.d("correct ", startTime + " " + clickedTime + " " + reactionTime);
-                        noOfCorrectResponses++;
-                        imageView.setEnabled(false);
-                    } else {
-                        Log.d("wrong", startTime + " " + clickedTime + " " + reactionTime);
-                        noOfCommissionErrors++;
-                    }
+                mp2 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
+                mp2.start();
+                // Your action here on button click
+                clickedTime = System.currentTimeMillis();
+                reactionTime = (clickedTime - startTime);
+                //if (clicked.equals("monkey")) {
+                if ( i - 1 == 2 || i - 1 == 14 || i - 1 == 26 || i - 1 == 38 ) {
+                    totalReactionTime = totalReactionTime + reactionTime;
+                    Log.d("correct ", startTime + " " + clickedTime + " " + reactionTime);
+                    noOfCorrectResponses++;
+                    imageView.setEnabled(false);
+                } else {
+                    Log.d("wrong", startTime + " " + clickedTime + " " + reactionTime);
+                    noOfCommissionErrors++;
+                }
             }
         });
 
         imageView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    mp2 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
-                    mp2.start();
-                    // Your action here on button click
-                    clickedTime = System.currentTimeMillis();
-                    reactionTime = (clickedTime - startTime);
-                    //if (clicked.equals("monkey")) {
-                    if ( i - 1 == 4 || i - 1 == 16 || i - 1 == 28 || i - 1 == 40 ) {
-                        totalReactionTime = totalReactionTime + reactionTime;
-                        Log.d("correct ", startTime + " " + clickedTime + " " + reactionTime);
-                        noOfCorrectResponses++;
-                        imageView2.setEnabled(false);
-                    } else {
-                        Log.d("wrong", startTime + " " + clickedTime + " " + reactionTime);
-                        noOfCommissionErrors++;
-                    }
+                mp2 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
+                mp2.start();
+                // Your action here on button click
+                clickedTime = System.currentTimeMillis();
+                reactionTime = (clickedTime - startTime);
+                //if (clicked.equals("monkey")) {
+                if ( i - 1 == 4 || i - 1 == 16 || i - 1 == 28 || i - 1 == 40 ) {
+                    totalReactionTime = totalReactionTime + reactionTime;
+                    Log.d("correct ", startTime + " " + clickedTime + " " + reactionTime);
+                    noOfCorrectResponses++;
+                    imageView2.setEnabled(false);
+                } else {
+                    Log.d("wrong", startTime + " " + clickedTime + " " + reactionTime);
+                    noOfCommissionErrors++;
+                }
             }
         });
 
@@ -450,20 +450,20 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                    mp2 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
-                    mp2.start();
-                    // Your action here on button click
-                    clickedTime = System.currentTimeMillis();
-                    reactionTime = (clickedTime - startTime);
-                    if ( i - 1 == 6 || i - 1 == 18 || i - 1 == 30 ) {
-                        totalReactionTime = totalReactionTime + reactionTime;
-                        Log.d("correct ", startTime + " " + clickedTime + " " + reactionTime);
-                        noOfCorrectResponses++;
-                        imageView3.setEnabled(false);
-                    } else {
-                        Log.d("wrong", startTime + " " + clickedTime + " " + reactionTime);
-                        noOfCommissionErrors++;
-                    }
+                mp2 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
+                mp2.start();
+                // Your action here on button click
+                clickedTime = System.currentTimeMillis();
+                reactionTime = (clickedTime - startTime);
+                if ( i - 1 == 6 || i - 1 == 18 || i - 1 == 30 ) {
+                    totalReactionTime = totalReactionTime + reactionTime;
+                    Log.d("correct ", startTime + " " + clickedTime + " " + reactionTime);
+                    noOfCorrectResponses++;
+                    imageView3.setEnabled(false);
+                } else {
+                    Log.d("wrong", startTime + " " + clickedTime + " " + reactionTime);
+                    noOfCommissionErrors++;
+                }
 
             }
         });
@@ -472,20 +472,20 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                    mp2 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
-                    mp2.start();
-                    // Your action here on button click
-                    clickedTime = System.currentTimeMillis();
-                    reactionTime = (clickedTime - startTime);
-                    if ( i - 1 == 8 || i - 1 == 20 || i - 1 == 32 )  {
-                        totalReactionTime = totalReactionTime + reactionTime;
-                        Log.d("correct ", startTime + " " + clickedTime + " " + reactionTime);
-                        noOfCorrectResponses++;
-                        imageView4.setEnabled(false);
-                    } else {
-                        Log.d("wrong", startTime + " " + clickedTime + " " + reactionTime);
-                        noOfCommissionErrors++;
-                    }
+                mp2 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
+                mp2.start();
+                // Your action here on button click
+                clickedTime = System.currentTimeMillis();
+                reactionTime = (clickedTime - startTime);
+                if ( i - 1 == 8 || i - 1 == 20 || i - 1 == 32 )  {
+                    totalReactionTime = totalReactionTime + reactionTime;
+                    Log.d("correct ", startTime + " " + clickedTime + " " + reactionTime);
+                    noOfCorrectResponses++;
+                    imageView4.setEnabled(false);
+                } else {
+                    Log.d("wrong", startTime + " " + clickedTime + " " + reactionTime);
+                    noOfCommissionErrors++;
+                }
 
             }
         });
@@ -494,20 +494,20 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                    mp2 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
-                    mp2.start();
-                    // Your action here on button click
-                    clickedTime = System.currentTimeMillis();
-                    reactionTime = (clickedTime - startTime);
-                    if ( i - 1 == 10 || i - 1 == 22 || i - 1 == 34 ) {
-                        totalReactionTime = totalReactionTime + reactionTime;
-                        Log.d("correct ", startTime + " " + clickedTime + " " + reactionTime);
-                        noOfCorrectResponses++;
-                        imageView5.setEnabled(false);
-                    } else {
-                        Log.d("wrong", startTime + " " + clickedTime + " " + reactionTime);
-                        noOfCommissionErrors++;
-                    }
+                mp2 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
+                mp2.start();
+                // Your action here on button click
+                clickedTime = System.currentTimeMillis();
+                reactionTime = (clickedTime - startTime);
+                if ( i - 1 == 10 || i - 1 == 22 || i - 1 == 34 ) {
+                    totalReactionTime = totalReactionTime + reactionTime;
+                    Log.d("correct ", startTime + " " + clickedTime + " " + reactionTime);
+                    noOfCorrectResponses++;
+                    imageView5.setEnabled(false);
+                } else {
+                    Log.d("wrong", startTime + " " + clickedTime + " " + reactionTime);
+                    noOfCommissionErrors++;
+                }
 
             }
         });
@@ -516,20 +516,20 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                    mp2 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
-                    mp2.start();
-                    // Your action here on button click
-                    clickedTime = System.currentTimeMillis();
-                    reactionTime = (clickedTime - startTime);
-                    if ( i - 1 == 12 || i - 1 == 24 || i - 1 == 36 ) {
-                        totalReactionTime = totalReactionTime + reactionTime;
-                        Log.d("correct ", startTime + " " + clickedTime + " " + reactionTime);
-                        noOfCorrectResponses++;
-                        imageView6.setEnabled(false);
-                    } else {
-                        Log.d("wrong", startTime + " " + clickedTime + " " + reactionTime);
-                        noOfCommissionErrors++;
-                    }
+                mp2 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
+                mp2.start();
+                // Your action here on button click
+                clickedTime = System.currentTimeMillis();
+                reactionTime = (clickedTime - startTime);
+                if ( i - 1 == 12 || i - 1 == 24 || i - 1 == 36 ) {
+                    totalReactionTime = totalReactionTime + reactionTime;
+                    Log.d("correct ", startTime + " " + clickedTime + " " + reactionTime);
+                    noOfCorrectResponses++;
+                    imageView6.setEnabled(false);
+                } else {
+                    Log.d("wrong", startTime + " " + clickedTime + " " + reactionTime);
+                    noOfCommissionErrors++;
+                }
 
             }
         });

@@ -36,6 +36,12 @@ import com.anuththara18.attentionassessment.details.ParentDetailsActivity;
 import com.anuththara18.attentionassessment.gender.GenderActivity;
 import com.anuththara18.attentionassessment.home.NavigationDrawerActivity;
 import com.anuththara18.attentionassessment.selective.Selective;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.opencsv.CSVWriter;
 
 import java.io.File;
@@ -55,6 +61,8 @@ public class FACompleteScreen extends AppCompatActivity {
 
     List<Focused> dataList;
     SQLiteDatabase mDatabase;
+
+    String csv;
 
     // declaring width and height
     // for our PDF file.
@@ -161,7 +169,7 @@ public class FACompleteScreen extends AppCompatActivity {
 
         /*******************************************************************************************/
 
-        String csv = (Environment.getExternalStorageDirectory().getAbsolutePath() + "/FocusedAttention.csv"); // Here csv file name is MyCsvFile.csv
+        csv = (Environment.getExternalStorageDirectory().getAbsolutePath() + "/FocusedAttention.csv"); // Here csv file name is MyCsvFile.csv
 
         // csv will create inside phone storage.
         CSVWriter writer = null;
@@ -337,6 +345,33 @@ public class FACompleteScreen extends AppCompatActivity {
 
     }
 
+    public void uploadToFirebase() {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        if ( auth.getCurrentUser().getUid() == null ) {
+            auth.signInAnonymously();
+        }
+
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+
+        Uri file = Uri.fromFile(new File(csv));
+
+        StorageReference storageReference = storageRef.child(auth.getCurrentUser().getUid() + file.getLastPathSegment());
+        storageReference.putFile(file).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                //Toast.makeText(getApplicationContext(), "Upload Filed", Toast.LENGTH_SHORT).show();
+
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Toast.makeText(getApplicationContext(), "Upload successful", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+    }
 
     /**************************************************************************************************/
 

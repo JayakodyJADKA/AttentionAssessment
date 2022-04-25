@@ -11,6 +11,7 @@
     <string name="girl">Girl</string>
     <string name="boy">Boy</string>
     <string name="next">Next</string>
+    <string name="skip">Skip...</string>
     <string name="previous">Previous</string>
     <string name="age">Select your child\'s age:</string>
     <string name="language">Select language:</string>
