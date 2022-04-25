@@ -370,7 +370,8 @@ public class SelectiveACompleteScreen extends AppCompatActivity {
 
         Uri file = Uri.fromFile(new File(csv));
 
-        StorageReference storageReference = storageRef.child(auth.getCurrentUser().getUid() + "/Game1/" + file.getLastPathSegment());
+        //StorageReference storageReference = storageRef.child(auth.getCurrentUser().getUid() + "/Game1/" + file.getLastPathSegment());
+        StorageReference storageReference = storageRef.child(auth.getCurrentUser().getUid() + file.getLastPathSegment());
         storageReference.putFile(file).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {

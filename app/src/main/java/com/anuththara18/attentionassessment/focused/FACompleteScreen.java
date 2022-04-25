@@ -206,6 +206,8 @@ public class FACompleteScreen extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        uploadToFirebase(csv);
+
         /*******************************************************************************************/
 
 
@@ -345,7 +347,7 @@ public class FACompleteScreen extends AppCompatActivity {
 
     }
 
-    public void uploadToFirebase() {
+    public void uploadToFirebase(String csv) {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         if ( auth.getCurrentUser().getUid() == null ) {
             auth.signInAnonymously();
@@ -353,7 +355,7 @@ public class FACompleteScreen extends AppCompatActivity {
 
         StorageReference storageRef = FirebaseStorage.getInstance().getReference();
 
-        Uri file = Uri.fromFile(new File(csv));
+        Uri file = Uri.fromFile(new File(this.csv));
 
         StorageReference storageReference = storageRef.child(auth.getCurrentUser().getUid() + file.getLastPathSegment());
         storageReference.putFile(file).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {

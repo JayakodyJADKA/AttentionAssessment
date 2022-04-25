@@ -36,6 +36,15 @@ import com.anuththara18.attentionassessment.details.ParentDetailsActivity;
 import com.anuththara18.attentionassessment.gender.GenderActivity;
 import com.anuththara18.attentionassessment.home.NavigationDrawerActivity;
 import com.anuththara18.attentionassessment.selective.Selective;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.opencsv.CSVWriter;
 
 import java.io.File;
@@ -198,6 +207,8 @@ public class DACompleteScreen extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        uploadToFirebase(csv);
+
         /*******************************************************************************************/
 
 
@@ -352,6 +363,39 @@ public class DACompleteScreen extends AppCompatActivity {
         // after storing our pdf to that
         // location we are closing our PDF file.
         pdfDocument.close();
+
+    }
+
+    /**************************************************************************************************/
+
+    public void uploadToFirebase(String csv) {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        if ( auth.getCurrentUser() == null ) {
+            auth.signInAnonymously().addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    Log.i("test user", String.valueOf(task.isSuccessful()));
+                }
+            });
+        }
+
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+
+        Uri file = Uri.fromFile(new File(csv));
+
+        StorageReference storageReference = storageRef.child(auth.getCurrentUser().getUid() + file.getLastPathSegment());
+        storageReference.putFile(file).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                //Toast.makeText(getApplicationContext(), "Upload Filed", Toast.LENGTH_SHORT).show();
+
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Toast.makeText(getApplicationContext(), "Upload successful", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
