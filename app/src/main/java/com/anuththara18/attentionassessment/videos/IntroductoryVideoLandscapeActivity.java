@@ -4,7 +4,13 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.MediaController;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
@@ -17,19 +23,25 @@ import com.anuththara18.attentionassessment.focused.AnimalChoosingActivity;
 import com.anuththara18.attentionassessment.focused.FocusedAttentionGame1;
 import com.anuththara18.attentionassessment.focused.FocusedAttentionGame2;
 import com.anuththara18.attentionassessment.home.MainFragment;
+import com.anuththara18.attentionassessment.language.LanguageSetter;
 import com.anuththara18.attentionassessment.map.Map1Activity;
 import com.anuththara18.attentionassessment.map.Map2Activity;
+import com.anuththara18.attentionassessment.selective.SelectiveAttentionGame1;
 import com.anuththara18.attentionassessment.sustained.BirdChoosingActivity;
 
 public class IntroductoryVideoLandscapeActivity extends AppCompatActivity {
 
-    String videoUrl = "https://media.geeksforgeeks.org/wp-content/uploads/20201217192146/Screenrecorder-2020-12-17-19-17-36-828.mp4?_=1";
+    String videoStr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_introductory_video);
 
+        TextView skip = findViewById(R.id.skip);
+        skip.setText(LanguageSetter.getresources().getString(R.string.skip));
+
+        /*
         // finding videoview by its id
         VideoView videoView = findViewById(R.id.videoView);
 
@@ -40,35 +52,11 @@ public class IntroductoryVideoLandscapeActivity extends AppCompatActivity {
             videoUrl = "";
         }
 
-        // Uri object to refer the
-        // resource from the videoUrl
-        Uri uri = Uri.parse(videoUrl);
+         */
 
-        // sets the resource from the
-        // videoUrl to the videoView
-        videoView.setVideoURI(uri);
-
-        // creating object of
-        // media controller class
-        MediaController mediaController = new MediaController(this);
-
-        // sets the anchor view
-        // anchor view for the videoView
-        mediaController.setAnchorView(videoView);
-
-        // sets the media player to the videoView
-        mediaController.setMediaPlayer(videoView);
-
-        // sets the media controller to the videoView
-        videoView.setMediaController(mediaController);
-
-        // starts the video
-        videoView.start();
-
-        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+        skip.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCompletion(MediaPlayer mp) {
-                //Toast.makeText(getApplicationContext(), "Video completed", Toast.LENGTH_LONG).show();
+            public void onClick(View view) {
                 if (MainFragment.game.equals("focused")) {
                     if (Map1Activity.level == 1){
                         startActivity(new Intent(getApplicationContext(), FocusedAttentionGame2.class));
@@ -85,6 +73,34 @@ public class IntroductoryVideoLandscapeActivity extends AppCompatActivity {
                 }
             }
         });
+
+        if (MainFragment.game.equals("focused")) {
+            if (Map1Activity.level == 1 || Map1Activity.level == 2) {
+                videoStr = "<html><body><iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/9n7kxFr-nBA\" frameborder=\"0\" allowfullscreen></iframe></body></html>";
+            }
+            else if (Map1Activity.level == 5){
+                videoStr = "<html><body><iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/9n7kxFr-nBA\" frameborder=\"0\" allowfullscreen></iframe></body></html>";
+            }
+        }
+        else if (MainFragment.game.equals("alternating")) {
+            videoStr = "<html><body><iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/9n7kxFr-nBA\" frameborder=\"0\" allowfullscreen></iframe></body></html>";
+        }
+
+        Log.i("*********************************************************Video", "Video Playing....");
+
+        WebView mWebView=(WebView)findViewById(R.id.videoView);
+
+        int height = 2;
+
+        mWebView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                return false;
+            }
+        });
+        WebSettings ws = mWebView.getSettings();
+        ws.setJavaScriptEnabled(true);
+        mWebView.loadData(videoStr, "text/html", "utf-8");
 
     }
 
