@@ -18,6 +18,9 @@ import com.anuththara18.attentionassessment.videos.IntroductoryVideoPortraitActi
 public class Map1Activity extends AppCompatActivity {
 
     ImageButton imageButton1, imageButton2, imageButton3, imageButton4, imageButton5;
+    ImageButton star1, star2, star3, star4, star5;
+
+    public static int comp1, comp2, comp3, comp4, comp5 = 0;
 
     public static int level = 1;
 
@@ -31,6 +34,33 @@ public class Map1Activity extends AppCompatActivity {
         imageButton3 = findViewById(R.id.imageButton3);
         imageButton4 = findViewById(R.id.imageButton4);
         imageButton5 = findViewById(R.id.imageButton5);
+        star1 = findViewById(R.id.star1);
+        star2 = findViewById(R.id.star2);
+        star3 = findViewById(R.id.star3);
+        star4 = findViewById(R.id.star4);
+        star5 = findViewById(R.id.star5);
+
+        star1.setVisibility(View.INVISIBLE);
+        star2.setVisibility(View.INVISIBLE);
+        star3.setVisibility(View.INVISIBLE);
+        star4.setVisibility(View.INVISIBLE);
+        star5.setVisibility(View.INVISIBLE);
+
+        if (comp1 == 1) {
+            star1.setVisibility(View.VISIBLE);
+        }
+        else if (comp2 == 1){
+            star2.setVisibility(View.VISIBLE);
+        }
+        else if (comp3 == 1){
+            star3.setVisibility(View.VISIBLE);
+        }
+        else if (comp4 == 1){
+            star4.setVisibility(View.VISIBLE);
+        }
+        else if (comp5 == 1){
+            star5.setVisibility(View.VISIBLE);
+        }
 
         imageButton1.setOnClickListener(new View.OnClickListener() {
             @Override

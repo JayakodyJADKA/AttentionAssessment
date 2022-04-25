@@ -37,6 +37,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import static com.anuththara18.attentionassessment.map.Map1Activity.comp1;
+import static com.anuththara18.attentionassessment.map.Map1Activity.comp2;
+
 public class FocusedAttentionGame2 extends AppCompatActivity {
 
     private static final int CODE_GET_REQUEST = 1024;
@@ -210,6 +213,12 @@ public class FocusedAttentionGame2 extends AppCompatActivity {
                     saveDataToOnlineDB();
                     createTable();
                     saveDataToLocalDB();
+                    if (Map1Activity.level == 1){
+                        comp1 = 1;
+                    }
+                    else if (Map1Activity.level == 2){
+                        comp2 = 1;
+                    }
                     Intent intent = new Intent(getApplicationContext(), FACompleteScreen.class);
                     finish();
                     mp.pause();

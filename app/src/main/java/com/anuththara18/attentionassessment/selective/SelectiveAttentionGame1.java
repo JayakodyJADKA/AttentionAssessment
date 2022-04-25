@@ -32,6 +32,7 @@ import com.anuththara18.attentionassessment.focused.FocusedAttentionGame1;
 import com.anuththara18.attentionassessment.gender.GenderActivity;
 import com.anuththara18.attentionassessment.home.NavigationDrawerActivity;
 import com.anuththara18.attentionassessment.language.LanguageSetter;
+import com.anuththara18.attentionassessment.map.Map1Activity;
 import com.anuththara18.attentionassessment.map.Map2Activity;
 
 import org.json.JSONException;
@@ -44,6 +45,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
+
+import static com.anuththara18.attentionassessment.map.Map1Activity.comp1;
+import static com.anuththara18.attentionassessment.map.Map1Activity.comp2;
 
 public class SelectiveAttentionGame1 extends AppCompatActivity {
 
@@ -416,6 +420,23 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
                     GVAdapter2 adapter = new GVAdapter2(getApplicationContext(), gridModelArrayList);
                     gridView.setAdapter(adapter);
                     gridView.setEnabled(false);
+
+                    if (Map2Activity.level == 1){
+                        Map2Activity.comp1 = 1;
+                    }
+                    else if (Map2Activity.level == 2){
+                        Map2Activity.comp2 = 1;
+                    }
+                    else if (Map2Activity.level == 3){
+                        Map2Activity.comp3 = 1;
+                    }
+                    else if (Map2Activity.level == 4){
+                        Map2Activity.comp4 = 1;
+                    }
+                    else if (Map2Activity.level == 5){
+                        Map2Activity.comp5 = 1;
+                    }
+
                     saveDataToOnlineDB();
                     createTable();
                     saveDataToLocalDB();

@@ -20,6 +20,19 @@
         app:layout_constraintVertical_bias="0.093" />
 
     <ImageButton
+        android:id="@+id/star1"
+        android:layout_width="110dp"
+        android:layout_height="101.95dp"
+        android:background="@drawable/stars"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.470"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.029" />
+
+    <ImageButton
         android:id="@+id/imageButton2"
         android:layout_width="78dp"
         android:layout_height="79.32dp"
@@ -30,6 +43,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.371" />
+
+    <ImageButton
+        android:id="@+id/star2"
+        android:layout_width="110dp"
+        android:layout_height="101.95dp"
+        android:background="@drawable/stars"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.71"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.315" />
 
     <ImageButton
         android:id="@+id/imageButton3"
@@ -44,6 +70,19 @@
         app:layout_constraintVertical_bias="0.526" />
 
     <ImageButton
+        android:id="@+id/star3"
+        android:layout_width="110dp"
+        android:layout_height="101.95dp"
+        android:background="@drawable/stars"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.250"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.480" />
+
+    <ImageButton
         android:id="@+id/imageButton4"
         android:layout_width="90dp"
         android:layout_height="80.53dp"
@@ -54,6 +93,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.662" />
+
+    <ImageButton
+        android:id="@+id/star4"
+        android:layout_width="110dp"
+        android:layout_height="101.95dp"
+        android:background="@drawable/stars"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.782"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.615" />
 
     <ImageButton
         android:id="@+id/imageButton5"
@@ -68,5 +120,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.871" />
+
+    <ImageButton
+        android:id="@+id/star5"
+        android:layout_width="110dp"
+        android:layout_height="101.95dp"
+        android:background="@drawable/stars"
+        android:translationZ="5dp"
+        android:elevation="15dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.472"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.830" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
