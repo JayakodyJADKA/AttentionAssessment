@@ -393,7 +393,7 @@ public class DACompleteScreen extends AppCompatActivity {
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(getApplicationContext(), "Upload successful", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "Upload successful", Toast.LENGTH_SHORT).show();
             }
         });
 

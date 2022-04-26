@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">AttentionAssessment</string>
-    <string name="splash">Name - \n Attention Assessment &amp; Training Game</string>
+    <string name="splash">Attention Assessment &amp; Training Game</string>
 
     <!-- Navigation Drawer-->
     <string name="heading">Attention Assessment Game</string>

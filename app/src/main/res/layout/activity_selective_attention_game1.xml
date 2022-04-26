@@ -48,7 +48,7 @@
             android:text="@string/select"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="24sp"
+            android:textSize="24dp"
             android:textStyle="bold" />
 
         <ImageView
