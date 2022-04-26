@@ -119,6 +119,16 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
         mp = MediaPlayer.create(getApplicationContext(), R.raw.selective);
         mp.start();
 
+        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                Log.d("#############", "restart");
+                mp.start();
+            }
+
+        });
+
         long gameStart = System.currentTimeMillis();
         Log.d("startTime", String.valueOf(gameStart));
 

@@ -102,6 +102,16 @@ public class FocusedAttentionGame2 extends AppCompatActivity {
         mp = MediaPlayer.create(getApplicationContext(), R.raw.focused);
         mp.start();
 
+        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                Log.d("#############", "restart");
+                mp.start();
+            }
+
+        });
+
         long gameStart = System.currentTimeMillis();
 
         //creating a database

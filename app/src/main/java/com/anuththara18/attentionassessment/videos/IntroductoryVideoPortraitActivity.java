@@ -54,7 +54,9 @@ public class IntroductoryVideoPortraitActivity extends AppCompatActivity {
         setContentView(R.layout.activity_introductory_video);
 
         TextView skip = findViewById(R.id.skip);
+        TextView loading = findViewById(R.id.loading);
         skip.setText(LanguageSetter.getresources().getString(R.string.skip));
+        loading.setText(LanguageSetter.getresources().getString(R.string.loading));
 
         skip.setOnClickListener(new View.OnClickListener() {
             @Override

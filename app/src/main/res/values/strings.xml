@@ -22,6 +22,7 @@
     <string name="req">* Required</string>
     <string name="send">Send Data</string>
     <string name="diagnosis">Does your child show any symptoms of attention impairements?</string>
+    <string name="loading">The video will take few seconds to load...</string>
 
     <string name="select">Select the</string>
     <string name="birdselect">Pick your favourite character</string>
