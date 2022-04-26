@@ -49,16 +49,16 @@ public class Map1Activity extends AppCompatActivity {
         if (comp1 == 1) {
             star1.setVisibility(View.VISIBLE);
         }
-        else if (comp2 == 1){
+        if (comp2 == 1){
             star2.setVisibility(View.VISIBLE);
         }
-        else if (comp3 == 1){
+        if (comp3 == 1){
             star3.setVisibility(View.VISIBLE);
         }
-        else if (comp4 == 1){
+        if (comp4 == 1){
             star4.setVisibility(View.VISIBLE);
         }
-        else if (comp5 == 1){
+        if (comp5 == 1){
             star5.setVisibility(View.VISIBLE);
         }
 

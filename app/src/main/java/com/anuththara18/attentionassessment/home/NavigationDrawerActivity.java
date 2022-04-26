@@ -52,7 +52,7 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Navig
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_drawer);
 
-        toolbar.setNavigationIcon(null);
+        //toolbar.setNavigationIcon(null);
 
         // Configure all views
         this.configureToolBar();

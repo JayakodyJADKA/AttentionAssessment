@@ -3,9 +3,11 @@ package com.anuththara18.attentionassessment.videos;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -36,6 +38,13 @@ public class IntroductoryVideoLandscapeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT < 16) {
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
         setContentView(R.layout.activity_introductory_video);
 
         TextView skip = findViewById(R.id.skip);
@@ -76,14 +85,14 @@ public class IntroductoryVideoLandscapeActivity extends AppCompatActivity {
 
         if (MainFragment.game.equals("focused")) {
             if (Map1Activity.level == 1 || Map1Activity.level == 2) {
-                videoStr = "<html><body><iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/9n7kxFr-nBA\" frameborder=\"0\" allowfullscreen></iframe></body></html>";
+                videoStr = "<html><body><iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/_Ob4e8Upofg\" frameborder=\"0\" allowfullscreen></iframe></body></html>";
             }
             else if (Map1Activity.level == 5){
-                videoStr = "<html><body><iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/9n7kxFr-nBA\" frameborder=\"0\" allowfullscreen></iframe></body></html>";
+                videoStr = "<html><body><iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/bRPtJDKBPu4\" frameborder=\"0\" allowfullscreen></iframe></body></html>";
             }
         }
         else if (MainFragment.game.equals("alternating")) {
-            videoStr = "<html><body><iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/9n7kxFr-nBA\" frameborder=\"0\" allowfullscreen></iframe></body></html>";
+            videoStr = "<html><body><iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/zphdLe78ils\" frameborder=\"0\" allowfullscreen></iframe></body></html>";
         }
 
         Log.i("*********************************************************Video", "Video Playing....");

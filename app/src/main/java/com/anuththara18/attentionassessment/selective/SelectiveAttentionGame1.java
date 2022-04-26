@@ -426,6 +426,7 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
                     }
                     else if (Map2Activity.level == 2){
                         Map2Activity.comp2 = 1;
+                        Log.d("***************", "level 2 done");
                     }
                     else if (Map2Activity.level == 3){
                         Map2Activity.comp3 = 1;
