@@ -3,8 +3,12 @@ package com.anuththara18.attentionassessment.consentform;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,7 +26,8 @@ public class SinhalaConsentFormActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     List<ConsentForm> consentFormList;
     private Boolean[] chkArr;
-    TextView textView, next;
+    TextView textView;
+    ImageButton next;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,15 +46,31 @@ public class SinhalaConsentFormActivity extends AppCompatActivity {
         next = findViewById(R.id.next);
 
         textView.setText(LanguageSetter.getresources().getString(R.string.consentForm));
-        next.setText(LanguageSetter.getresources().getString(R.string.proceed));
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Animation animZoomOut = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.zoom_out);
+                        next.startAnimation(animZoomOut);
+                        handler.postDelayed(this, 750);
+
+                    }
+                });
+            }
+        }, 0);
 
         initData();
         initRecyclerView();
 
-        TextView next = findViewById(R.id.next);
+        next = findViewById(R.id.next);
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                finish();
                 Intent intent = new Intent(getApplicationContext(), GetParentsConsentActivity.class);
                 startActivity(intent);
             }
