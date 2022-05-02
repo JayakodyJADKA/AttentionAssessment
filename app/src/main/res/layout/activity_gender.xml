@@ -7,19 +7,13 @@
     android:background="@drawable/bg1"
     tools:context=".gender.GenderActivity">
 
-    <TextView
+    <ImageButton
         android:id="@+id/previous"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:drawableStart="@drawable/icon_left"
-        android:drawableTint="@color/black"
-        android:fontFamily="@font/poppins_medium"
-        android:gravity="center"
-        android:paddingLeft="30dp"
-        android:text="@string/previous"
-        android:textColor="@color/black"
-        android:textSize="16dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/left_btn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,19 +34,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <ImageButton
         android:id="@+id/next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:drawableEnd="@drawable/icon_right"
-        android:drawableTint="@color/black"
-        android:fontFamily="@font/poppins_medium"
-        android:gravity="center"
-        android:paddingRight="30dp"
-        android:text="@string/next"
-        android:textColor="@color/black"
-        android:textSize="16dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/right_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -71,7 +59,7 @@
         android:id="@+id/boy_img"
         android:layout_width="150dp"
         android:layout_height="250dp"
-        android:layout_marginStart="50dp"
+        android:layout_marginStart="65dp"
         android:layout_marginBottom="15dp"
         android:src="@drawable/boy"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -81,21 +69,10 @@
         android:id="@+id/girl_img"
         android:layout_width="190dp"
         android:layout_height="280dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginEnd="65dp"
         android:src="@drawable/girl"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
-    <ImageButton
-        android:id="@+id/toggle_btn"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:background="@drawable/toggle_left"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/girl_txt"

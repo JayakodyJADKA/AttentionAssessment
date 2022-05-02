@@ -204,7 +204,7 @@ public class LanguageActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Please select a language", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    mp.pause();
+                    //mp.pause();
                     finish();
                     Intent intent = new Intent(LanguageActivity.this, GenderActivity.class);
                     startActivity(intent);

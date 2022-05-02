@@ -3,12 +3,16 @@ package com.anuththara18.attentionassessment.gender;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -22,13 +26,14 @@ import com.anuththara18.attentionassessment.language.LanguageSetter;
 
 public class GenderActivity extends AppCompatActivity {
 
-    ImageButton toggle_btn;
+    ImageButton toggle_btn, next, previous;
     ImageView girl_img, boy_img;
-    TextView boy_txt, girl_txt, next, previous, selectGender;
+    TextView boy_txt, girl_txt, selectGender;
 
     public static int gender = 2;
 
     int click = 1;
+    MediaPlayer mp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,19 +47,17 @@ public class GenderActivity extends AppCompatActivity {
         decorView.setSystemUiVisibility(uiOptions);
         setContentView(R.layout.activity_gender);
 
-        toggle_btn = (ImageButton)findViewById(R.id.toggle_btn);
+        //toggle_btn = (ImageButton)findViewById(R.id.toggle_btn);
         girl_img = (ImageView)findViewById(R.id.girl_img);
         boy_img = (ImageView)findViewById(R.id.boy_img);
         girl_txt = (TextView)findViewById(R.id.girl_txt);
         boy_txt = (TextView)findViewById(R.id.boy_txt);
-        next = (TextView)findViewById(R.id.next);
-        previous = (TextView)findViewById(R.id.previous);
+        next = (ImageButton)findViewById(R.id.next);
+        previous = (ImageButton)findViewById(R.id.previous);
         selectGender = (TextView)findViewById(R.id.selectGender);
 
         girl_txt.setText(LanguageSetter.getresources().getString(R.string.girl));
         boy_txt.setText(LanguageSetter.getresources().getString(R.string.boy));
-        next.setText(LanguageSetter.getresources().getString(R.string.next));
-        previous.setText(LanguageSetter.getresources().getString(R.string.previous));
         selectGender.setText(LanguageSetter.getresources().getString(R.string.gender));
 
         // initially
@@ -63,6 +66,79 @@ public class GenderActivity extends AppCompatActivity {
         boy_img.setImageAlpha(255);
         boy_txt.setAlpha(1f);
 
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Animation animZoomOut = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.zoom_out);
+                        next.startAnimation(animZoomOut);
+                        handler.postDelayed(this, 750);
+
+                    }
+                });
+            }
+        }, 0);
+
+        girl_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mp = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
+                mp.start();
+                boy_img.setImageAlpha(127);
+                boy_txt.setAlpha(0.5f);
+                girl_img.setImageAlpha(255);
+                girl_txt.setAlpha(1f);
+                gender = 1; // girl
+                Log.d("gender", String.valueOf(gender));
+            }
+        });
+
+        girl_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mp = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
+                mp.start();
+                boy_img.setImageAlpha(127);
+                boy_txt.setAlpha(0.5f);
+                girl_img.setImageAlpha(255);
+                girl_txt.setAlpha(1f);
+                gender = 1; // girl
+                Log.d("gender", String.valueOf(gender));
+            }
+        });
+
+        boy_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mp = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
+                mp.start();
+                girl_img.setImageAlpha(127);
+                girl_txt.setAlpha(0.5f);
+                boy_img.setImageAlpha(255);
+                boy_txt.setAlpha(1f);
+                gender = 2; // boy
+                Log.d("gender", String.valueOf(gender));
+            }
+        });
+
+        boy_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mp = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
+                mp.start();
+                girl_img.setImageAlpha(127);
+                girl_txt.setAlpha(0.5f);
+                boy_img.setImageAlpha(255);
+                boy_txt.setAlpha(1f);
+                gender = 2; // boy
+                Log.d("gender", String.valueOf(gender));
+            }
+        });
+
+        /*
         toggle_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,10 +167,13 @@ public class GenderActivity extends AppCompatActivity {
                 }
             }
         });
+         */
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                finish();
                 Intent intent = new Intent(GenderActivity.this, AgeActivity.class);
                 startActivity(intent);
             }
