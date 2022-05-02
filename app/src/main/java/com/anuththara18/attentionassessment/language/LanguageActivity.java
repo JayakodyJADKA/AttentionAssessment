@@ -64,6 +64,19 @@ public class LanguageActivity extends AppCompatActivity {
 
         int bt_notes_blink = 0;
 
+        if (text.equals("English")){
+            sinhala_btn.setImageAlpha(127);
+            sinhala_txt_btn.setAlpha(0.5f);
+            english_btn.setImageAlpha(255);
+            english_txt.setAlpha(1f);
+        }
+        else if (text.equals("සිංහල")){
+            english_btn.setImageAlpha(127);
+            english_txt.setAlpha(0.5f);
+            sinhala_btn.setImageAlpha(255);
+            sinhala_txt_btn.setAlpha(1f);
+        }
+
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override

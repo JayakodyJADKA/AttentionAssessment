@@ -6,14 +6,18 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -41,10 +45,10 @@ import java.util.HashMap;
 
 public class AgeActivity extends AppCompatActivity {
 
-    ImageButton right_btn, left_btn;
-    ImageView bunny_img;
-    TextView age_txt, next, previous, selectAge;
-    public static int age = 4;
+    ImageButton next, previous;
+    ImageView bunny_img4, bunny_img5, bunny_img6, bunny_img7, icon4, icon5, icon6, icon7;
+    TextView selectAge;
+    public static int age = 0;
     SharedPreferences sharedPreferences;
     int imageCheck;
     int width;
@@ -53,6 +57,8 @@ public class AgeActivity extends AppCompatActivity {
 
     public static final String DATABASE_NAME = "childData";
     SQLiteDatabase mDatabase;
+
+    MediaPlayer mp;
 
     private static final int CODE_GET_REQUEST = 1024;
     private static final int CODE_POST_REQUEST = 1025;
@@ -69,20 +75,22 @@ public class AgeActivity extends AppCompatActivity {
         decorView.setSystemUiVisibility(uiOptions);
         setContentView(R.layout.activity_age);
 
-        right_btn = (ImageButton)findViewById(R.id.right_btn);
-        left_btn = (ImageButton)findViewById(R.id.left_btn);
-        bunny_img = (ImageView)findViewById(R.id.bunny_img);
-        age_txt = (TextView)findViewById(R.id.age_txt);
-        next = (TextView)findViewById(R.id.next);
-        previous = (TextView)findViewById(R.id.previous);
+        bunny_img4 = (ImageView)findViewById(R.id.bunny_img4);
+        bunny_img5 = (ImageView)findViewById(R.id.bunny_img5);
+        bunny_img6 = (ImageView)findViewById(R.id.bunny_img6);
+        bunny_img7 = (ImageView)findViewById(R.id.bunny_img7);
+        icon4 = (ImageView)findViewById(R.id.icon4);
+        icon5 = (ImageView)findViewById(R.id.icon5);
+        icon6 = (ImageView)findViewById(R.id.icon6);
+        icon7 = (ImageView)findViewById(R.id.icon7);
+        next = (ImageButton)findViewById(R.id.next);
+        previous = (ImageButton)findViewById(R.id.previous);
         selectAge = (TextView)findViewById(R.id.selectAge);
         sharedPreferences = getSharedPreferences("ImageCheck", MODE_PRIVATE);
         imageCheck = sharedPreferences.getInt("ImageSet", 5);
 
         mDatabase = openOrCreateDatabase(DATABASE_NAME, MODE_PRIVATE, null);
 
-        next.setText(LanguageSetter.getresources().getString(R.string.next));
-        previous.setText(LanguageSetter.getresources().getString(R.string.previous));
         selectAge.setText(LanguageSetter.getresources().getString(R.string.age));
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -92,6 +100,200 @@ public class AgeActivity extends AppCompatActivity {
 
         count = 1;
 
+        if (age == 4) {
+            bunny_img5.setImageAlpha(127);
+            bunny_img6.setImageAlpha(127);
+            bunny_img7.setImageAlpha(127);
+            icon5.setImageAlpha(127);
+            icon6.setImageAlpha(127);
+            icon7.setImageAlpha(127);
+            bunny_img4.setImageAlpha(255);
+            icon4.setImageAlpha(255);
+        }
+        else if (age == 5) {
+            bunny_img4.setImageAlpha(127);
+            bunny_img6.setImageAlpha(127);
+            bunny_img7.setImageAlpha(127);
+            icon4.setImageAlpha(127);
+            icon6.setImageAlpha(127);
+            icon7.setImageAlpha(127);
+            bunny_img5.setImageAlpha(255);
+            icon5.setImageAlpha(255);
+        }
+        else if (age == 6) {
+            bunny_img4.setImageAlpha(127);
+            bunny_img5.setImageAlpha(127);
+            bunny_img7.setImageAlpha(127);
+            icon4.setImageAlpha(127);
+            icon5.setImageAlpha(127);
+            icon7.setImageAlpha(127);
+            bunny_img6.setImageAlpha(255);
+            icon6.setImageAlpha(255);
+        }
+        else if (age == 7) {
+            bunny_img4.setImageAlpha(127);
+            bunny_img5.setImageAlpha(127);
+            bunny_img6.setImageAlpha(127);
+            icon4.setImageAlpha(127);
+            icon5.setImageAlpha(127);
+            icon6.setImageAlpha(127);
+            bunny_img7.setImageAlpha(255);
+            icon7.setImageAlpha(255);
+        }
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Animation animZoomOut = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.zoom_out);
+                        next.startAnimation(animZoomOut);
+                        handler.postDelayed(this, 750);
+
+                    }
+                });
+            }
+        }, 0);
+
+        bunny_img4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mp = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
+                mp.start();
+                bunny_img5.setImageAlpha(127);
+                bunny_img6.setImageAlpha(127);
+                bunny_img7.setImageAlpha(127);
+                icon5.setImageAlpha(127);
+                icon6.setImageAlpha(127);
+                icon7.setImageAlpha(127);
+                bunny_img4.setImageAlpha(255);
+                icon4.setImageAlpha(255);
+                age = 4;
+            }
+        });
+
+        icon4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mp = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
+                mp.start();
+                bunny_img5.setImageAlpha(127);
+                bunny_img6.setImageAlpha(127);
+                bunny_img7.setImageAlpha(127);
+                icon5.setImageAlpha(127);
+                icon6.setImageAlpha(127);
+                icon7.setImageAlpha(127);
+                bunny_img4.setImageAlpha(255);
+                icon4.setImageAlpha(255);
+                age = 4;
+            }
+        });
+
+        bunny_img5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mp = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
+                mp.start();
+                bunny_img4.setImageAlpha(127);
+                bunny_img6.setImageAlpha(127);
+                bunny_img7.setImageAlpha(127);
+                icon4.setImageAlpha(127);
+                icon6.setImageAlpha(127);
+                icon7.setImageAlpha(127);
+                bunny_img5.setImageAlpha(255);
+                icon5.setImageAlpha(255);
+                age = 5;
+            }
+        });
+
+        icon5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mp = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
+                mp.start();
+                bunny_img4.setImageAlpha(127);
+                bunny_img6.setImageAlpha(127);
+                bunny_img7.setImageAlpha(127);
+                icon4.setImageAlpha(127);
+                icon6.setImageAlpha(127);
+                icon7.setImageAlpha(127);
+                bunny_img5.setImageAlpha(255);
+                icon5.setImageAlpha(255);
+                age = 5;
+            }
+        });
+
+        bunny_img6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mp = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
+                mp.start();
+                bunny_img4.setImageAlpha(127);
+                bunny_img5.setImageAlpha(127);
+                bunny_img7.setImageAlpha(127);
+                icon4.setImageAlpha(127);
+                icon5.setImageAlpha(127);
+                icon7.setImageAlpha(127);
+                bunny_img6.setImageAlpha(255);
+                icon6.setImageAlpha(255);
+                age = 6;
+            }
+        });
+
+        icon6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mp = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
+                mp.start();
+                bunny_img4.setImageAlpha(127);
+                bunny_img5.setImageAlpha(127);
+                bunny_img7.setImageAlpha(127);
+                icon4.setImageAlpha(127);
+                icon5.setImageAlpha(127);
+                icon7.setImageAlpha(127);
+                bunny_img6.setImageAlpha(255);
+                icon6.setImageAlpha(255);
+                age = 6;
+            }
+        });
+
+        bunny_img7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mp = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
+                mp.start();
+                bunny_img4.setImageAlpha(127);
+                bunny_img5.setImageAlpha(127);
+                bunny_img6.setImageAlpha(127);
+                icon4.setImageAlpha(127);
+                icon5.setImageAlpha(127);
+                icon6.setImageAlpha(127);
+                bunny_img7.setImageAlpha(255);
+                icon7.setImageAlpha(255);
+                age = 7;
+            }
+        });
+
+        icon7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mp = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
+                mp.start();
+                bunny_img4.setImageAlpha(127);
+                bunny_img5.setImageAlpha(127);
+                bunny_img6.setImageAlpha(127);
+                icon4.setImageAlpha(127);
+                icon5.setImageAlpha(127);
+                icon6.setImageAlpha(127);
+                bunny_img7.setImageAlpha(255);
+                icon7.setImageAlpha(255);
+                age = 7;
+            }
+        });
+
+        /*
         right_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -126,26 +328,22 @@ public class AgeActivity extends AppCompatActivity {
             }
 
         });
+        */
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //saveDataToOnlineDB();
-                createTable();
-                saveDataToLocalDB();
-                startActivity(new Intent(AgeActivity.this, ParentDetailsActivity.class));
 
-                 /*if(imageCheck==1) {
-                    Intent navInt = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
-                    startActivity(navInt);
-
+                if (age == 0) {
+                    Toast.makeText(getApplicationContext(), LanguageSetter.getresources().getString(R.string.agenull), Toast.LENGTH_SHORT).show();
                 }
-                else{
-
+                else {
+                    //saveDataToOnlineDB();
+                    createTable();
+                    saveDataToLocalDB();
+                    finish();
+                    startActivity(new Intent(AgeActivity.this, ParentDetailsActivity.class));
                 }
-                     */
-
-                //startActivity(new Intent(AgeActivity.this, NavigationDrawerActivity.class));
             }
         });
 
@@ -188,6 +386,7 @@ public class AgeActivity extends AppCompatActivity {
 
     /*************************************************************************************************/
 
+    /*
     public void setAge() {
         if ( count == 1 ) {
             age = 4;
@@ -214,6 +413,8 @@ public class AgeActivity extends AppCompatActivity {
             Log.d("age", String.valueOf(age));
         }
     }
+
+     */
 
     /*************************************************************************************************/
 

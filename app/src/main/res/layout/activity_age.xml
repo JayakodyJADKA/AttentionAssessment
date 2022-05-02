@@ -7,20 +7,24 @@
     android:background="@drawable/bg2"
     tools:context=".age.AgeActivity">
 
-    <TextView
+    <ImageButton
         android:id="@+id/previous"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:drawableStart="@drawable/icon_left"
-        android:drawableTint="@color/black"
-        android:fontFamily="@font/poppins_medium"
-        android:gravity="center"
-        android:paddingLeft="30dp"
-        android:text="@string/previous"
-        android:textColor="@color/black"
-        android:textSize="16dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/left_btn"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/next"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/right_btn"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -40,76 +44,89 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:drawableEnd="@drawable/icon_right"
-        android:drawableTint="@color/black"
-        android:fontFamily="@font/poppins_medium"
-        android:gravity="center"
-        android:paddingRight="30dp"
-        android:text="@string/next"
-        android:textColor="@color/black"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
+    <ImageView
+        android:id="@+id/bunny_img4"
+        android:layout_width="200dp"
+        android:layout_height="170dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="70dp"
+        android:src="@drawable/age_bunny"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="125dp"
-        android:layout_marginBottom="-8dp"
-        android:src="@drawable/stick"
+        android:id="@+id/bunny_img5"
+        android:layout_width="200dp"
+        android:layout_height="170dp"
+        android:layout_marginStart="180dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/age_bunny2"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/bunny_img"
-        android:layout_width="220dp"
-        android:layout_height="190dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginBottom="108dp"
+        android:id="@+id/bunny_img6"
+        android:layout_width="200dp"
+        android:layout_height="170dp"
+        android:layout_marginStart="350dp"
         android:src="@drawable/age_bunny"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_marginTop="75dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/age_txt"
-        android:layout_width="54dp"
-        android:layout_height="113dp"
-        android:layout_marginStart="128dp"
+    <ImageView
+        android:id="@+id/bunny_img7"
+        android:layout_width="200dp"
+        android:layout_height="170dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="4"
-        android:textColor="@color/black"
-        android:textSize="78dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/bunny_img"
-        app:layout_constraintStart_toStartOf="@+id/bunny_img" />
-
-    <ImageButton
-        android:id="@+id/right_btn"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="18dp"
-        android:layout_marginBottom="25dp"
-        android:background="@drawable/right_btn"
+        android:src="@drawable/age_bunny2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <ImageButton
-        android:id="@+id/left_btn"
+    <ImageView
+        android:id="@+id/icon4"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/icon4"
+        app:layout_constraintBottom_toBottomOf="@+id/bunny_img4"
+        app:layout_constraintEnd_toEndOf="@+id/bunny_img4"
+        app:layout_constraintTop_toTopOf="@+id/bunny_img4"
+        app:layout_constraintVertical_bias="0.811" />
+
+    <ImageView
+        android:id="@+id/icon5"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="18dp"
-        android:layout_marginBottom="25dp"
-        android:background="@drawable/left_btn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_marginStart="35dp"
+        android:src="@drawable/icon5"
+        app:layout_constraintBottom_toBottomOf="@+id/bunny_img5"
+        app:layout_constraintStart_toStartOf="@+id/bunny_img5"
+        app:layout_constraintTop_toTopOf="@+id/bunny_img5"
+        app:layout_constraintVertical_bias="0.741" />
+
+    <ImageView
+        android:id="@+id/icon6"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/icon6"
+        app:layout_constraintBottom_toBottomOf="@+id/bunny_img6"
+        app:layout_constraintEnd_toEndOf="@+id/bunny_img6"
+        app:layout_constraintTop_toTopOf="@+id/bunny_img6"
+        app:layout_constraintVertical_bias="0.847" />
+
+    <ImageView
+        android:id="@+id/icon7"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="28dp"
+        android:src="@drawable/icon7"
+        app:layout_constraintBottom_toBottomOf="@+id/bunny_img7"
+        app:layout_constraintStart_toStartOf="@+id/bunny_img7"
+        app:layout_constraintTop_toTopOf="@+id/bunny_img7"
+        app:layout_constraintVertical_bias="0.765" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

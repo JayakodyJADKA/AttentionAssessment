@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.anuththara18.attentionassessment.R;
 import com.anuththara18.attentionassessment.age.AgeActivity;
@@ -30,7 +31,7 @@ public class GenderActivity extends AppCompatActivity {
     ImageView girl_img, boy_img;
     TextView boy_txt, girl_txt, selectGender;
 
-    public static int gender = 2;
+    public static int gender = 0;
 
     int click = 1;
     MediaPlayer mp;
@@ -60,11 +61,18 @@ public class GenderActivity extends AppCompatActivity {
         boy_txt.setText(LanguageSetter.getresources().getString(R.string.boy));
         selectGender.setText(LanguageSetter.getresources().getString(R.string.gender));
 
-        // initially
-        girl_img.setImageAlpha(127);
-        girl_txt.setAlpha(0.5f);
-        boy_img.setImageAlpha(255);
-        boy_txt.setAlpha(1f);
+        if (gender == 1) {
+            boy_img.setImageAlpha(127);
+            boy_txt.setAlpha(0.5f);
+            girl_img.setImageAlpha(255);
+            girl_txt.setAlpha(1f);
+        }
+        else if (gender == 2) {
+            girl_img.setImageAlpha(127);
+            girl_txt.setAlpha(0.5f);
+            boy_img.setImageAlpha(255);
+            boy_txt.setAlpha(1f);
+        }
 
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -173,9 +181,15 @@ public class GenderActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                finish();
-                Intent intent = new Intent(GenderActivity.this, AgeActivity.class);
-                startActivity(intent);
+                if (gender == 0) {
+                    Toast.makeText(getApplicationContext(), LanguageSetter.getresources().getString(R.string.gendernull), Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    finish();
+                    Intent intent = new Intent(GenderActivity.this, AgeActivity.class);
+                    startActivity(intent);
+                }
+
             }
         });
 

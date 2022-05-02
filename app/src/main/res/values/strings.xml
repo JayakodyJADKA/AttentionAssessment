@@ -39,6 +39,8 @@
     <string name="consentForm">Consent Form To Participate in a Research Study</string>
     <string name="clear">Clear</string>
     <string name="save">Save</string>
+    <string name="agenull">Please select the age</string>
+    <string name="gendernull">Please select the gender</string>
 
     <!-- Login Screen -->
     <string name="welcome">Welcome!</string>

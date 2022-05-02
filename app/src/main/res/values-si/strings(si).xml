@@ -40,6 +40,8 @@
     <string name="consentForm">පර්යේෂණ අධ්‍යයනයකට සහභාගී වීමට කැමැත්ත දක්වන පෝරමය</string>
     <string name="clear">මකා දමන්න</string>
     <string name="save">සුරකින්න</string>
+    <string name="agenull">කරුණාකර වයස තෝරන්න</string>
+    <string name="gendernull">කරුණාකර ස්ත්‍රී පුරුෂ භාවය තෝරන්න</string>
 
     <!-- Login Screen -->
     <string name="welcome">ආයුබෝවන්!</string>
