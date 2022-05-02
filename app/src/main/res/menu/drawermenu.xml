@@ -9,9 +9,9 @@
 
                 <item android:id="@+id/dashboard" android:title="Dashboard" android:icon="@drawable/icon_dashboard"/>
                 <item android:id="@+id/admin" android:title="Visual Attention Assessments" android:icon="@drawable/icon_assessment"/>
-                <item android:id="@+id/parents" android:title="Ayeshka" android:icon="@drawable/icon_assessment"/>
-                <item android:id="@+id/healthProfessional" android:title="Sandunika" android:icon="@drawable/icon_assessment"/>
-                <item android:id="@+id/doctor" android:title="Isuri" android:icon="@drawable/icon_assessment"/>
+                <item android:id="@+id/parents" android:title="Coming Soon..." android:icon="@drawable/icon_assessment"/>
+                <item android:id="@+id/healthProfessional" android:title="Coming Soon..." android:icon="@drawable/icon_assessment"/>
+                <item android:id="@+id/doctor" android:title="Coming Soon..." android:icon="@drawable/icon_assessment"/>
             </group>
         </menu>
     </item>
