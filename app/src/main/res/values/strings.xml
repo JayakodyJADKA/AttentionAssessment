@@ -35,6 +35,7 @@
 
     <string name="provideconsent">I have read this consent form and my questions have been answered. My signature below means that I do want my child to be in the study. I know that I can withdraw my child from the study at any time without any problems.</string>
     <string name="getSignature">Sign Here</string>
+    <string name="changeSignature">Change Signature</string>
     <string name="proceed">Proceed</string>
     <string name="consentForm">Consent Form To Participate in a Research Study</string>
     <string name="clear">Clear</string>

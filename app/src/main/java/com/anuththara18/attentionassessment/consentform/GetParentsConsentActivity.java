@@ -14,9 +14,13 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,18 +41,22 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+import pl.droidsonroids.gif.GifImageView;
+
 import static android.Manifest.permission.MANAGE_EXTERNAL_STORAGE;
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class GetParentsConsentActivity extends AppCompatActivity {
 
-    TextView textView3, next;
-    Button btnGetSignature;
+    TextView textView3;
+    ImageButton next;
+    public static Button btnGetSignature;
     public static ImageView fingerprintImageView;
     static int flag2 = 0;
     public SharedPreferences sharedPreferences;
     public int imageSet = 0;
+    public static GifImageView red_circle;
 
     // constant code for runtime permissions
     private static final int PERMISSION_REQUEST_CODE = 200;
@@ -69,13 +77,13 @@ public class GetParentsConsentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_get_parents_consent);
 
         textView3 = (TextView) findViewById(R.id.textView3);
-        next = (TextView) findViewById(R.id.next);
+        next = findViewById(R.id.next);
         btnGetSignature = (Button)findViewById(R.id.btnGetSignature);
         fingerprintImageView = (ImageView)findViewById(R.id.fingerprintImageView);
         sharedPreferences = getSharedPreferences("ImageSet", MODE_PRIVATE);
+        red_circle = findViewById(R.id.red_circle);
 
         textView3.setText(LanguageSetter.getresources().getString(R.string.provideconsent));
-        next.setText(LanguageSetter.getresources().getString(R.string.proceed));
         btnGetSignature.setText(LanguageSetter.getresources().getString(R.string.getSignature));
 
         //textView3.setText(LanguageSetter.getresources().getString(R.string.provideConsent));
@@ -83,6 +91,22 @@ public class GetParentsConsentActivity extends AppCompatActivity {
         //btnGetSignature.setText(LanguageSetter.getresources().getString(R.string.getSignature));
 
         /*******************************************************************************************/
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Animation animZoomOut = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.zoom_out);
+                        next.startAnimation(animZoomOut);
+                        handler.postDelayed(this, 750);
+
+                    }
+                });
+            }
+        }, 0);
 
         // below code is used for
         // checking our permissions.
