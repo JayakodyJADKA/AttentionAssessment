@@ -45,7 +45,9 @@
     <!-- Login Screen -->
     <string name="welcome">Welcome!</string>
     <string name="name">Enter your name</string>
-    <string name="email">Enter your email</string>
+    <string name="email">Enter a valid email address</string>
+    <string name="contact">Enter a valid contact number Eg: 0771234567</string>
+    <string name="empty">Response Needed</string>
     <string name="pwd">Enter your password</string>
     <string name="confirmPwd">Confirm password</string>
     <string name="fgtPassword">Forgot Password?</string>
