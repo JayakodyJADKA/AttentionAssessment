@@ -37,6 +37,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import static com.anuththara18.attentionassessment.consentform.GetSignatureActivity.myEdit;
 import static com.anuththara18.attentionassessment.map.Map1Activity.comp1;
 import static com.anuththara18.attentionassessment.map.Map1Activity.comp2;
 
@@ -148,7 +149,7 @@ public class FocusedAttentionGame2 extends AppCompatActivity {
                     }
                     // appearance - 1s * 20 times
                     else {
-                        if ( Map1Activity.level == 1 ) {
+                        if ( Map1Activity.level == 1 || Map1Activity.level == 2 ) {
 
                             if ( i == 2 || i == 14 || i == 26 || i == 38 ) {
                                 bear1.setVisibility(View.VISIBLE);
@@ -225,9 +226,13 @@ public class FocusedAttentionGame2 extends AppCompatActivity {
                     saveDataToLocalDB();
                     if (Map1Activity.level == 1){
                         comp1 = 1;
+                        myEdit.putInt("fal1", Map1Activity.comp1);
+                        myEdit.commit();
                     }
                     else if (Map1Activity.level == 2){
                         comp2 = 1;
+                        myEdit.putInt("fal2", Map1Activity.comp2);
+                        myEdit.commit();
                     }
                     Intent intent = new Intent(getApplicationContext(), FACompleteScreen.class);
                     finish();

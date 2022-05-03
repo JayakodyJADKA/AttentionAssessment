@@ -1,5 +1,6 @@
 package com.anuththara18.attentionassessment.language;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -23,6 +24,10 @@ import android.widget.Toast;
 import com.anuththara18.attentionassessment.R;
 import com.anuththara18.attentionassessment.details.ParentDetailsActivity;
 import com.anuththara18.attentionassessment.gender.GenderActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import pl.droidsonroids.gif.GifImageView;
 
@@ -31,6 +36,7 @@ public class LanguageActivity extends AppCompatActivity {
     ImageView english_btn, sinhala_btn;
     TextView english_txt;
     public static String text = "";
+    public static String uid = "";
     public static final String sharedKey = "Language";
     TextView selectLanguage;
     ImageButton next, sinhala_txt_btn;
@@ -61,6 +67,18 @@ public class LanguageActivity extends AppCompatActivity {
         red_circle = findViewById(R.id.red_circle);
 
         sharedPref = getSharedPreferences(sharedKey, MODE_PRIVATE);
+
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        if ( auth.getCurrentUser() == null ) {
+            auth.signInAnonymously().addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    Log.i("**********************************************test user", String.valueOf(task.isSuccessful()));
+                    Log.i("**********************************************test user2", String.valueOf(auth.getCurrentUser().getUid()));
+                    uid = auth.getCurrentUser().getUid();
+                }
+            });
+        }
 
         int bt_notes_blink = 0;
 

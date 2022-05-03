@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.PorterDuff;
 import android.media.MediaPlayer;
@@ -46,6 +47,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
 
+import static com.anuththara18.attentionassessment.consentform.GetSignatureActivity.myEdit;
 import static com.anuththara18.attentionassessment.map.Map1Activity.comp1;
 import static com.anuththara18.attentionassessment.map.Map1Activity.comp2;
 
@@ -431,21 +433,36 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
                     gridView.setAdapter(adapter);
                     gridView.setEnabled(false);
 
+
                     if (Map2Activity.level == 1){
                         Map2Activity.comp1 = 1;
+
+                        // Storing the key and its value as the data fetched from edittext
+                        myEdit.putInt("sel1", Integer.parseInt(String.valueOf(Map2Activity.comp1)));
+                        // Once the changes have been made,
+                        // we need to commit to apply those changes made,
+                        // otherwise, it will throw an error
+                        myEdit.commit();
                     }
                     else if (Map2Activity.level == 2){
                         Map2Activity.comp2 = 1;
-                        Log.d("***************", "level 2 done");
+                        myEdit.putInt("sel2", Map2Activity.comp2);
+                        myEdit.commit();
                     }
                     else if (Map2Activity.level == 3){
                         Map2Activity.comp3 = 1;
+                        myEdit.putInt("sel3", Map2Activity.comp3);
+                        myEdit.commit();
                     }
                     else if (Map2Activity.level == 4){
                         Map2Activity.comp4 = 1;
+                        myEdit.putInt("sel4", Map2Activity.comp4);
+                        myEdit.commit();
                     }
                     else if (Map2Activity.level == 5){
                         Map2Activity.comp5 = 1;
+                        myEdit.putInt("sel5", Map2Activity.comp5);
+                        myEdit.commit();
                     }
 
                     saveDataToOnlineDB();

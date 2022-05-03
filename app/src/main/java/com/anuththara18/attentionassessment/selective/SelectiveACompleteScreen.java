@@ -318,7 +318,6 @@ public class SelectiveACompleteScreen extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == PERMISSION_REQUEST_CODE) {
             if (grantResults.length > 0) {
-
                 // after requesting permissions we are showing
                 // users a toast message of permission granted.
                 boolean writeStorage = grantResults[0] == PackageManager.PERMISSION_GRANTED;
@@ -361,7 +360,8 @@ public class SelectiveACompleteScreen extends AppCompatActivity {
             auth.signInAnonymously().addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    Log.i("test user", String.valueOf(task.isSuccessful()));
+                    Log.i("**********************************************test user", String.valueOf(task.isSuccessful()));
+                    Log.i("**********************************************test user", String.valueOf(auth.getCurrentUser().getUid()));
                 }
             });
         }
@@ -376,7 +376,6 @@ public class SelectiveACompleteScreen extends AppCompatActivity {
             @Override
             public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
                 //Toast.makeText(getApplicationContext(), "Upload Filed", Toast.LENGTH_SHORT).show();
-
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override

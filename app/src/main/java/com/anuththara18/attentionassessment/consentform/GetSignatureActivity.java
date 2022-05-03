@@ -1,6 +1,7 @@
 package com.anuththara18.attentionassessment.consentform;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -40,6 +41,9 @@ public class GetSignatureActivity extends AppCompatActivity {
     private signature mSignature;
     public static Bitmap bitmap;
 
+    public static SharedPreferences sharedPreferences;
+    public static SharedPreferences.Editor myEdit;
+
     // Creating Separate Directory for saving Generated Images
     String DIRECTORY = Environment.getExternalStorageDirectory().getPath() + "/Signature/";
     String pic_name = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
@@ -67,6 +71,12 @@ public class GetSignatureActivity extends AppCompatActivity {
 
         btnClear.setText(LanguageSetter.getresources().getString(R.string.clear));
         btnSave.setText(LanguageSetter.getresources().getString(R.string.save));
+
+        // Storing data into SharedPreferences
+        sharedPreferences = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+
+        // Creating an Editor object to edit(write to the file)
+        myEdit = sharedPreferences.edit();
 
         view = canvasLL;
 

@@ -35,6 +35,7 @@ import com.anuththara18.attentionassessment.gender.GenderActivity;
 import com.anuththara18.attentionassessment.home.NavigationDrawerActivity;
 import com.anuththara18.attentionassessment.language.LanguageSetter;
 import com.anuththara18.attentionassessment.map.Map1Activity;
+import com.anuththara18.attentionassessment.map.Map2Activity;
 import com.anuththara18.attentionassessment.sustained.SustainedAttentionGame1;
 
 import org.json.JSONException;
@@ -49,6 +50,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import static com.anuththara18.attentionassessment.consentform.GetSignatureActivity.myEdit;
 import static com.anuththara18.attentionassessment.map.Map1Activity.comp1;
 import static com.anuththara18.attentionassessment.map.Map1Activity.comp2;
 
@@ -408,14 +410,22 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
                     saveDataToOnlineDB();
                     createTable();
                     saveDataToLocalDB();
+
+
                     if (Map1Activity.level == 3){
                         Map1Activity.comp3 = 1;
+                        myEdit.putInt("fal3", Map1Activity.comp3);
+                        myEdit.commit();
                     }
                     else if (Map1Activity.level == 4){
                         Map1Activity.comp4 = 1;
+                        myEdit.putInt("fal4", Map1Activity.comp4);
+                        myEdit.commit();
                     }
                     else if (Map1Activity.level == 5){
                         Map1Activity.comp5 = 1;
+                        myEdit.putInt("fal5", Map1Activity.comp5);
+                        myEdit.commit();
                     }
                     Intent intent = new Intent(getApplicationContext(), FACompleteScreen.class);
                     finish();
