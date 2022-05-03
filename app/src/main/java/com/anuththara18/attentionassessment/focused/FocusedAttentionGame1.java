@@ -66,6 +66,8 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
     int radomTimer = 0;
     int rand = 0;
 
+    public static String stimulus, colour, sequence_of_responses = "";
+
     int i = 1;
     private long startTime, clickedTime = 0;
     long reactionTime;
@@ -133,6 +135,31 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
 
         //creating a database
         mDatabase = openOrCreateDatabase(DATABASE_NAME, MODE_PRIVATE, null);
+
+        if(AnimalChoosingActivity.birdSelected == 0) {
+            stimulus = "monkey";
+            colour = "shades of brown";
+        }
+        else if(AnimalChoosingActivity.birdSelected == 1) {
+            stimulus = "zebra";
+            colour = "black & white";
+        }
+        else if(AnimalChoosingActivity.birdSelected == 4) {
+            stimulus = "giraffe";
+            colour = "yellow & brown";
+        }
+        else if(AnimalChoosingActivity.birdSelected == 9) {
+            stimulus = "dog";
+            colour = "brown orange";
+        }
+        else if(AnimalChoosingActivity.birdSelected == 5) {
+            stimulus = "cow";
+            colour = "black & white";
+        }
+        else if(AnimalChoosingActivity.birdSelected == 8) {
+            stimulus = "lion";
+            colour = "orange & brown";
+        }
 
         List<Integer> unpickedNumbers = new ArrayList<Integer>();
         unpickedNumbers.add(0);
@@ -325,6 +352,7 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
                                 imageView5.setVisibility(View.INVISIBLE);
                                 imageView6.setVisibility(View.INVISIBLE);
                                 imageView.setImageResource(images[rand]);
+                                getData();
                             }
                             else if ( i == 4 || i == 16 || i == 28 || i == 40 ) {
                                 imageView2.setVisibility(View.VISIBLE);
@@ -334,6 +362,7 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
                                 imageView5.setVisibility(View.INVISIBLE);
                                 imageView6.setVisibility(View.INVISIBLE);
                                 imageView2.setImageResource(images[rand]);
+                                getData();
                             }
                             else if ( i == 6 || i == 18 || i == 30 ) {
                                 imageView3.setVisibility(View.VISIBLE);
@@ -343,6 +372,7 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
                                 imageView5.setVisibility(View.INVISIBLE);
                                 imageView6.setVisibility(View.INVISIBLE);
                                 imageView3.setImageResource(images[rand]);
+                                getData();
                             }
                             else if ( i == 8 || i == 20 || i == 32 ) {
                                 imageView4.setVisibility(View.VISIBLE);
@@ -352,6 +382,7 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
                                 imageView5.setVisibility(View.INVISIBLE);
                                 imageView6.setVisibility(View.INVISIBLE);
                                 imageView4.setImageResource(images[rand]);
+                                getData();
                             }
                             else if ( i == 10 || i == 22 || i == 34 ) {
                                 imageView5.setVisibility(View.VISIBLE);
@@ -361,6 +392,7 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
                                 imageView.setVisibility(View.INVISIBLE);
                                 imageView6.setVisibility(View.INVISIBLE);
                                 imageView5.setImageResource(images[rand]);
+                                getData();
                             }
                             else if ( i == 12 || i == 24 || i == 36 ) {
                                 imageView6.setVisibility(View.VISIBLE);
@@ -370,6 +402,7 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
                                 imageView5.setVisibility(View.INVISIBLE);
                                 imageView.setVisibility(View.INVISIBLE);
                                 imageView6.setImageResource(images[rand]);
+                                getData();
                             }
 
                         }
@@ -588,6 +621,41 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
                 return true;
             }
         });
+
+    }
+
+    public void getData(){
+        if (rand == 0) {
+            stimulus = stimulus + " monkey, ";
+            colour = colour + " - shades of brown, ";
+        }else if (rand == 1) {
+            stimulus = stimulus + " zebra, ";
+            colour = colour + " - black & white, ";
+        }else if (rand == 2) {
+            stimulus = stimulus + " elephant, ";
+            colour = colour + " - grey, ";
+        }else if (rand == 3) {
+            stimulus = stimulus + " pig, ";
+            colour = colour + " - pink, ";
+        }else if (rand == 4) {
+            stimulus = stimulus + " giraffe, ";
+            colour = colour + " - yellow & brown, ";
+        }else if (rand == 5) {
+            stimulus = stimulus + " cow, ";
+            colour = colour + " - black & white, ";
+        }else if (rand == 6) {
+            stimulus = stimulus + " horse, ";
+            colour = colour + " - shades of brown, ";
+        }else if (rand == 7) {
+            stimulus = stimulus + " dino, ";
+            colour = colour + " - purple & red, ";
+        }else if (rand == 8) {
+            stimulus = stimulus + " lion, ";
+            colour = colour + " - orange & brown, ";
+        }else if (rand == 9) {
+            stimulus = stimulus + " dog, ";
+            colour = colour + " - brown orange, ";
+        }
 
     }
 

@@ -35,6 +35,7 @@ import com.anuththara18.attentionassessment.consentform.ParentsConsentDatabaseHe
 import com.anuththara18.attentionassessment.details.ParentDetailsActivity;
 import com.anuththara18.attentionassessment.gender.GenderActivity;
 import com.anuththara18.attentionassessment.home.NavigationDrawerActivity;
+import com.anuththara18.attentionassessment.map.Map1Activity;
 import com.anuththara18.attentionassessment.selective.Selective;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -77,6 +78,8 @@ public class FACompleteScreen extends AppCompatActivity {
     // constant code for runtime permissions
     private static final int PERMISSION_REQUEST_CODE = 200;
 
+    String stimulus;
+    String colour;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -176,18 +179,40 @@ public class FACompleteScreen extends AppCompatActivity {
         try {
             writer = new CSVWriter(new FileWriter(csv));
 
-            String[] entries = {"id","child_gender","child_age","total_correct_responses","correct_responses","commission_errors","omission_errors","mean_reaction_time","total_duration","diagnosis"};
+            String[] entries = {"id","child_gender","child_age", "level",
+                    "stimulus", "colour", "sequence_of_responses",
+                    "total_correct_responses","correct_responses",
+                    "commission_errors","omission_errors",
+                    "mean_reaction_time","total_duration","diagnosis"};
             writer.writeNext(entries);
 
             List<String[]> data = new ArrayList<String[]>();
+
+            if (Map1Activity.level == 1 || Map1Activity.level == 2) {
+                stimulus = "bear head";
+                colour = "brown";
+            }
+            else if (Map1Activity.level == 2 || Map1Activity.level == 3) {
+                stimulus = FocusedAttentionGame1.stimulus;
+                colour = FocusedAttentionGame1.colour;
+            }
+            else if (Map1Activity.level == 5) {
+                stimulus = FocusedAttentionGame1.stimulus;
+                colour = FocusedAttentionGame1.colour;
+            }
 
             for (int i = 0; i < dataList.size(); i++) {
 
                 Focused gameData = dataList.get(i);
                 data.add(new String[]{ String.valueOf(gameData.getId()),
-
                         String.valueOf(String.valueOf(gameData.getChildID()).charAt(0)),
                         String.valueOf(String.valueOf(gameData.getChildID()).charAt(1)),
+                        String.valueOf(Map1Activity.level),
+
+                        String.valueOf(stimulus),
+                        String.valueOf(colour),
+                        String.valueOf("null"),
+
                         String.valueOf(gameData.getTotalCorrectResponses()),
                         String.valueOf(gameData.getNoOfCorrectResponses()),
                         String.valueOf(gameData.getNoOfCommissionErrors()),

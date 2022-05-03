@@ -177,7 +177,10 @@ public class DACompleteScreen extends AppCompatActivity {
         try {
             writer = new CSVWriter(new FileWriter(csv));
 
-            String[] entries = {"id","child_gender","child_age","total_correct_responses","correct_responses","commission_errors","omission_errors","mean_reaction_time","total_duration","diagnosis"};
+            String[] entries = {"id","child_gender","child_age", "sequence_of_responses",
+                    "total_correct_responses","correct_responses",
+                    "commission_errors","omission_errors","mean_reaction_time",
+                    "total_duration","diagnosis"};
             writer.writeNext(entries);
 
             List<String[]> data = new ArrayList<String[]>();
@@ -188,6 +191,7 @@ public class DACompleteScreen extends AppCompatActivity {
                 data.add(new String[]{ String.valueOf(gameData.getId()),
                         String.valueOf(String.valueOf(gameData.getChildID()).charAt(0)),
                         String.valueOf(String.valueOf(gameData.getChildID()).charAt(1)),
+                        String.valueOf("null"),
                         String.valueOf(gameData.getTotalCorrectResponses()),
                         String.valueOf(gameData.getNoOfCorrectResponses()),
                         String.valueOf(gameData.getNoOfCommissionErrors()),
