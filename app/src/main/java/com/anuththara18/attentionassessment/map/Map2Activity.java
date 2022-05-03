@@ -188,8 +188,6 @@ public class Map2Activity extends AppCompatActivity {
                 level = 1;
                 mp = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
                 mp.start();
-                Animation animZoomOut = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.zoom_out);
-                imageButton5.startAnimation(animZoomOut);
                 Intent intent = new Intent(getApplicationContext(), IntroductoryVideoPortraitActivity.class);
                 finish();
                 startActivity(intent);

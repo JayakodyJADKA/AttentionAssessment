@@ -102,6 +102,7 @@ public class GetSignatureActivity extends AppCompatActivity {
                 GetParentsConsentActivity.fingerprintImageView.setImageBitmap(bitmap);
                 GetParentsConsentActivity.flag2 = 1;
                 GetParentsConsentActivity.btnGetSignature.setText(LanguageSetter.getresources().getString(R.string.changeSignature));
+                GetParentsConsentActivity.btnGetSignature.setBackgroundColor(Color.GRAY);
                 GetParentsConsentActivity.red_circle.setVisibility(View.VISIBLE);
                 //Toast.makeText(getApplicationContext(), "Signature Recorded", Toast.LENGTH_SHORT).show();
                 finish();

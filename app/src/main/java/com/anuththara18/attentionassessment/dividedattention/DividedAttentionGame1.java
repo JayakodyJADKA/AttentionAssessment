@@ -3,6 +3,7 @@ package com.anuththara18.attentionassessment.dividedattention;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -15,6 +16,8 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -373,6 +376,8 @@ public class DividedAttentionGame1 extends AppCompatActivity {
         sq2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Animation animZoomOut = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.blink);
+                sq2.startAnimation(animZoomOut);
                 mp2 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
                 mp2.start();
                 clickedTime = System.currentTimeMillis();

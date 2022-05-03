@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -178,10 +179,9 @@ public class Map1Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 level = 1;
+                //imageButton1.setBackgroundColor(Color.RED);
                 mp = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
                 mp.start();
-                Animation animZoomOut = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.zoom_out);
-                imageButton5.startAnimation(animZoomOut);
                 Intent intent = new Intent(getApplicationContext(), IntroductoryVideoLandscapeActivity.class);
                 finish();
                 startActivity(intent);
@@ -204,6 +204,7 @@ public class Map1Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 level = 3;
+                //imageButton3.setImageAlpha(127);
                 mp = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
                 mp.start();
                 Intent intent = new Intent(getApplicationContext(), IntroductoryVideoPortraitActivity.class);
