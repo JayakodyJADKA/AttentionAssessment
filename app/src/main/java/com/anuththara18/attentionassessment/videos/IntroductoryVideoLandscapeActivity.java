@@ -70,16 +70,20 @@ public class IntroductoryVideoLandscapeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (MainFragment.game.equals("focused")) {
                     if (Map1Activity.level == 1){
+                        finish();
                         startActivity(new Intent(getApplicationContext(), FocusedAttentionGame2.class));
                     }
                     else if (Map1Activity.level == 2){
+                        finish();
                         startActivity(new Intent(getApplicationContext(), FocusedAttentionGame2.class));
                     }
                     else if (Map1Activity.level == 5){
+                        finish();
                         startActivity(new Intent(getApplicationContext(), FocusedAttentionGame1.class));
                     }
                 }
                 else if (MainFragment.game.equals("alternating")) {
+                    finish();
                     startActivity(new Intent(getApplicationContext(), AlternatingAttentionGame1.class));
                 }
             }

@@ -1,7 +1,9 @@
 package com.anuththara18.attentionassessment.details;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -148,6 +150,38 @@ public class ParentDetailsActivity extends AppCompatActivity {
         Pattern p = Pattern.compile("(07/91)?[0-9]{10}");
         Matcher m = p.matcher(phone);
         return TextUtils.isEmpty(phone) || (m.find() && m.group().equals(phone));
+    }
+
+    /*************************************************************************************************/
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        alert();
+    }
+
+    /*************************************************************************************************/
+
+    private void alert() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage("Do you really want to quit the game?");
+        alertDialogBuilder.setPositiveButton("yes",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        finish();
+                    }
+                });
+
+        alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //finish();
+            }
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 
 }

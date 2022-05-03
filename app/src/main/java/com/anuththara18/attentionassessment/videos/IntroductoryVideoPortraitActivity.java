@@ -63,19 +63,24 @@ public class IntroductoryVideoPortraitActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (MainFragment.game.equals("focused")) {
                     if (Map1Activity.level == 3){
+                        finish();
                         startActivity(new Intent(getApplicationContext(), AnimalChoosingActivity.class));
                     }
                     else if (Map1Activity.level == 4){
+                        finish();
                         startActivity(new Intent(getApplicationContext(), AnimalChoosingActivity.class));
                     }
                 }
                 else if (MainFragment.game.equals("divided")) {
+                    finish();
                     startActivity(new Intent(getApplicationContext(), DividedAttentionGame1.class));
                 }
                 else if (MainFragment.game.equals("selective")) {
+                    finish();
                     startActivity(new Intent(getApplicationContext(), SelectiveAttentionGame1.class));
                 }
                 else if (MainFragment.game.equals("sustained")) {
+                    finish();
                     startActivity(new Intent(getApplicationContext(), BirdChoosingActivity.class));
                 }
             }

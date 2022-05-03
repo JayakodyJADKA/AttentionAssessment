@@ -1,6 +1,7 @@
 package com.anuththara18.attentionassessment.consentform;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -21,6 +22,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.anuththara18.attentionassessment.R;
@@ -237,5 +239,37 @@ public class GetSignatureActivity extends AppCompatActivity {
             dirtyRect.top = Math.min(lastTouchY, eventY);
             dirtyRect.bottom = Math.max(lastTouchY, eventY);
         }
+    }
+
+    /*************************************************************************************************/
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        alert();
+    }
+
+    /*************************************************************************************************/
+
+    private void alert() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage("Do you really want to quit the game?");
+        alertDialogBuilder.setPositiveButton("yes",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        finish();
+                    }
+                });
+
+        alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //finish();
+            }
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 }

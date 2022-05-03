@@ -1,5 +1,6 @@
 package com.anuththara18.attentionassessment.consentform;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -101,4 +103,35 @@ public class SinhalaConsentFormActivity extends AppCompatActivity {
         consentFormList.add(new ConsentForm("ඔබට යම් ප්\u200Dරශ්නයක් හෝ ගැටළුවක් ඇත්නම් දුරකථනයෙන් සම්බන්ධ කරගත හැකි අය ", "මෙම පර්යේෂණය සඳහා සහභාගී වීමේදී ඔබේ අයිතිවාසිකම් පිළිබඳව හෝ පර්යේෂණය හා සම්බන්ධ කිසියම් කාරණයක් දැනගැනීමට අවශ්\u200Dය නම් සහ මෙම පර්යේෂණය සමග සම්බන්ධ වීමට හෝ තවදුරටත් කරගෙන යාමට ඔබට යම් අපහසුතාවයක් ඇත්නම් 0723537952 දුරකථන අංකයෙන් හෝ pradeepa.s@sliit.lk විද්\u200Dයුත් තැපැල් ලිපිනයෙන්, ශ්\u200Dරී ලංකා තොරතුරු තාක්ෂණ ආයතනයේ ප්\u200Dරධාන පර්යේෂිකා (principal investigator) ආචාර්ය ප්\u200Dරදීපා සමරසිංහ මහත්මිය සම්බන්ධ කරගැනීමට හැකියාව ඇත. "));
     }
 
+    /*************************************************************************************************/
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        alert();
+    }
+
+    /*************************************************************************************************/
+
+    private void alert() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage("Do you really want to quit the game?");
+        alertDialogBuilder.setPositiveButton("yes",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        finish();
+                    }
+                });
+
+        alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //finish();
+            }
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
 }

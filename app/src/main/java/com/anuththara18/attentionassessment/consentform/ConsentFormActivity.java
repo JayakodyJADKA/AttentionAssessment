@@ -1,5 +1,6 @@
 package com.anuththara18.attentionassessment.consentform;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -110,6 +112,38 @@ public class ConsentFormActivity extends AppCompatActivity {
         consentFormList.add(new ConsentForm("What are my rights as a participant?", "Participation in this study is voluntary. Your participation is not mandatory. You will also be informed of any new information discovered during the course of this study that might influence your child’s health, welfare, or willingness to be in this study."));
         consentFormList.add(new ConsentForm("Who do I contact if I have questions, concerns, or complaints?", "Please contact the research assistant or the research team if you have questions about the research."));
         consentFormList.add(new ConsentForm("Whom do I call if I have questions or problems?", "If you have any questions regarding your rights as a participant in this research and/or concerns about the study, or if you feel under any pressure to enroll or to continue to participate in this study, you may contact the Dr Pradeepa Samarasinghe, Principle Investigator at Sri Lanka Institute of Information Technology at 0723537952 or pradeepa.s@sliit.lk ."));
+    }
+
+    /*************************************************************************************************/
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        alert();
+    }
+
+    /*************************************************************************************************/
+
+    private void alert() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage("Do you really want to quit the game?");
+        alertDialogBuilder.setPositiveButton("yes",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        finish();
+                    }
+                });
+
+        alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //finish();
+            }
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 
 }

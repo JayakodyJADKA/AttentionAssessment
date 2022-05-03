@@ -1,8 +1,10 @@
 package com.anuththara18.attentionassessment.language;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -24,6 +26,7 @@ import android.widget.Toast;
 import com.anuththara18.attentionassessment.R;
 import com.anuththara18.attentionassessment.details.ParentDetailsActivity;
 import com.anuththara18.attentionassessment.gender.GenderActivity;
+import com.anuththara18.attentionassessment.home.NavigationDrawerActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -243,6 +246,40 @@ public class LanguageActivity extends AppCompatActivity {
             }
         });
     }
+
+    /*************************************************************************************************/
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        alert();
+    }
+
+    private void alert() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage("Do you really want to quit the game?");
+        alertDialogBuilder.setPositiveButton("yes",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        finish();
+                    }
+                });
+
+        alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //finish();
+            }
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
+
+    /*************************************************************************************************/
+
 
     public void englishSelected() {
         english_btn.getLayoutParams().height = 700;

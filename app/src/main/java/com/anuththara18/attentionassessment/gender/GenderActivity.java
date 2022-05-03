@@ -1,7 +1,9 @@
 package com.anuththara18.attentionassessment.gender;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Build;
@@ -22,6 +24,7 @@ import android.widget.Toast;
 import com.anuththara18.attentionassessment.R;
 import com.anuththara18.attentionassessment.age.AgeActivity;
 import com.anuththara18.attentionassessment.details.ParentDetailsActivity;
+import com.anuththara18.attentionassessment.home.NavigationDrawerActivity;
 import com.anuththara18.attentionassessment.language.LanguageActivity;
 import com.anuththara18.attentionassessment.language.LanguageSetter;
 
@@ -202,4 +205,37 @@ public class GenderActivity extends AppCompatActivity {
         });
 
     }
+
+    /*************************************************************************************************/
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        alert();
+    }
+
+    /*************************************************************************************************/
+
+    private void alert() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage("Do you really want to quit the game?");
+        alertDialogBuilder.setPositiveButton("yes",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        finish();
+                    }
+                });
+
+        alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //finish();
+            }
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
 }

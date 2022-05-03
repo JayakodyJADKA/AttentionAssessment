@@ -162,6 +162,7 @@ public class GetParentsConsentActivity extends AppCompatActivity {
             ed.apply();
             //Toast.makeText(getApplicationContext(), String.valueOf(imageSet), Toast.LENGTH_LONG).show();
             //Toast.makeText(getApplicationContext(), "Consent Saved Successfully!", Toast.LENGTH_SHORT).show();
+            finish();
             Intent intent = new Intent(getApplicationContext(), NavigationDrawerActivity.class);
             startActivity(intent);
         }
