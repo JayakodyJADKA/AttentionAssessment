@@ -175,7 +175,11 @@ public class SelectiveACompleteScreen extends AppCompatActivity {
         try {
             writer = new CSVWriter(new FileWriter(csv));
 
-            String[] entries = {"id","child_gender","child_age","level","total_correct_responses","correct_responses","commission_errors","omission_errors","mean_reaction_time","total_duration","diagnosis"};
+            String[] entries = {"id","child_gender","child_age","level",
+                    "stimulus", "colour", "sequence_of_responses", "no_of_clicks", "order_of_selection",
+                    "total_correct_responses","correct_responses",
+                    "commission_errors","omission_errors","mean_reaction_time",
+                    "total_duration","diagnosis"};
             writer.writeNext(entries);
 
             List<String[]> data = new ArrayList<String[]>();
@@ -187,6 +191,13 @@ public class SelectiveACompleteScreen extends AppCompatActivity {
                         String.valueOf(String.valueOf(gameData.getChildID()).charAt(0)),
                         String.valueOf(String.valueOf(gameData.getChildID()).charAt(1)),
                         String.valueOf(String.valueOf(gameData.getChildID()).charAt(2)),
+
+                        String.valueOf(SelectiveAttentionGame1.stimulus),
+                        String.valueOf(SelectiveAttentionGame1.colour),
+                        String.valueOf("null"),
+                        String.valueOf(SelectiveAttentionGame1.no_of_clicks),
+                        String.valueOf("null"),
+
                         String.valueOf(gameData.getTotalCorrectResponses()),
                         String.valueOf(gameData.getNoOfCorrectResponses()),
                         String.valueOf(gameData.getNoOfCommissionErrors()),

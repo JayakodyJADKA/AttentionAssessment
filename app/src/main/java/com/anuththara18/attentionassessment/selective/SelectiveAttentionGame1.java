@@ -95,6 +95,12 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
     Random random;
     long gameEnd;
 
+    public static String stimulus;
+    public static String colour;
+    public static String sequence_of_responses;
+    public static int no_of_clicks;
+    public static String order_of_selection;
+
     MediaPlayer mp;
     int clickCount = 0;
 
@@ -166,10 +172,14 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
                 if(num % 2 == 0) {
                     main_img.setImageResource(a);
                     image_name = a1;
+                    stimulus = "ladybird";
+                    colour = "red";
                 }
                 else {
                     main_img.setImageResource(b);
                     image_name = b1;
+                    stimulus = "butterfly";
+                    colour = "blue";
                 }
             }
             else if (level == 2) {
@@ -178,14 +188,20 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
                 if(num >= 0 && num < 40) {
                     main_img.setImageResource(a);
                     image_name = a1;
+                    stimulus = "ladybird";
+                    colour = "red";
                 }
                 else if(num >= 40 && num < 80) {
                     main_img.setImageResource(b);
                     image_name = b1;
+                    stimulus = "butterfly";
+                    colour = "blue";
                 }
                 else if(num >= 80 && num < 120) {
                     main_img.setImageResource(c);
                     image_name = c1;
+                    stimulus = "bee";
+                    colour = "yellow";
                 }
             }
             else if (level == 3) {
@@ -194,18 +210,26 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
                 if(num >= 0 && num < 30) {
                     main_img.setImageResource(a);
                     image_name = a1;
+                    stimulus = "ladybird";
+                    colour = "red";
                 }
                 else if(num >= 30 && num < 60) {
                     main_img.setImageResource(b);
                     image_name = b1;
+                    stimulus = "butterfly";
+                    colour = "blue";
                 }
                 else if(num >= 60 && num < 90) {
                     main_img.setImageResource(c);
                     image_name = c1;
+                    stimulus = "bee";
+                    colour = "yellow";
                 }
                 else if(num >= 90 && num < 120) {
                     main_img.setImageResource(d);
                     image_name = d1;
+                    stimulus = "bird";
+                    colour = "green";
                 }
             }
             else if (level == 4) {
@@ -213,18 +237,26 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
                 if(num >= 0 && num < 30) {
                     main_img.setImageResource(a);
                     image_name = a1;
+                    stimulus = "ladybird";
+                    colour = "red";
                 }
                 else if(num >= 30 && num < 60) {
                     main_img.setImageResource(b);
                     image_name = b1;
+                    stimulus = "butterfly";
+                    colour = "blue";
                 }
                 else if(num >= 60 && num < 90) {
                     main_img.setImageResource(c);
                     image_name = c1;
+                    stimulus = "bee";
+                    colour = "yellow";
                 }
                 else if(num >= 90 && num < 120) {
                     main_img.setImageResource(d);
                     image_name = d1;
+                    stimulus = "bird";
+                    colour = "green";
                 }
             }
             else if (level == 5) {
@@ -232,22 +264,32 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
                 if(num >= 0 && num < 20) {
                     main_img.setImageResource(a);
                     image_name = a1;
+                    stimulus = "ladybird";
+                    colour = "red";
                 }
                 else if(num >= 20 && num < 40) {
                     main_img.setImageResource(b);
                     image_name = b1;
+                    stimulus = "butterfly";
+                    colour = "blue";
                 }
                 else if(num >= 40 && num < 60) {
                     main_img.setImageResource(c);
                     image_name = c1;
+                    stimulus = "bee";
+                    colour = "yellow";
                 }
                 else if(num >= 60 && num < 80) {
                     main_img.setImageResource(d);
                     image_name = d1;
+                    stimulus = "bird";
+                    colour = "green";
                 }
                 else if(num >= 80 && num < 100) {
                     main_img.setImageResource(e);
                     image_name = e1;
+                    stimulus = "flower";
+                    colour = "pink";
                 }
             }
         }
@@ -259,18 +301,26 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
                 if (num >= 0 && num < 30) {
                     main_img.setImageResource(a);
                     image_name = a1;
+                    stimulus = "ladybird";
+                    colour = "red";
                 }
                 else if (num >= 30 && num < 60) {
                     main_img.setImageResource(b);
                     image_name = b1;
+                    stimulus = "butterfly";
+                    colour = "blue";
                 }
                 else if (num >= 60 && num < 90) {
                     main_img.setImageResource(c);
                     image_name = c1;
+                    stimulus = "bee";
+                    colour = "yellow";
                 }
                 else if (num >= 90 && num < 120) {
                     main_img.setImageResource(d);
                     image_name = d1;
+                    stimulus = "bird";
+                    colour = "green";
                 }
             } else if (level == 2) {
                 // 5 objects
@@ -278,22 +328,32 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
                 if (num >= 0 && num < 20) {
                     main_img.setImageResource(a);
                     image_name = a1;
+                    stimulus = "ladybird";
+                    colour = "red";
                 }
                 else if (num >= 20 && num < 40) {
                     main_img.setImageResource(b);
                     image_name = b1;
+                    stimulus = "butterfly";
+                    colour = "blue";
                 }
                 else if (num >= 40 && num < 60) {
                     main_img.setImageResource(c);
                     image_name = c1;
+                    stimulus = "bee";
+                    colour = "yellow";
                 }
                 else if (num >= 60 && num < 80) {
                     main_img.setImageResource(d);
                     image_name = d1;
+                    stimulus = "bird";
+                    colour = "green";
                 }
                 else if (num >= 80 && num < 100) {
                     main_img.setImageResource(e);
                     image_name = e1;
+                    stimulus = "flower";
+                    colour = "pink";
                 }
             } else if (level == 3) {
                 // 6 objects
@@ -301,21 +361,33 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
                 if (num >= 0 && num < 20) {
                     main_img.setImageResource(a);
                     image_name = a1;
+                    stimulus = "ladybird";
+                    colour = "red";
                 } else if (num >= 20 && num < 40) {
                     main_img.setImageResource(b);
                     image_name = b1;
+                    stimulus = "butterfly";
+                    colour = "blue";
                 } else if (num >= 40 && num < 60) {
                     main_img.setImageResource(c);
                     image_name = c1;
+                    stimulus = "bee";
+                    colour = "yellow";
                 } else if (num >= 60 && num < 80) {
                     main_img.setImageResource(d);
                     image_name = d1;
+                    stimulus = "bird";
+                    colour = "green";
                 } else if (num >= 80 && num < 100) {
                     main_img.setImageResource(e);
                     image_name = e1;
+                    stimulus = "flower";
+                    colour = "pink";
                 } else if (num >= 100 && num < 120) {
                     main_img.setImageResource(f);
                     image_name = f1;
+                    stimulus = "bear";
+                    colour = "brown";
                 }
             } else if (level == 4) {
                 // 6 objects
@@ -323,21 +395,33 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
                 if (num >= 0 && num < 20) {
                     main_img.setImageResource(a);
                     image_name = a1;
+                    stimulus = "ladybird";
+                    colour = "red";
                 } else if (num >= 20 && num < 40) {
                     main_img.setImageResource(b);
                     image_name = b1;
+                    stimulus = "butterfly";
+                    colour = "blue";
                 } else if (num >= 40 && num < 60) {
                     main_img.setImageResource(c);
                     image_name = c1;
+                    stimulus = "bee";
+                    colour = "yellow";
                 } else if (num >= 60 && num < 80) {
                     main_img.setImageResource(d);
                     image_name = d1;
+                    stimulus = "bird";
+                    colour = "green";
                 } else if (num >= 80 && num < 100) {
                     main_img.setImageResource(e);
                     image_name = e1;
+                    stimulus = "flower";
+                    colour = "pink";
                 } else if (num >= 100 && num < 120) {
                     main_img.setImageResource(f);
                     image_name = f1;
+                    stimulus = "bear";
+                    colour = "brown";
                 }
             } else if (level == 5) {
                 // 7 objects
@@ -345,24 +429,38 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
                 if (num >= 0 && num < 20) {
                     main_img.setImageResource(a);
                     image_name = a1;
+                    stimulus = "ladybird";
+                    colour = "red";
                 } else if (num >= 20 && num < 40) {
                     main_img.setImageResource(b);
                     image_name = b1;
+                    stimulus = "butterfly";
+                    colour = "blue";
                 } else if (num >= 40 && num < 60) {
                     main_img.setImageResource(c);
                     image_name = c1;
+                    stimulus = "bee";
+                    colour = "yellow";
                 } else if (num >= 60 && num < 80) {
                     main_img.setImageResource(d);
                     image_name = d1;
+                    stimulus = "bird";
+                    colour = "green";
                 } else if (num >= 80 && num < 100) {
                     main_img.setImageResource(e);
                     image_name = e1;
+                    stimulus = "flower";
+                    colour = "pink";
                 } else if (num >= 100 && num < 120) {
                     main_img.setImageResource(f);
                     image_name = f1;
+                    stimulus = "bear";
+                    colour = "brown";
                 } else if (num >= 120 && num < 140) {
                     main_img.setImageResource(g);
                     image_name = g1;
+                    stimulus = "pig";
+                    colour = "pink";
                 }
             }
         }
@@ -428,7 +526,7 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
                     Log.d("omissionErrors", String.valueOf(totalCorrectResponses - noOfCorrectResponses));
                     Log.d("commissionErrors", String.valueOf(noOfCommissionErrors));
                     Log.d("duration", String.valueOf(completionTime));
-
+                    no_of_clicks = noOfCorrectResponses + noOfCommissionErrors;
                     GVAdapter2 adapter = new GVAdapter2(getApplicationContext(), gridModelArrayList);
                     gridView.setAdapter(adapter);
                     gridView.setEnabled(false);
