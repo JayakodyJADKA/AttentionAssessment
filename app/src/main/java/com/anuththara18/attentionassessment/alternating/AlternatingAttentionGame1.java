@@ -73,14 +73,14 @@ public class AlternatingAttentionGame1 extends AppCompatActivity {
             R.drawable.waving_dog,
             R.drawable.dancing_cat,
             R.drawable.walking_unicorn,
-            R.drawable.yellow_bird_gif};
+            R.drawable.yellow_baby_bird_gif};
 
     Integer[] right_images = { R.drawable.dancing_star,
             R.drawable.blowing_crab,
             R.drawable.swimming_fish,
             R.drawable.blue_fishy,
             R.drawable.brown_octopus,
-            R.drawable.yellow_bird_gif};
+            R.drawable.yellow_baby_bird_gif};
 
     //Integer[] sequence1 = { 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1, 0};
 

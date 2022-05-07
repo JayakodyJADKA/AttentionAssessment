@@ -100,8 +100,9 @@
 
                 <ImageView
                     android:layout_width="180dp"
+                    android:padding="10dp"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/twety" />
+                    android:src="@drawable/yellow_bird" />
 
             </LinearLayout>
 
@@ -138,6 +139,7 @@
                 <ImageView
                     android:layout_width="180dp"
                     android:layout_height="wrap_content"
+                    android:padding="15dp"
                     android:src="@drawable/red_angry_bird" />
 
             </LinearLayout>
@@ -165,7 +167,7 @@
                     android:layout_width="180dp"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
-                    android:src="@drawable/woody" />
+                    android:src="@drawable/woody_bird" />
 
             </LinearLayout>
 

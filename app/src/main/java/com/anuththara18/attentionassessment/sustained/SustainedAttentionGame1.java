@@ -55,6 +55,7 @@ public class SustainedAttentionGame1 extends AppCompatActivity {
             1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000, 1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000, 1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000, 1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000, 1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000, 1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000, 1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000, 1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000, 1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000, 1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000, 1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000, 1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000,
             1000, 4500, 2500, 5000, 2000, 3500, 6000, 1500, 3000, 5500, 4000, };
 
+    /*
     Integer[] image = { R.drawable.red_bird_gif,
             R.drawable.blue_bird_gif,
             R.drawable.green_bird_gif,
@@ -62,7 +63,12 @@ public class SustainedAttentionGame1 extends AppCompatActivity {
             R.drawable.blue_bird2_gif,
             R.drawable.yellow_bird_gif};
 
+     */
+
     int correctImage, clickedImage;
+
+    public static String stimulus, colour, sequence_of_responses = "";
+
 
     Random random = new Random();
     int randomImage = 0;
@@ -145,8 +151,34 @@ public class SustainedAttentionGame1 extends AppCompatActivity {
                         bird.setVisibility(View.INVISIBLE);
                         gifImageView.setVisibility(View.VISIBLE);
                         bird.setEnabled(true);
-                        gifImageView.setImageResource(image[randomImage]);
-                        clickedImage = image[randomImage];
+
+                        if (BirdChoosingActivity.birdSelected == 1) {
+                            gifImageView.setImageResource(R.drawable.blue_bird_gif);
+                            clickedImage = 1;
+                            stimulus = "bird";
+                            colour = "blue";
+                        }
+                        else if (BirdChoosingActivity.birdSelected == 2) {
+                            gifImageView.setImageResource(R.drawable.yellow_baby_bird_gif);
+                            clickedImage = 2;
+                            stimulus = "bird";
+                            colour = "yellow";
+                        }
+                        else if (BirdChoosingActivity.birdSelected == 3) {
+                            gifImageView.setImageResource(R.drawable.red_bird_gif);
+                            clickedImage = 3;
+                            stimulus = "bird";
+                            colour = "red";
+                        }
+                        else if (BirdChoosingActivity.birdSelected == 4) {
+                            gifImageView.setImageResource(R.drawable.pink_bird_gif);
+                            clickedImage = 4;
+                            stimulus = "bird";
+                            colour = "pink";
+                        }
+
+                        //gifImageView.setImageResource(image[randomImage]);
+                        //clickedImage = image[randomImage];
                         updateInterval = isi[j];
                         Log.d("radomTimer", String.valueOf(i + " " + updateInterval));
                         gifImageView.postDelayed(this, updateInterval);
@@ -161,8 +193,8 @@ public class SustainedAttentionGame1 extends AppCompatActivity {
 
                         bird.setVisibility(View.VISIBLE);
                         if (BirdChoosingActivity.birdSelected == 1) {
-                            bird.setImageResource(R.drawable.blue_bird);
-                            clickedImage = R.drawable.blue_bird;
+                            bird.setImageResource(R.drawable.bluey);
+                            clickedImage = R.drawable.bluey;
                         }
                         else if (BirdChoosingActivity.birdSelected == 2) {
                             Log.d("******************************", "start 2");
