@@ -32,6 +32,7 @@ import com.anuththara18.attentionassessment.map.Map1Activity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -52,6 +53,7 @@ public class FocusedAttentionGame2 extends AppCompatActivity {
     Random random = new Random();
     int radomTimer = 0;
     int rand = 0;
+    int missed = 0;
 
     int i = 1;
     private long startTime, clickedTime = 0;
@@ -71,10 +73,11 @@ public class FocusedAttentionGame2 extends AppCompatActivity {
 
     String clicked = "null";
 
+    public static ArrayList<String> sequence_of_responses;
+
     Integer[] isi = { 3000, 3500, 4000, 4500, 5000, 5500, 6000 };
 
     MediaPlayer mp, mp2;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +105,8 @@ public class FocusedAttentionGame2 extends AppCompatActivity {
 
         mp = MediaPlayer.create(getApplicationContext(), R.raw.focused);
         mp.start();
+
+        sequence_of_responses = new ArrayList<>();
 
         mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
 
@@ -139,6 +144,11 @@ public class FocusedAttentionGame2 extends AppCompatActivity {
                         bear2.setEnabled(true);
                         bear3.setEnabled(true);
                         bear4.setEnabled(true);
+
+                        if (missed == 0) {
+                            sequence_of_responses.add("M");
+                            Log.d("%%%%%%%%%%%%%%%%%%", String.valueOf(sequence_of_responses));
+                        }
 
                         radomTimer = random.nextInt(5);
                         updateInterval = isi[radomTimer];
@@ -221,7 +231,7 @@ public class FocusedAttentionGame2 extends AppCompatActivity {
                     Log.d("commissionErrors", String.valueOf(noOfCommissionErrors));
                     Log.d("meanReactionTime", String.valueOf(meanReactionTime));
                     Log.d("duration", String.valueOf(duration));
-                    saveDataToOnlineDB();
+                    //saveDataToOnlineDB();
                     createTable();
                     saveDataToLocalDB();
                     if (Map1Activity.level == 1){
@@ -256,6 +266,7 @@ public class FocusedAttentionGame2 extends AppCompatActivity {
                     totalReactionTime = totalReactionTime + reactionTime;
                     Log.d("correct ", startTime + " " + clickedTime + " " + reactionTime);
                     noOfCorrectResponses++;
+                    sequence_of_responses.add("C");
                     bear1.setEnabled(false);
                 } else {
                     Log.d("wrong", startTime + " " + clickedTime + " " + reactionTime);
@@ -277,6 +288,7 @@ public class FocusedAttentionGame2 extends AppCompatActivity {
                     totalReactionTime = totalReactionTime + reactionTime;
                     Log.d("correct ", startTime + " " + clickedTime + " " + reactionTime);
                     noOfCorrectResponses++;
+                    sequence_of_responses.add("C");
                     bear2.setEnabled(false);
                 } else {
                     Log.d("wrong", startTime + " " + clickedTime + " " + reactionTime);
@@ -298,6 +310,7 @@ public class FocusedAttentionGame2 extends AppCompatActivity {
                     totalReactionTime = totalReactionTime + reactionTime;
                     Log.d("correct ", startTime + " " + clickedTime + " " + reactionTime);
                     noOfCorrectResponses++;
+                    sequence_of_responses.add("C");
                     bear3.setEnabled(false);
                 } else {
                     Log.d("wrong", startTime + " " + clickedTime + " " + reactionTime);
@@ -320,6 +333,7 @@ public class FocusedAttentionGame2 extends AppCompatActivity {
                     totalReactionTime = totalReactionTime + reactionTime;
                     Log.d("correct ", startTime + " " + clickedTime + " " + reactionTime);
                     noOfCorrectResponses++;
+                    sequence_of_responses.add("C");
                     bear4.setEnabled(false);
                 } else {
                     Log.d("wrong", startTime + " " + clickedTime + " " + reactionTime);

@@ -31,6 +31,7 @@ import com.anuththara18.attentionassessment.R;
 import com.anuththara18.attentionassessment.age.AgeActivity;
 import com.anuththara18.attentionassessment.db.Api;
 import com.anuththara18.attentionassessment.db.RequestHandler;
+import com.anuththara18.attentionassessment.details.ParentDetailsActivity;
 import com.anuththara18.attentionassessment.gender.GenderActivity;
 import com.anuththara18.attentionassessment.home.NavigationDrawerActivity;
 import com.anuththara18.attentionassessment.language.LanguageSetter;
@@ -66,12 +67,13 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
     int radomTimer = 0;
     int rand = 0;
 
-    public static String stimulus, colour, sequence_of_responses = "";
+    public static String stimulus, colour;
 
     int i = 1;
     private long startTime, clickedTime = 0;
     long reactionTime;
     int count;
+    int missed = 0;
 
     int totalCorrectResponses = 0;
     int noOfCorrectResponses = 0;
@@ -91,6 +93,8 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
 
     Integer[] images = {R.drawable.monkey, R.drawable.baby_zebra, R.drawable.elephant, R.drawable.pig, R.drawable.giraffe,
             R.drawable.cow, R.drawable.horse, R.drawable.dino, R.drawable.lion, R.drawable.dog};
+
+    public static ArrayList<String> sequence_of_responses;
 
     MediaPlayer mp, mp2;
 
@@ -118,8 +122,13 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
 
         textView.setText(LanguageSetter.getresources().getString(R.string.focg1));
 
+        stimulus = "";
+        colour = "";
+
         mp = MediaPlayer.create(getApplicationContext(), R.raw.focused);
         mp.start();
+
+        sequence_of_responses = new ArrayList<>();
 
         mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
 
@@ -136,29 +145,26 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
         //creating a database
         mDatabase = openOrCreateDatabase(DATABASE_NAME, MODE_PRIVATE, null);
 
-        if(AnimalChoosingActivity.birdSelected == 0) {
-            stimulus = "monkey";
-            colour = "shades of brown";
-        }
-        else if(AnimalChoosingActivity.birdSelected == 1) {
-            stimulus = "zebra";
-            colour = "black & white";
-        }
-        else if(AnimalChoosingActivity.birdSelected == 4) {
-            stimulus = "giraffe";
-            colour = "yellow & brown";
-        }
-        else if(AnimalChoosingActivity.birdSelected == 9) {
-            stimulus = "dog";
-            colour = "brown orange";
-        }
-        else if(AnimalChoosingActivity.birdSelected == 5) {
-            stimulus = "cow";
-            colour = "black & white";
-        }
-        else if(AnimalChoosingActivity.birdSelected == 8) {
-            stimulus = "lion";
-            colour = "orange & brown";
+        if  ( Map1Activity.level == 3 || Map1Activity.level == 4 ) {
+            if (AnimalChoosingActivity.birdSelected == 0) {
+                stimulus = "monkey";
+                colour = "shades of brown";
+            } else if (AnimalChoosingActivity.birdSelected == 1) {
+                stimulus = "zebra";
+                colour = "black & white";
+            } else if (AnimalChoosingActivity.birdSelected == 4) {
+                stimulus = "giraffe";
+                colour = "yellow & brown";
+            } else if (AnimalChoosingActivity.birdSelected == 9) {
+                stimulus = "dog";
+                colour = "brown orange";
+            } else if (AnimalChoosingActivity.birdSelected == 5) {
+                stimulus = "cow";
+                colour = "black & white";
+            } else if (AnimalChoosingActivity.birdSelected == 8) {
+                stimulus = "lion";
+                colour = "orange & brown";
+            }
         }
 
         List<Integer> unpickedNumbers = new ArrayList<Integer>();
@@ -198,6 +204,11 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
                         imageView4.setEnabled(true);
                         imageView5.setEnabled(true);
                         imageView6.setEnabled(true);
+
+                        if (missed == 0) {
+                            sequence_of_responses.add("M");
+                            Log.d("%%%%%%%%%%%%%%%%%%", String.valueOf(sequence_of_responses));
+                        }
 
                         radomTimer = random.nextInt(5);
                         updateInterval = isi[radomTimer];
@@ -407,6 +418,8 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
 
                         }
 
+                        missed = 0;
+
                         imageView.setEnabled(true);
                         imageView2.setEnabled(true);
                         imageView3.setEnabled(true);
@@ -440,7 +453,11 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
                     Log.d("commissionErrors", String.valueOf(noOfCommissionErrors));
                     Log.d("meanReactionTime", String.valueOf(meanReactionTime));
                     Log.d("duration", String.valueOf(duration));
-                    saveDataToOnlineDB();
+                    Log.d("stimulus", String.valueOf(stimulus));
+                    Log.d("colour", String.valueOf(colour));
+                    sequence_of_responses.remove(0);
+                    Log.d("responses", String.valueOf(sequence_of_responses));
+                    //saveDataToOnlineDB();
                     createTable();
                     saveDataToLocalDB();
 
@@ -474,6 +491,8 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
             public void onClick(View view) {
                 mp2 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
                 mp2.start();
+                Animation animZoomOut = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.blink);
+                imageView.startAnimation(animZoomOut);
                 // Your action here on button click
                 clickedTime = System.currentTimeMillis();
                 reactionTime = (clickedTime - startTime);
@@ -482,6 +501,8 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
                     totalReactionTime = totalReactionTime + reactionTime;
                     Log.d("correct ", startTime + " " + clickedTime + " " + reactionTime);
                     noOfCorrectResponses++;
+                    missed = 1;
+                    sequence_of_responses.add("C");
                     imageView.setEnabled(false);
                 } else {
                     Log.d("wrong", startTime + " " + clickedTime + " " + reactionTime);
@@ -495,6 +516,8 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
             public void onClick(View view) {
                 mp2 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
                 mp2.start();
+                Animation animZoomOut = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.blink);
+                imageView2.startAnimation(animZoomOut);
                 // Your action here on button click
                 clickedTime = System.currentTimeMillis();
                 reactionTime = (clickedTime - startTime);
@@ -503,6 +526,8 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
                     totalReactionTime = totalReactionTime + reactionTime;
                     Log.d("correct ", startTime + " " + clickedTime + " " + reactionTime);
                     noOfCorrectResponses++;
+                    missed = 1;
+                    sequence_of_responses.add("C");
                     imageView2.setEnabled(false);
                 } else {
                     Log.d("wrong", startTime + " " + clickedTime + " " + reactionTime);
@@ -514,9 +539,10 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
         imageView3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 mp2 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
                 mp2.start();
+                Animation animZoomOut = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.blink);
+                imageView3.startAnimation(animZoomOut);
                 // Your action here on button click
                 clickedTime = System.currentTimeMillis();
                 reactionTime = (clickedTime - startTime);
@@ -524,6 +550,8 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
                     totalReactionTime = totalReactionTime + reactionTime;
                     Log.d("correct ", startTime + " " + clickedTime + " " + reactionTime);
                     noOfCorrectResponses++;
+                    missed = 1;
+                    sequence_of_responses.add("C");
                     imageView3.setEnabled(false);
                 } else {
                     Log.d("wrong", startTime + " " + clickedTime + " " + reactionTime);
@@ -536,9 +564,10 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
         imageView4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 mp2 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
                 mp2.start();
+                Animation animZoomOut = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.blink);
+                imageView4.startAnimation(animZoomOut);
                 // Your action here on button click
                 clickedTime = System.currentTimeMillis();
                 reactionTime = (clickedTime - startTime);
@@ -546,6 +575,8 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
                     totalReactionTime = totalReactionTime + reactionTime;
                     Log.d("correct ", startTime + " " + clickedTime + " " + reactionTime);
                     noOfCorrectResponses++;
+                    missed = 1;
+                    sequence_of_responses.add("C");
                     imageView4.setEnabled(false);
                 } else {
                     Log.d("wrong", startTime + " " + clickedTime + " " + reactionTime);
@@ -558,9 +589,10 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
         imageView5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 mp2 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
                 mp2.start();
+                Animation animZoomOut = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.blink);
+                imageView5.startAnimation(animZoomOut);
                 // Your action here on button click
                 clickedTime = System.currentTimeMillis();
                 reactionTime = (clickedTime - startTime);
@@ -568,6 +600,8 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
                     totalReactionTime = totalReactionTime + reactionTime;
                     Log.d("correct ", startTime + " " + clickedTime + " " + reactionTime);
                     noOfCorrectResponses++;
+                    missed = 1;
+                    sequence_of_responses.add("C");
                     imageView5.setEnabled(false);
                 } else {
                     Log.d("wrong", startTime + " " + clickedTime + " " + reactionTime);
@@ -580,9 +614,10 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
         imageView6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 mp2 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
                 mp2.start();
+                Animation animZoomOut = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.blink);
+                imageView6.startAnimation(animZoomOut);
                 // Your action here on button click
                 clickedTime = System.currentTimeMillis();
                 reactionTime = (clickedTime - startTime);
@@ -590,12 +625,13 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
                     totalReactionTime = totalReactionTime + reactionTime;
                     Log.d("correct ", startTime + " " + clickedTime + " " + reactionTime);
                     noOfCorrectResponses++;
+                    missed = 1;
+                    sequence_of_responses.add("C");
                     imageView6.setEnabled(false);
                 } else {
                     Log.d("wrong", startTime + " " + clickedTime + " " + reactionTime);
                     noOfCommissionErrors++;
                 }
-
             }
         });
 
@@ -626,35 +662,35 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
 
     public void getData(){
         if (rand == 0) {
-            stimulus = stimulus + " monkey, ";
-            colour = colour + " - shades of brown, ";
+            stimulus = stimulus + "monkey, ";
+            colour = colour + "shades of brown, ";
         }else if (rand == 1) {
-            stimulus = stimulus + " zebra, ";
-            colour = colour + " - black & white, ";
+            stimulus = stimulus + "zebra, ";
+            colour = colour + "black & white, ";
         }else if (rand == 2) {
-            stimulus = stimulus + " elephant, ";
-            colour = colour + " - grey, ";
+            stimulus = stimulus + "elephant, ";
+            colour = colour + "grey, ";
         }else if (rand == 3) {
-            stimulus = stimulus + " pig, ";
-            colour = colour + " - pink, ";
+            stimulus = stimulus + "pig, ";
+            colour = colour + "pink, ";
         }else if (rand == 4) {
-            stimulus = stimulus + " giraffe, ";
-            colour = colour + " - yellow & brown, ";
+            stimulus = stimulus + "giraffe, ";
+            colour = colour + "yellow & brown, ";
         }else if (rand == 5) {
-            stimulus = stimulus + " cow, ";
-            colour = colour + " - black & white, ";
+            stimulus = stimulus + "cow, ";
+            colour = colour + "black & white, ";
         }else if (rand == 6) {
-            stimulus = stimulus + " horse, ";
-            colour = colour + " - shades of brown, ";
+            stimulus = stimulus + "horse, ";
+            colour = colour + "shades of brown, ";
         }else if (rand == 7) {
-            stimulus = stimulus + " dino, ";
-            colour = colour + " - purple & red, ";
+            stimulus = stimulus + "dino, ";
+            colour = colour + "purple & red, ";
         }else if (rand == 8) {
-            stimulus = stimulus + " lion, ";
-            colour = colour + " - orange & brown, ";
+            stimulus = stimulus + "lion, ";
+            colour = colour + "orange & brown, ";
         }else if (rand == 9) {
-            stimulus = stimulus + " dog, ";
-            colour = colour + " - brown orange, ";
+            stimulus = stimulus + "dog, ";
+            colour = colour + "brown orange, ";
         }
 
     }
@@ -827,15 +863,20 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
                 "CREATE TABLE IF NOT EXISTS focusedAttention (\n" +
                         "    id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                         "    childID int NOT NULL,\n" +
+                        "    stimulus text NOT NULL,\n" +
+                        "    colour text NOT NULL,\n" +
+                        "    sequence_of_responses text NOT NULL,\n" +
                         "    totalCorrectResponses int NOT NULL,\n" +
                         "    noOfCorrectResponses int NOT NULL,\n" +
                         "    noOfCommissionErrors int NOT NULL,\n" +
                         "    noOfOmmissionErrors int NOT NULL,\n" +
                         "    meanReactionTime int NOT NULL,\n" +
-                        "    totalDuration int NOT NULL\n" +
+                        "    totalDuration int NOT NULL,\n" +
+                        "    diagnosis text NOT NULL\n" +
                         ");"
         );
     }
+
 
     /*************************************************************************************************/
 
@@ -851,12 +892,11 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
         int total_duration = duration;
 
         String insertSQL = "INSERT INTO focusedAttention \n" +
-                "(childID, totalCorrectResponses, noOfCorrectResponses, noOfCommissionErrors, noOfOmmissionErrors, meanReactionTime, totalDuration)\n" +
+                "(childID, stimulus, colour, sequence_of_responses, totalCorrectResponses, noOfCorrectResponses, noOfCommissionErrors, noOfOmmissionErrors, meanReactionTime, totalDuration, diagnosis)\n" +
                 "VALUES \n" +
-                "(?, ?, ?, ?, ?, ?, ?);";
+                "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
-        mDatabase.execSQL(insertSQL, new Integer[]{child_ID, total_correct_responses, no_of_correct_responses, no_of_commission_errors, no_of_ommission_errors, mean_reaction_time, total_duration});
-
+        mDatabase.execSQL(insertSQL, new Object[]{child_ID, stimulus, colour, sequence_of_responses, total_correct_responses, no_of_correct_responses, no_of_commission_errors, no_of_ommission_errors, mean_reaction_time, total_duration, ParentDetailsActivity.diagnosis});
         //Toast.makeText(this, "Data Added Successfully", Toast.LENGTH_SHORT).show();
     }
 

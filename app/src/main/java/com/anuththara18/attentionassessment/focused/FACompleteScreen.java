@@ -80,6 +80,7 @@ public class FACompleteScreen extends AppCompatActivity {
 
     String stimulus;
     String colour;
+    String responses;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,12 +159,16 @@ public class FACompleteScreen extends AppCompatActivity {
                 dataList.add(new Focused(
                         cursorEmployees.getInt(0),
                         cursorEmployees.getInt(1),
-                        cursorEmployees.getInt(2),
-                        cursorEmployees.getInt(3),
-                        cursorEmployees.getInt(4),
+                        cursorEmployees.getString(2),
+                        cursorEmployees.getString(3),
+                        cursorEmployees.getString(4),
                         cursorEmployees.getInt(5),
                         cursorEmployees.getInt(6),
-                        cursorEmployees.getInt(7)
+                        cursorEmployees.getInt(7),
+                        cursorEmployees.getInt(8),
+                        cursorEmployees.getInt(9),
+                        cursorEmployees.getInt(10),
+                        cursorEmployees.getString(11)
                 ));
             } while (cursorEmployees.moveToNext());
         }
@@ -191,14 +196,17 @@ public class FACompleteScreen extends AppCompatActivity {
             if (Map1Activity.level == 1 || Map1Activity.level == 2) {
                 stimulus = "bear head";
                 colour = "brown";
+                responses = String.valueOf(FocusedAttentionGame2.sequence_of_responses);
             }
-            else if (Map1Activity.level == 2 || Map1Activity.level == 3) {
+            else if (Map1Activity.level == 3 || Map1Activity.level == 4) {
                 stimulus = FocusedAttentionGame1.stimulus;
                 colour = FocusedAttentionGame1.colour;
+                responses = String.valueOf(FocusedAttentionGame1.sequence_of_responses);
             }
             else if (Map1Activity.level == 5) {
                 stimulus = FocusedAttentionGame1.stimulus;
                 colour = FocusedAttentionGame1.colour;
+                responses = String.valueOf(FocusedAttentionGame1.sequence_of_responses);
             }
 
             for (int i = 0; i < dataList.size(); i++) {
@@ -207,19 +215,17 @@ public class FACompleteScreen extends AppCompatActivity {
                 data.add(new String[]{ String.valueOf(gameData.getId()),
                         String.valueOf(String.valueOf(gameData.getChildID()).charAt(0)),
                         String.valueOf(String.valueOf(gameData.getChildID()).charAt(1)),
-                        String.valueOf(Map1Activity.level),
-
-                        String.valueOf(stimulus),
-                        String.valueOf(colour),
-                        String.valueOf("null"),
-
+                        String.valueOf(String.valueOf(gameData.getChildID()).charAt(2)),
+                        String.valueOf(gameData.getStimulus()),
+                        String.valueOf(gameData.getColour()),
+                        String.valueOf(gameData.getSequence_of_responses()),
                         String.valueOf(gameData.getTotalCorrectResponses()),
                         String.valueOf(gameData.getNoOfCorrectResponses()),
                         String.valueOf(gameData.getNoOfCommissionErrors()),
                         String.valueOf(gameData.getNoOfOmmissionErrors()),
                         String.valueOf(gameData.getMeanReactionTime()),
                         String.valueOf(gameData.getTotalDuration()),
-                        String.valueOf(ParentDetailsActivity.diagnosis)
+                        String.valueOf(gameData.getDiagnosis())
                 });
             }
 
