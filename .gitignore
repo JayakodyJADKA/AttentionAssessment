@@ -13,6 +13,3 @@
 .externalNativeBuild
 .cxx
 local.properties
-/app/src/main/res/drawable/
-/app/src/main/res/drawable-v24/
-/app/src/main/res/drawable-nodpi/
