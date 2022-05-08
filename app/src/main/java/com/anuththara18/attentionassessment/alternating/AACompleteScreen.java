@@ -156,12 +156,16 @@ public class AACompleteScreen extends AppCompatActivity {
                 dataList.add(new Alternating(
                         cursorEmployees.getInt(0),
                         cursorEmployees.getInt(1),
-                        cursorEmployees.getInt(2),
-                        cursorEmployees.getInt(3),
-                        cursorEmployees.getInt(4),
+                        cursorEmployees.getString(2),
+                        cursorEmployees.getString(3),
+                        cursorEmployees.getString(4),
                         cursorEmployees.getInt(5),
                         cursorEmployees.getInt(6),
-                        cursorEmployees.getInt(7)
+                        cursorEmployees.getInt(7),
+                        cursorEmployees.getInt(8),
+                        cursorEmployees.getInt(9),
+                        cursorEmployees.getInt(10),
+                        cursorEmployees.getString(11)
                 ));
             } while (cursorEmployees.moveToNext());
         }
@@ -177,7 +181,7 @@ public class AACompleteScreen extends AppCompatActivity {
         try {
             writer = new CSVWriter(new FileWriter(csv));
 
-            String[] entries = {"id","child_gender","child_age","total_correct_responses","correct_responses","commission_errors","omission_errors","mean_reaction_time","total_duration","diagnosis"};
+            String[] entries = {"id","child_gender","child_age", "sequence_of_responses", "sequence_of_stimuli", "sequence_of_sides", "total_correct_responses","correct_responses","commission_errors","omission_errors","mean_reaction_time","total_duration","diagnosis"};
             writer.writeNext(entries);
 
             List<String[]> data = new ArrayList<String[]>();
@@ -188,13 +192,16 @@ public class AACompleteScreen extends AppCompatActivity {
                 data.add(new String[]{ String.valueOf(gameData.getId()),
                         String.valueOf(String.valueOf(gameData.getChildID()).charAt(0)),
                         String.valueOf(String.valueOf(gameData.getChildID()).charAt(1)),
+                        String.valueOf(gameData.getSequence_of_responses()),
+                        String.valueOf(gameData.getSequence_of_stimuli()),
+                        String.valueOf(gameData.getSequence_of_sides()),
                         String.valueOf(gameData.getTotalCorrectResponses()),
                         String.valueOf(gameData.getNoOfCorrectResponses()),
                         String.valueOf(gameData.getNoOfCommissionErrors()),
                         String.valueOf(gameData.getNoOfOmmissionErrors()),
                         String.valueOf(gameData.getMeanReactionTime()),
                         String.valueOf(gameData.getTotalDuration()),
-                        String.valueOf(ParentDetailsActivity.diagnosis)
+                        String.valueOf(gameData.getDiagnosis())
 
                 });
             }

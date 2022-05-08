@@ -15,6 +15,8 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,6 +26,7 @@ import com.anuththara18.attentionassessment.R;
 import com.anuththara18.attentionassessment.age.AgeActivity;
 import com.anuththara18.attentionassessment.db.Api;
 import com.anuththara18.attentionassessment.db.RequestHandler;
+import com.anuththara18.attentionassessment.details.ParentDetailsActivity;
 import com.anuththara18.attentionassessment.focused.FACompleteScreen;
 import com.anuththara18.attentionassessment.gender.GenderActivity;
 import com.anuththara18.attentionassessment.home.NavigationDrawerActivity;
@@ -32,6 +35,7 @@ import com.anuththara18.attentionassessment.language.LanguageSetter;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -43,14 +47,18 @@ public class AlternatingAttentionGame1 extends AppCompatActivity {
     public static final String DATABASE_NAME = "alternatingAttention";
     SQLiteDatabase mDatabase;
 
+    String sequence_of_stimuli ="", sequence_of_sides ="";
+
     ImageView imageView1, imageView2, cross_btn;
-    //ImageButton red_btn_left, red_btn_right;
     TextView textView;
+
+    public static ArrayList<String> sequence_of_responses;
 
     Random random = new Random();
     int radomImage = 0;
     int randomSide;
     String side;
+    int missed = 0;
 
     int i = 1;
     private long startTime, clickedTime = 0;
@@ -110,6 +118,8 @@ public class AlternatingAttentionGame1 extends AppCompatActivity {
         mp = MediaPlayer.create(getApplicationContext(), R.raw.alternating);
         mp.start();
 
+        sequence_of_responses = new ArrayList<>();
+
         mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
 
             @Override
@@ -156,17 +166,25 @@ public class AlternatingAttentionGame1 extends AppCompatActivity {
                         side ="right";
                     }
 
+                    if (missed == 0 || missed == 2) {
+                        sequence_of_responses.add("M");
+                        Log.d("%%%%%%%%%%%%%%%%%%", String.valueOf(sequence_of_responses));
+                    }
+                    missed = 0;
+
                     if( side.equals("left")) {
                         radomImage = random.nextInt(4);
                         //imageView2.setVisibility(View.INVISIBLE);
                         imageView2.setImageResource(0);
                         imageView1.setVisibility(View.VISIBLE);
+                        sequence_of_sides = sequence_of_sides + side + ", ";
                         if (leftcount > 4 ){
                             leftcount = 0;
                         }
                         imageView1.setImageResource(left_images[leftcount]);
                         imageView1.setEnabled(true);
                         imageView2.setEnabled(true);
+                        sequence_of_stimuli = sequence_of_stimuli + getLeftStimuli(leftcount);;
                         leftcount++;
                         startTime = System.currentTimeMillis();
                         clickedSide = "left";
@@ -182,12 +200,14 @@ public class AlternatingAttentionGame1 extends AppCompatActivity {
                         //imageView1.setVisibility(View.INVISIBLE);
                         imageView1.setImageResource(0);
                         imageView2.setVisibility(View.VISIBLE);
+                        sequence_of_sides = sequence_of_sides + side  + ", ";;
                         if (rightcount > 4 ){
                             rightcount = 0;
                         }
                         imageView2.setImageResource(right_images[rightcount]);
                         imageView1.setEnabled(true);
                         imageView2.setEnabled(true);
+                        sequence_of_stimuli = sequence_of_stimuli + getRightStimuli(rightcount);;
                         rightcount++;
                         startTime = System.currentTimeMillis();
                         clickedSide = "right";
@@ -200,6 +220,12 @@ public class AlternatingAttentionGame1 extends AppCompatActivity {
 
                 }
                 else {
+                    if ( i == 20) {
+                        if (missed == 0 || missed == 2) {
+                            sequence_of_responses.add("M");
+                            Log.d("%%%%%%%%%%%%%%%%%%", String.valueOf(sequence_of_responses));
+                        }
+                    }
                     long gameEnd = System.currentTimeMillis();
                     long seconds = (gameEnd - gameStart) / 1000;
                     if ( noOfCorrectResponses == 0 ) {
@@ -217,7 +243,12 @@ public class AlternatingAttentionGame1 extends AppCompatActivity {
                     Log.d("commissionErrors", String.valueOf(noOfCommissionErrors));
                     Log.d("meanReactionTime", String.valueOf(meanReactionTime));
                     Log.d("duration", String.valueOf(duration));
-                    saveDataToOnlineDB();
+                    sequence_of_responses.remove(0);
+                    Log.d("responses", String.valueOf(sequence_of_responses));
+                    Log.d("sides", String.valueOf(sequence_of_sides));
+                    Log.d("stimuli", String.valueOf(sequence_of_stimuli));
+
+                    //saveDataToOnlineDB();
                     createTable();
                     saveDataToLocalDB();
                     Intent intent = new Intent(getApplicationContext(), AACompleteScreen.class);
@@ -232,6 +263,8 @@ public class AlternatingAttentionGame1 extends AppCompatActivity {
         imageView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Animation animZoomOut = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.blink);
+                imageView1.startAnimation(animZoomOut);
                 mp2 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
                 mp2.start();
                 clickedTime = System.currentTimeMillis();
@@ -240,11 +273,17 @@ public class AlternatingAttentionGame1 extends AppCompatActivity {
                     totalReactionTime = totalReactionTime + reactionTime;
                     Log.d("correct " , startTime + " " + clickedTime + " " + reactionTime);
                     noOfCorrectResponses++;
+                    missed = 1;
+                    sequence_of_responses.add("C");
+                    Log.d("%%%%%%%%%%%%%%%%%%", String.valueOf(sequence_of_responses));
                     imageView1.setEnabled(false);
                 }
                 else {
                     Log.d( "wrong" , startTime + " " + clickedTime + " " + reactionTime);
                     noOfCommissionErrors++;
+                    missed = 2;
+                    sequence_of_responses.add("W");
+                    Log.d("%%%%%%%%%%%%%%%%%%", String.valueOf(sequence_of_responses));
                 }
             }
         });
@@ -252,6 +291,8 @@ public class AlternatingAttentionGame1 extends AppCompatActivity {
         imageView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Animation animZoomOut = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.blink);
+                imageView2.startAnimation(animZoomOut);
                 mp3 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
                 mp3.start();
                 clickedTime = System.currentTimeMillis();
@@ -260,11 +301,17 @@ public class AlternatingAttentionGame1 extends AppCompatActivity {
                     totalReactionTime = totalReactionTime + reactionTime;
                     Log.d("correct " , startTime + " " + clickedTime + " " + reactionTime);
                     noOfCorrectResponses++;
+                    missed = 1;
+                    sequence_of_responses.add("C");
+                    Log.d("%%%%%%%%%%%%%%%%%%", String.valueOf(sequence_of_responses));
                     imageView2.setEnabled(false);
                 }
                 else {
                     Log.d( "wrong" , startTime + " " + clickedTime + " " + reactionTime);
                     noOfCommissionErrors++;
+                    missed = 2;
+                    sequence_of_responses.add("W");
+                    Log.d("%%%%%%%%%%%%%%%%%%", String.valueOf(sequence_of_responses));
                 }
             }
         });
@@ -293,6 +340,36 @@ public class AlternatingAttentionGame1 extends AppCompatActivity {
             }
         });
 
+    }
+
+    private String getLeftStimuli(int leftcount) {
+        if (leftcount == 0) {
+            return "white bunny, ";
+        }else if (leftcount == 1) {
+            return "pink pig, ";
+        }else if (leftcount == 2) {
+            return "brown dog, ";
+        }else if (leftcount == 3) {
+            return "pale brown cat, ";
+        }else if (leftcount == 4) {
+            return "pink unicorn, ";
+        }
+        return "null";
+    }
+
+    private String getRightStimuli(int rightcount) {
+        if (rightcount == 0) {
+            return "red star, ";
+        }else if (rightcount == 1) {
+            return "red crab, ";
+        }else if (rightcount == 2) {
+            return "red fish, ";
+        }else if (rightcount == 3) {
+            return "blue fish, ";
+        }else if (rightcount == 4) {
+            return "brown octopus, ";
+        }
+        return "null";
     }
 
     /*************************************************************************************************/
@@ -427,12 +504,16 @@ public class AlternatingAttentionGame1 extends AppCompatActivity {
                 "CREATE TABLE IF NOT EXISTS alternatingAttention (\n" +
                         "    id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                         "    childID int NOT NULL,\n" +
+                        "    sequence_of_responses text NOT NULL,\n" +
+                        "    sequence_of_stimuli text NOT NULL,\n" +
+                        "    sequence_of_sides text NOT NULL,\n" +
                         "    totalCorrectResponses int NOT NULL,\n" +
                         "    noOfCorrectResponses int NOT NULL,\n" +
                         "    noOfCommissionErrors int NOT NULL,\n" +
                         "    noOfOmmissionErrors int NOT NULL,\n" +
                         "    meanReactionTime int NOT NULL,\n" +
-                        "    totalDuration int NOT NULL\n" +
+                        "    totalDuration int NOT NULL,\n" +
+                        "    diagnosis text NOT NULL\n" +
                         ");"
         );
     }
@@ -451,11 +532,11 @@ public class AlternatingAttentionGame1 extends AppCompatActivity {
         int total_duration = duration;
 
         String insertSQL = "INSERT INTO alternatingAttention \n" +
-                "(childID, totalCorrectResponses, noOfCorrectResponses, noOfCommissionErrors, noOfOmmissionErrors, meanReactionTime, totalDuration)\n" +
+                "(childID, sequence_of_responses, sequence_of_stimuli, sequence_of_sides, totalCorrectResponses, noOfCorrectResponses, noOfCommissionErrors, noOfOmmissionErrors, meanReactionTime, totalDuration, diagnosis)\n" +
                 "VALUES \n" +
-                "(?, ?, ?, ?, ?, ?, ?);";
+                "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
-        mDatabase.execSQL(insertSQL, new Integer[]{child_ID, total_correct_responses, no_of_correct_responses, no_of_commission_errors, no_of_ommission_errors, mean_reaction_time, total_duration});
+        mDatabase.execSQL(insertSQL, new Object[]{child_ID,  sequence_of_responses, sequence_of_stimuli, sequence_of_sides, total_correct_responses, no_of_correct_responses, no_of_commission_errors, no_of_ommission_errors, mean_reaction_time, total_duration, ParentDetailsActivity.diagnosis});
 
         //Toast.makeText(this, "Data Added Successfully", Toast.LENGTH_SHORT).show();
     }
