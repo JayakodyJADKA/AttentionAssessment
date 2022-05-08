@@ -131,39 +131,39 @@ public class DividedAttentionGame1 extends AppCompatActivity {
             public void run() {
                 if ( i < 40 ) { // 40 times
 
-                    if ( i == 4 ) {
+                    if ( i == 5 ) {
                         checkIfMissed();
                         missed = 0;
                         correctresponse = 0;
-                    }else if ( i == 9 ) {
+                    }else if ( i == 10 ) {
                         checkIfMissed();
                         missed = 0;
                         correctresponse = 0;
-                    }else if ( i == 14 ) {
+                    }else if ( i == 15 ) {
                         checkIfMissed();
                         missed = 0;
                         correctresponse = 0;
-                    }else if ( i == 19 ) {
+                    }else if ( i == 20 ) {
                         checkIfMissed();
                         missed = 0;
                         correctresponse = 0;
-                    }else if ( i == 24 ) {
+                    }else if ( i == 25 ) {
                         checkIfMissed();
                         missed = 0;
                         correctresponse = 0;
-                    }else if ( i == 29 ) {
+                    }else if ( i == 30 ) {
                         checkIfMissed();
                         missed = 0;
                         correctresponse = 0;
-                    }else if ( i == 34 ) {
+                    }else if ( i == 35 ) {
                         checkIfMissed();
                         missed = 0;
                         correctresponse = 0;
-                    }else if ( i == 39 ) {
+                    }else if ( i == 40 ) {
                         checkIfMissed();
                         missed = 0;
                         correctresponse = 0;
-                    }else if ( i == 44 ) {
+                    }else if ( i == 45 ) {
                         checkIfMissed();
                         missed = 0;
                         correctresponse = 0;
@@ -316,6 +316,12 @@ public class DividedAttentionGame1 extends AppCompatActivity {
                     }
                 }
                 else {
+                    if ( i == 40) {
+                        if (missed == 0 || missed == 2) {
+                            sequence_of_responses.add("M");
+                            Log.d("%%%%%%%%%%%%%%%%%%", String.valueOf(sequence_of_responses));
+                        }
+                    }
                     long gameEnd = System.currentTimeMillis();
                     long seconds = (gameEnd - gameStart) / 1000;
                     if ( noOfCorrectResponses == 0 ) {
