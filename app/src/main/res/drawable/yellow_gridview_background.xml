@@ -4,8 +4,8 @@
     <shape xmlns:android="http://schemas.android.com/apk/res/android" >
         <gradient
             android:angle="360"
-            android:startColor="#00FFFF"
-            android:endColor="#0523E3"
+            android:startColor="#FFC107"
+            android:endColor="#FF9800"
             android:type="linear" />
         <corners android:radius="7dp"/>
     </shape>
@@ -17,7 +17,7 @@
     android:right="3dp"
     android:top="3dp">
     <shape xmlns:android="http://schemas.android.com/apk/res/android" >
-        <solid android:color="#CEFF96" />
+        <solid android:color="#FFF38E" />
         <corners android:radius="7dp"/>
     </shape>
 </item>

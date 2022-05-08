@@ -125,7 +125,9 @@
         <activity
             android:name=".map.Map2Activity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar" >
+
+        </activity>
         <activity
             android:name=".map.Map1Activity"
             android:screenOrientation="portrait"

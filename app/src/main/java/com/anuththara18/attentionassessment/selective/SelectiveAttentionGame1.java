@@ -69,6 +69,7 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
 
     public static ArrayList<Integer> correctResponses;
     public static ArrayList<Integer> incorrectResponses;
+    public static ArrayList<Integer> missedResponses;
     public static int columns;
     int rows, noOfObjects;
     int gridSize = 0;
@@ -149,6 +150,7 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
         random = new Random();
         correctResponses = new ArrayList<>();
         incorrectResponses = new ArrayList<>();
+        missedResponses = new ArrayList<>();
 
         // level 1 & 2
         a = R.drawable.ladybird;
@@ -478,6 +480,7 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
                 GridModel data = (GridModel) gridModelArrayList.get(i);
                 if ( data.getImage_name().equals(image_name)){
                     totalCorrectResponses++;
+                    missedResponses.add(i);
                 }
             }
             Log.d("@@@@@@@@@@@@@@@@@@@", String.valueOf(totalCorrectResponses));
@@ -501,7 +504,7 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
                     correctResponses.add(position);
                     sequence_of_responses.add("C");
                     Log.d("%%%%%%%%%%%%%%%%%%", String.valueOf(sequence_of_responses));
-                    //Toast.makeText(getApplicationContext(), data.getImage_name(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), data.getImage_name() + image_name, Toast.LENGTH_SHORT).show();
                     order_of_selection = order_of_selection + data.getImage_name() + ", ";
                     gridView.setAdapter(adapter);
                 }
@@ -512,7 +515,7 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
                     gridView.setAdapter(adapter);
                     sequence_of_responses.add("W");
                     Log.d("%%%%%%%%%%%%%%%%%%", String.valueOf(sequence_of_responses));
-                    //Toast.makeText(getApplicationContext(), data.getImage_name(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), data.getImage_name()  + image_name, Toast.LENGTH_SHORT).show();
                     order_of_selection = order_of_selection + data.getImage_name() + ", ";
                 }
             }

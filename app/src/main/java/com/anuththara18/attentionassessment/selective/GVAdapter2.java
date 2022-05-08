@@ -40,6 +40,22 @@ public class GVAdapter2 extends ArrayAdapter<GridModel> {
 
             //listitemView = LayoutInflater.from(getContext()).inflate(R.layout.card_item3, parent, false);
 
+            /*
+            for ( int i = 0; i < SelectiveAttentionGame1.missedResponses.size(); i++ ) {
+                if (position == SelectiveAttentionGame1.missedResponses.get(i)) {
+                    if (SelectiveAttentionGame1.columns == 3) {
+                        listitemView = LayoutInflater.from(getContext()).inflate(R.layout.yellow_card1, parent, false);
+                    }
+                    else if (SelectiveAttentionGame1.columns == 4) {
+                        listitemView = LayoutInflater.from(getContext()).inflate(R.layout.yellow_card2, parent, false);
+                    }
+                    else if (SelectiveAttentionGame1.columns == 5) {
+                        listitemView = LayoutInflater.from(getContext()).inflate(R.layout.yellow_card, parent, false);
+                    }
+                }
+            }
+             */
+
             for ( int i = 0; i < SelectiveAttentionGame1.correctResponses.size(); i++ ) {
                 if (position == SelectiveAttentionGame1.correctResponses.get(i)) {
                     if (SelectiveAttentionGame1.columns == 3) {
@@ -68,11 +84,21 @@ public class GVAdapter2 extends ArrayAdapter<GridModel> {
                 }
             }
 
+
+
         }
 
         GridModel gridModel = getItem(position);
         ImageView gridImage = listitemView.findViewById(R.id.gridImage);
         gridImage.setImageResource(gridModel.getImgid());
+
+        /*
+        for ( int i = 0; i < SelectiveAttentionGame1.missedResponses.size(); i++ ) {
+            if (position == SelectiveAttentionGame1.missedResponses.get(i)) {
+                gridImage.setImageResource(R.drawable.exclamation);
+            }
+        }
+         */
 
         for ( int i = 0; i < SelectiveAttentionGame1.correctResponses.size(); i++ ) {
             if (position == SelectiveAttentionGame1.correctResponses.get(i)) {
@@ -85,6 +111,7 @@ public class GVAdapter2 extends ArrayAdapter<GridModel> {
                 gridImage.setImageResource(R.drawable.cross);
             }
         }
+
 
         return listitemView;
 
