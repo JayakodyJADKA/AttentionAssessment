@@ -154,12 +154,18 @@ public class SelectiveACompleteScreen extends AppCompatActivity {
                 dataList.add(new Selective(
                         cursorEmployees.getInt(0),
                         cursorEmployees.getInt(1),
-                        cursorEmployees.getInt(2),
-                        cursorEmployees.getInt(3),
-                        cursorEmployees.getInt(4),
-                        cursorEmployees.getInt(5),
-                        cursorEmployees.getInt(6),
-                        cursorEmployees.getInt(7)
+                        cursorEmployees.getString(2),
+                        cursorEmployees.getString(3),
+                        cursorEmployees.getString(4),
+                        cursorEmployees.getString(5),
+                        cursorEmployees.getString(6),
+                        cursorEmployees.getInt(7),
+                        cursorEmployees.getInt(8),
+                        cursorEmployees.getInt(9),
+                        cursorEmployees.getInt(10),
+                        cursorEmployees.getInt(11),
+                        cursorEmployees.getInt(12),
+                        cursorEmployees.getString(13)
                 ));
             } while (cursorEmployees.moveToNext());
         }
@@ -176,7 +182,7 @@ public class SelectiveACompleteScreen extends AppCompatActivity {
             writer = new CSVWriter(new FileWriter(csv));
 
             String[] entries = {"id","child_gender","child_age","level",
-                    "stimulus", "colour", "sequence_of_responses", "no_of_clicks", "order_of_selection",
+                    "stimulus", "colour", "sequence_of_responses", "order_of_selection", "no_of_clicks",
                     "total_correct_responses","correct_responses",
                     "commission_errors","omission_errors","mean_reaction_time",
                     "total_duration","diagnosis"};
@@ -191,20 +197,18 @@ public class SelectiveACompleteScreen extends AppCompatActivity {
                         String.valueOf(String.valueOf(gameData.getChildID()).charAt(0)),
                         String.valueOf(String.valueOf(gameData.getChildID()).charAt(1)),
                         String.valueOf(String.valueOf(gameData.getChildID()).charAt(2)),
-
-                        String.valueOf(SelectiveAttentionGame1.stimulus),
-                        String.valueOf(SelectiveAttentionGame1.colour),
-                        String.valueOf("null"),
-                        String.valueOf(SelectiveAttentionGame1.no_of_clicks),
-                        String.valueOf("null"),
-
+                        String.valueOf(gameData.getStimulus()),
+                        String.valueOf(gameData.getColour()),
+                        String.valueOf(gameData.getSequence_of_responses()),
+                        String.valueOf(gameData.getOrder_of_selection()),
+                        String.valueOf(gameData.getNo_of_clicks()),
                         String.valueOf(gameData.getTotalCorrectResponses()),
                         String.valueOf(gameData.getNoOfCorrectResponses()),
                         String.valueOf(gameData.getNoOfCommissionErrors()),
                         String.valueOf(gameData.getNoOfOmmissionErrors()),
                         String.valueOf(gameData.getMeanReactionTime()),
                         String.valueOf(gameData.getTotalDuration()),
-                        String.valueOf(ParentDetailsActivity.diagnosis)
+                        String.valueOf(gameData.getDiagnosis())
                 });
             }
 

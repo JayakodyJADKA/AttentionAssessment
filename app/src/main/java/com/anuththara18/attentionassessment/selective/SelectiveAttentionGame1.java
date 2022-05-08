@@ -29,6 +29,7 @@ import com.anuththara18.attentionassessment.R;
 import com.anuththara18.attentionassessment.age.AgeActivity;
 import com.anuththara18.attentionassessment.db.Api;
 import com.anuththara18.attentionassessment.db.RequestHandler;
+import com.anuththara18.attentionassessment.details.ParentDetailsActivity;
 import com.anuththara18.attentionassessment.focused.FocusedAttentionGame1;
 import com.anuththara18.attentionassessment.gender.GenderActivity;
 import com.anuththara18.attentionassessment.home.NavigationDrawerActivity;
@@ -97,9 +98,9 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
 
     public static String stimulus;
     public static String colour;
-    public static String sequence_of_responses;
+    public static ArrayList<String> sequence_of_responses;
     public static int no_of_clicks;
-    public static String order_of_selection;
+    public static String order_of_selection = "";
 
     MediaPlayer mp;
     int clickCount = 0;
@@ -123,6 +124,8 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
         textview = findViewById(R.id.textview);
 
         textview.setText(LanguageSetter.getresources().getString(R.string.select));
+
+        sequence_of_responses = new ArrayList<>();
 
         mp = MediaPlayer.create(getApplicationContext(), R.raw.selective);
         mp.start();
@@ -149,7 +152,7 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
 
         // level 1 & 2
         a = R.drawable.ladybird;
-        a1 = "ladybird";
+        a1 = "red_ladybird";
         b = R.drawable.blue_buterfly;
         b1 = "blue_buterfly";
         c = R.drawable.yellow_bee;
@@ -159,7 +162,7 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
         e = R.drawable.pink_flower;
         e1 = "pink_flower";
         f = R.drawable.bear;
-        f1 = "bear";
+        f1 = "brown_bear";
         g = R.drawable.pink_pig;
         g1 = "pink_pig";
 
@@ -496,6 +499,10 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
                 if ( data.getImage_name().equals(image_name) ) {
                     noOfCorrectResponses++;
                     correctResponses.add(position);
+                    sequence_of_responses.add("C");
+                    Log.d("%%%%%%%%%%%%%%%%%%", String.valueOf(sequence_of_responses));
+                    //Toast.makeText(getApplicationContext(), data.getImage_name(), Toast.LENGTH_SHORT).show();
+                    order_of_selection = order_of_selection + data.getImage_name() + ", ";
                     gridView.setAdapter(adapter);
                 }
                 else {
@@ -503,6 +510,10 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
                     noOfCommissionErrors++;
                     incorrectResponses.add(position);
                     gridView.setAdapter(adapter);
+                    sequence_of_responses.add("W");
+                    Log.d("%%%%%%%%%%%%%%%%%%", String.valueOf(sequence_of_responses));
+                    //Toast.makeText(getApplicationContext(), data.getImage_name(), Toast.LENGTH_SHORT).show();
+                    order_of_selection = order_of_selection + data.getImage_name() + ", ";
                 }
             }
         });
@@ -526,6 +537,8 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
                     Log.d("omissionErrors", String.valueOf(totalCorrectResponses - noOfCorrectResponses));
                     Log.d("commissionErrors", String.valueOf(noOfCommissionErrors));
                     Log.d("duration", String.valueOf(completionTime));
+                    Log.d("sequence", String.valueOf(sequence_of_responses));
+                    Log.d("order", String.valueOf(order_of_selection));
                     no_of_clicks = noOfCorrectResponses + noOfCommissionErrors;
                     GVAdapter2 adapter = new GVAdapter2(getApplicationContext(), gridModelArrayList);
                     gridView.setAdapter(adapter);
@@ -563,7 +576,7 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
                         myEdit.commit();
                     }
 
-                    saveDataToOnlineDB();
+                    //saveDataToOnlineDB();
                     createTable();
                     saveDataToLocalDB();
                     clickCount++;
@@ -932,12 +945,18 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
                 "CREATE TABLE IF NOT EXISTS selectiveAttention (\n" +
                         "    id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                         "    childID int NOT NULL,\n" +
+                        "    stimulus text NOT NULL,\n" +
+                        "    colour text NOT NULL,\n" +
+                        "    sequence_of_responses text NOT NULL,\n" +
+                        "    order_of_selection text NOT NULL,\n" +
+                        "    no_of_clicks text NOT NULL,\n" +
                         "    totalCorrectResponses int NOT NULL,\n" +
                         "    noOfCorrectResponses int NOT NULL,\n" +
                         "    noOfCommissionErrors int NOT NULL,\n" +
                         "    noOfOmmissionErrors int NOT NULL,\n" +
                         "    meanReactionTime int NOT NULL,\n" +
-                        "    totalDuration int NOT NULL\n" +
+                        "    totalDuration int NOT NULL,\n" +
+                        "    diagnosis int NOT NULL\n" +
                         ");"
         );
     }
@@ -956,11 +975,11 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
         int total_duration = (int) completionTime;
 
         String insertSQL = "INSERT INTO selectiveAttention \n" +
-                "(childID, totalCorrectResponses, noOfCorrectResponses, noOfCommissionErrors, noOfOmmissionErrors, meanReactionTime, totalDuration)\n" +
+                "(childID, stimulus, colour, sequence_of_responses, order_of_selection, no_of_clicks, totalCorrectResponses, noOfCorrectResponses, noOfCommissionErrors, noOfOmmissionErrors, meanReactionTime, totalDuration, diagnosis)\n" +
                 "VALUES \n" +
-                "(?, ?, ?, ?, ?, ?, ?);";
+                "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
-        mDatabase.execSQL(insertSQL, new Integer[]{child_ID, total_correct_responses, no_of_correct_responses, no_of_commission_errors, no_of_ommission_errors, mean_reaction_time, total_duration});
+        mDatabase.execSQL(insertSQL, new Object[]{child_ID, stimulus, colour, sequence_of_responses, order_of_selection, no_of_clicks, total_correct_responses, no_of_correct_responses, no_of_commission_errors, no_of_ommission_errors, mean_reaction_time, total_duration, ParentDetailsActivity.diagnosis});
 
         //Toast.makeText(this, "Data Added Successfully", Toast.LENGTH_SHORT).show();
     }
