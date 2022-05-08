@@ -30,6 +30,7 @@ import com.anuththara18.attentionassessment.R;
 import com.anuththara18.attentionassessment.age.AgeActivity;
 import com.anuththara18.attentionassessment.db.Api;
 import com.anuththara18.attentionassessment.db.RequestHandler;
+import com.anuththara18.attentionassessment.details.ParentDetailsActivity;
 import com.anuththara18.attentionassessment.focused.FocusedAttentionGame1;
 import com.anuththara18.attentionassessment.gender.GenderActivity;
 import com.anuththara18.attentionassessment.home.NavigationDrawerActivity;
@@ -38,6 +39,7 @@ import com.anuththara18.attentionassessment.language.LanguageSetter;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DividedAttentionGame1 extends AppCompatActivity {
@@ -62,6 +64,8 @@ public class DividedAttentionGame1 extends AppCompatActivity {
     long meanReactionTime = 0; // total reaction time
     long totalReactionTime = 0;
     int duration = 0;
+    int missed = 0;
+    int correctresponse = 0;
 
     public static final String DATABASE_NAME = "dividedAttention";
     SQLiteDatabase mDatabase;
@@ -77,6 +81,8 @@ public class DividedAttentionGame1 extends AppCompatActivity {
             R.drawable.cute_giraffe, R.drawable.cute_horse, R.drawable.cute_snail, R.drawable.cute_unicorn};
 
     MediaPlayer mp, mp2;
+
+    public static ArrayList<String> sequence_of_responses;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +105,8 @@ public class DividedAttentionGame1 extends AppCompatActivity {
 
         mp = MediaPlayer.create(getApplicationContext(), R.raw.divided);
         mp.start();
+
+        sequence_of_responses = new ArrayList<>();
 
         mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
 
@@ -123,78 +131,43 @@ public class DividedAttentionGame1 extends AppCompatActivity {
             public void run() {
                 if ( i < 40 ) { // 40 times
 
-                    /*
-                    if (AgeActivity.age == 4) {
-
-                        if (i >= 0 && i < 5) {
-                            sq1.setImageResource(R.color.pink);
-                            correctImage = R.color.pink;
-                        } else if (i >= 5 && i < 10) {
-                            sq1.setImageResource(R.color.blue);
-                            correctImage = R.color.blue;
-                        } else if (i >= 10 && i < 15) {
-                            sq1.setImageResource(R.color.yellow);
-                            correctImage = R.color.yellow;
-                        } else if (i >= 15 && i < 20) {
-                            sq1.setImageResource(R.color.green);
-                            correctImage = R.color.green;
-                        } else if (i >= 20 && i < 25) {
-                            sq1.setImageResource(R.color.red);
-                            correctImage = R.color.red;
-                        } else if (i >= 25 && i < 30) {
-                            sq1.setImageResource(R.color.purple);
-                            correctImage = R.color.purple;
-                        } else if (i >= 30 && i < 35) {
-                            sq1.setImageResource(R.color.orange);
-                            correctImage = R.color.orange;
-                        } else if (i >= 35 && i < 40) {
-                            sq1.setImageResource(R.color.teal);
-                            correctImage = R.color.teal;
-                        }
-
-                        String j = String.valueOf(i);
-
-                        if (j.equals("0") || j.equals("8") || j.equals("16") || j.equals("24") || j.equals("34") || j.equals("40")) {
-                            sq2.setImageResource(image[0]);
-                            sq2.setEnabled(true);
-                            sq2.setTag(image[0]);
-                        } else if (j.equals("1") || j.equals("6") || j.equals("17") || j.equals("25") || j.equals("33") || j.equals("41")) {
-                            sq2.setImageResource(image[1]);
-                            sq2.setEnabled(true);
-                            sq2.setTag(image[1]);
-                        } else if (j.equals("2") || j.equals("14") || j.equals("19") || j.equals("26") || j.equals("30") || j.equals("42")) {
-                            sq2.setImageResource(image[2]);
-                            sq2.setEnabled(true);
-                            sq2.setTag(image[2]);
-                        } else if (j.equals("4") || j.equals("11") || j.equals("18") || j.equals("27") || j.equals("35") || j.equals("43")) {
-                            sq2.setImageResource(image[3]);
-                            sq2.setEnabled(true);
-                            sq2.setTag(image[3]);
-                        } else if (j.equals("3") || j.equals("12") || j.equals("20") || j.equals("29") || j.equals("36") || j.equals("44")) {
-                            sq2.setImageResource(image[4]);
-                            sq2.setEnabled(true);
-                            sq2.setTag(image[4]);
-                        } else if (j.equals("5") || j.equals("13") || j.equals("21") || j.equals("28") || j.equals("37") || j.equals("45")) {
-                            sq2.setImageResource(image[5]);
-                            sq2.setEnabled(true);
-                            sq2.setTag(image[5]);
-                        } else if (j.equals("9") || j.equals("15") || j.equals("22") || j.equals("32") || j.equals("39") || j.equals("46")) {
-                            sq2.setImageResource(image[6]);
-                            sq2.setEnabled(true);
-                            sq2.setTag(image[6]);
-                        } else if (j.equals("7") || j.equals("10") || j.equals("23") || j.equals("31") || j.equals("38") || j.equals("47")) {
-                            sq2.setImageResource(image[7]);
-                            sq2.setEnabled(true);
-                            sq2.setTag(image[7]);
-                        }
-                        startTime = System.currentTimeMillis();
-                        sq2.postDelayed(this, 2000);
-                        Log.d("int", String.valueOf(i));
-                        duration = duration + 2000;
-                        i++;
+                    if ( i == 4 ) {
+                        checkIfMissed();
+                        missed = 0;
+                        correctresponse = 0;
+                    }else if ( i == 9 ) {
+                        checkIfMissed();
+                        missed = 0;
+                        correctresponse = 0;
+                    }else if ( i == 14 ) {
+                        checkIfMissed();
+                        missed = 0;
+                        correctresponse = 0;
+                    }else if ( i == 19 ) {
+                        checkIfMissed();
+                        missed = 0;
+                        correctresponse = 0;
+                    }else if ( i == 24 ) {
+                        checkIfMissed();
+                        missed = 0;
+                        correctresponse = 0;
+                    }else if ( i == 29 ) {
+                        checkIfMissed();
+                        missed = 0;
+                        correctresponse = 0;
+                    }else if ( i == 34 ) {
+                        checkIfMissed();
+                        missed = 0;
+                        correctresponse = 0;
+                    }else if ( i == 39 ) {
+                        checkIfMissed();
+                        missed = 0;
+                        correctresponse = 0;
+                    }else if ( i == 44 ) {
+                        checkIfMissed();
+                        missed = 0;
+                        correctresponse = 0;
                     }
-                    */
-
                     /*---------------------------------------------------------------------------------*/
 
                     if (AgeActivity.age == 4 || AgeActivity.age == 5) {
@@ -361,9 +334,11 @@ public class DividedAttentionGame1 extends AppCompatActivity {
                     Log.d("commissionErrors", String.valueOf(noOfCommissionErrors));
                     Log.d("meanReactionTime", String.valueOf(meanReactionTime));
                     Log.d("duration", String.valueOf(duration));
-                    saveDataToOnlineDB();
+                    Log.d("responses", String.valueOf(sequence_of_responses));
+                    //saveDataToOnlineDB();
                     createTable();
                     saveDataToLocalDB();
+
                     Intent intent = new Intent(getApplicationContext(), DACompleteScreen.class);
                     finish();
                     mp.pause();
@@ -387,11 +362,19 @@ public class DividedAttentionGame1 extends AppCompatActivity {
                     totalReactionTime = totalReactionTime + reactionTime;
                     Log.d("correct " , startTime + " " + clickedTime + " " + reactionTime);
                     noOfCorrectResponses++;
+                    missed = 1;
+                    correctresponse = 1;
+                    sequence_of_responses.add("C");
+                    Log.d("%%%%%%%%%%%%%%%%%%", String.valueOf(sequence_of_responses));
                     sq2.setEnabled(false);
                 }
                 else {
                     Log.d( "wrong" , startTime + " " + clickedTime + " " + reactionTime);
                     noOfCommissionErrors++;
+                    missed = 2;
+                    sequence_of_responses.add("W");
+                    Log.d("%%%%%%%%%%%%%%%%%%", String.valueOf(sequence_of_responses));
+                    sq2.setEnabled(false);
                 }
             }
         });
@@ -419,6 +402,19 @@ public class DividedAttentionGame1 extends AppCompatActivity {
             }
         });
 
+    }
+
+    /*************************************************************************************************/
+
+    private void checkIfMissed() {
+        if (missed == 0) {
+            sequence_of_responses.add("M");
+            Log.d("%%%%%%%%%%%%%%%%%%", String.valueOf(sequence_of_responses));
+        }
+        else if ( correctresponse == 0 ) {
+            sequence_of_responses.add("M");
+            Log.d("%%%%%%%%%%%%%%%%%%", String.valueOf(sequence_of_responses));
+        }
     }
 
     /*************************************************************************************************/
@@ -554,12 +550,14 @@ public class DividedAttentionGame1 extends AppCompatActivity {
                 "CREATE TABLE IF NOT EXISTS dividedAttention (\n" +
                         "    id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                         "    childID int NOT NULL,\n" +
+                        "    sequence_of_responses text NOT NULL,\n" +
                         "    totalCorrectResponses int NOT NULL,\n" +
                         "    noOfCorrectResponses int NOT NULL,\n" +
                         "    noOfCommissionErrors int NOT NULL,\n" +
                         "    noOfOmmissionErrors int NOT NULL,\n" +
                         "    meanReactionTime int NOT NULL,\n" +
-                        "    totalDuration int NOT NULL\n" +
+                        "    totalDuration int NOT NULL,\n" +
+                        "    diagnosis text NOT NULL\n" +
                         ");"
         );
     }
@@ -578,13 +576,11 @@ public class DividedAttentionGame1 extends AppCompatActivity {
         int total_duration = duration;
 
         String insertSQL = "INSERT INTO dividedAttention \n" +
-                "(childID, totalCorrectResponses, noOfCorrectResponses, noOfCommissionErrors, noOfOmmissionErrors, meanReactionTime, totalDuration)\n" +
+                "(childID, sequence_of_responses, totalCorrectResponses, noOfCorrectResponses, noOfCommissionErrors, noOfOmmissionErrors, meanReactionTime, totalDuration, diagnosis)\n" +
                 "VALUES \n" +
-                "(?, ?, ?, ?, ?, ?, ?);";
+                "(?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
-        mDatabase.execSQL(insertSQL, new Integer[]{child_ID, total_correct_responses, no_of_correct_responses, no_of_commission_errors, no_of_ommission_errors, mean_reaction_time, total_duration});
-
-        //Toast.makeText(this, "Data Added Successfully", Toast.LENGTH_SHORT).show();
+        mDatabase.execSQL(insertSQL, new Object[]{child_ID, sequence_of_responses, total_correct_responses, no_of_correct_responses, no_of_commission_errors, no_of_ommission_errors, mean_reaction_time, total_duration, ParentDetailsActivity.diagnosis});
     }
 
     /*************************************************************************************************/
