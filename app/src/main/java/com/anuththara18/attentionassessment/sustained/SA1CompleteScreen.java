@@ -156,12 +156,16 @@ public class SA1CompleteScreen extends AppCompatActivity {
                 dataList.add(new Sustained(
                         cursorEmployees.getInt(0),
                         cursorEmployees.getInt(1),
-                        cursorEmployees.getInt(2),
-                        cursorEmployees.getInt(3),
-                        cursorEmployees.getInt(4),
+                        cursorEmployees.getString(2),
+                        cursorEmployees.getString(3),
+                        cursorEmployees.getString(4),
                         cursorEmployees.getInt(5),
                         cursorEmployees.getInt(6),
-                        cursorEmployees.getInt(7)
+                        cursorEmployees.getInt(7),
+                        cursorEmployees.getInt(8),
+                        cursorEmployees.getInt(9),
+                        cursorEmployees.getInt(10),
+                        cursorEmployees.getString(11)
                 ));
             } while (cursorEmployees.moveToNext());
         }
@@ -190,18 +194,16 @@ public class SA1CompleteScreen extends AppCompatActivity {
                 data.add(new String[]{ String.valueOf(gameData.getId()),
                         String.valueOf(String.valueOf(gameData.getChildID()).charAt(0)),
                         String.valueOf(String.valueOf(gameData.getChildID()).charAt(1)),
-
-                        String.valueOf(SustainedAttentionGame1.stimulus),
-                        String.valueOf(SustainedAttentionGame1.colour),
-                        String.valueOf("null"),
-
+                        String.valueOf(gameData.getColour()),
+                        String.valueOf(gameData.getStimulus()),
+                        String.valueOf(gameData.getSequence_of_responses()),
                         String.valueOf(gameData.getTotalCorrectResponses()),
                         String.valueOf(gameData.getNoOfCorrectResponses()),
                         String.valueOf(gameData.getNoOfCommissionErrors()),
                         String.valueOf(gameData.getNoOfOmmissionErrors()),
                         String.valueOf(gameData.getMeanReactionTime()),
                         String.valueOf(gameData.getTotalDuration()),
-                        String.valueOf(ParentDetailsActivity.diagnosis)
+                        String.valueOf(gameData.getDiagnosis())
                 });
             }
 
