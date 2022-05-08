@@ -15,6 +15,8 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,6 +26,7 @@ import com.anuththara18.attentionassessment.R;
 import com.anuththara18.attentionassessment.age.AgeActivity;
 import com.anuththara18.attentionassessment.db.Api;
 import com.anuththara18.attentionassessment.db.RequestHandler;
+import com.anuththara18.attentionassessment.details.ParentDetailsActivity;
 import com.anuththara18.attentionassessment.gender.GenderActivity;
 import com.anuththara18.attentionassessment.home.NavigationDrawerActivity;
 import com.anuththara18.attentionassessment.language.LanguageSetter;
@@ -159,6 +162,7 @@ public class FocusedAttentionGame2 extends AppCompatActivity {
                     }
                     // appearance - 1s * 20 times
                     else {
+
                         if ( Map1Activity.level == 1 || Map1Activity.level == 2 ) {
 
                             if ( i == 2 || i == 14 || i == 26 || i == 38 ) {
@@ -200,6 +204,8 @@ public class FocusedAttentionGame2 extends AppCompatActivity {
 
                         }
 
+                        missed = 0;
+
                         bear1.setEnabled(true);
                         bear2.setEnabled(true);
                         bear3.setEnabled(true);
@@ -231,9 +237,12 @@ public class FocusedAttentionGame2 extends AppCompatActivity {
                     Log.d("commissionErrors", String.valueOf(noOfCommissionErrors));
                     Log.d("meanReactionTime", String.valueOf(meanReactionTime));
                     Log.d("duration", String.valueOf(duration));
+                    sequence_of_responses.remove(0);
+                    Log.d("responses", String.valueOf(sequence_of_responses));
                     //saveDataToOnlineDB();
                     createTable();
                     saveDataToLocalDB();
+
                     if (Map1Activity.level == 1){
                         comp1 = 1;
                         myEdit.putInt("fal1", Map1Activity.comp1);
@@ -256,6 +265,8 @@ public class FocusedAttentionGame2 extends AppCompatActivity {
         bear1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Animation animZoomOut = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.blink);
+                bear1.startAnimation(animZoomOut);
                 mp2 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
                 mp2.start();
                 // Your action here on button click
@@ -266,6 +277,7 @@ public class FocusedAttentionGame2 extends AppCompatActivity {
                     totalReactionTime = totalReactionTime + reactionTime;
                     Log.d("correct ", startTime + " " + clickedTime + " " + reactionTime);
                     noOfCorrectResponses++;
+                    missed = 1;
                     sequence_of_responses.add("C");
                     bear1.setEnabled(false);
                 } else {
@@ -278,6 +290,8 @@ public class FocusedAttentionGame2 extends AppCompatActivity {
         bear2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Animation animZoomOut = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.blink);
+                bear2.startAnimation(animZoomOut);
                 mp2 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
                 mp2.start();
                 // Your action here on button click
@@ -288,6 +302,7 @@ public class FocusedAttentionGame2 extends AppCompatActivity {
                     totalReactionTime = totalReactionTime + reactionTime;
                     Log.d("correct ", startTime + " " + clickedTime + " " + reactionTime);
                     noOfCorrectResponses++;
+                    missed = 1;
                     sequence_of_responses.add("C");
                     bear2.setEnabled(false);
                 } else {
@@ -300,7 +315,8 @@ public class FocusedAttentionGame2 extends AppCompatActivity {
         bear3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Animation animZoomOut = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.blink);
+                bear3.startAnimation(animZoomOut);
                 mp2 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
                 mp2.start();
                 // Your action here on button click
@@ -310,6 +326,7 @@ public class FocusedAttentionGame2 extends AppCompatActivity {
                     totalReactionTime = totalReactionTime + reactionTime;
                     Log.d("correct ", startTime + " " + clickedTime + " " + reactionTime);
                     noOfCorrectResponses++;
+                    missed = 1;
                     sequence_of_responses.add("C");
                     bear3.setEnabled(false);
                 } else {
@@ -323,7 +340,8 @@ public class FocusedAttentionGame2 extends AppCompatActivity {
         bear4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Animation animZoomOut = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.blink);
+                bear4.startAnimation(animZoomOut);
                 mp2 = MediaPlayer.create(getApplicationContext(), R.raw.button_click);
                 mp2.start();
                 // Your action here on button click
@@ -333,6 +351,7 @@ public class FocusedAttentionGame2 extends AppCompatActivity {
                     totalReactionTime = totalReactionTime + reactionTime;
                     Log.d("correct ", startTime + " " + clickedTime + " " + reactionTime);
                     noOfCorrectResponses++;
+                    missed = 1;
                     sequence_of_responses.add("C");
                     bear4.setEnabled(false);
                 } else {
@@ -516,12 +535,16 @@ public class FocusedAttentionGame2 extends AppCompatActivity {
                 "CREATE TABLE IF NOT EXISTS focusedAttention (\n" +
                         "    id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                         "    childID int NOT NULL,\n" +
+                        "    stimulus text NOT NULL,\n" +
+                        "    colour text NOT NULL,\n" +
+                        "    sequence_of_responses text NOT NULL,\n" +
                         "    totalCorrectResponses int NOT NULL,\n" +
                         "    noOfCorrectResponses int NOT NULL,\n" +
                         "    noOfCommissionErrors int NOT NULL,\n" +
                         "    noOfOmmissionErrors int NOT NULL,\n" +
                         "    meanReactionTime int NOT NULL,\n" +
-                        "    totalDuration int NOT NULL\n" +
+                        "    totalDuration int NOT NULL,\n" +
+                        "    diagnosis text NOT NULL\n" +
                         ");"
         );
     }
@@ -530,7 +553,7 @@ public class FocusedAttentionGame2 extends AppCompatActivity {
 
     private void saveDataToLocalDB() {
 
-        String child = String.valueOf(GenderActivity.gender) + String.valueOf(AgeActivity.age);
+        String child = String.valueOf(GenderActivity.gender) + String.valueOf(AgeActivity.age) + String.valueOf(Map1Activity.level);
         int child_ID = Integer.parseInt(child);
         int total_correct_responses = totalCorrectResponses;
         int no_of_correct_responses = noOfCorrectResponses;
@@ -540,13 +563,12 @@ public class FocusedAttentionGame2 extends AppCompatActivity {
         int total_duration = duration;
 
         String insertSQL = "INSERT INTO focusedAttention \n" +
-                "(childID, totalCorrectResponses, noOfCorrectResponses, noOfCommissionErrors, noOfOmmissionErrors, meanReactionTime, totalDuration)\n" +
+                "(childID, stimulus, colour, sequence_of_responses, totalCorrectResponses, noOfCorrectResponses, noOfCommissionErrors, noOfOmmissionErrors, meanReactionTime, totalDuration, diagnosis)\n" +
                 "VALUES \n" +
-                "(?, ?, ?, ?, ?, ?, ?);";
+                "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
-        mDatabase.execSQL(insertSQL, new Integer[]{child_ID, total_correct_responses, no_of_correct_responses, no_of_commission_errors, no_of_ommission_errors, mean_reaction_time, total_duration});
+        mDatabase.execSQL(insertSQL, new Object[]{child_ID, "bear", "brown", sequence_of_responses, total_correct_responses, no_of_correct_responses, no_of_commission_errors, no_of_ommission_errors, mean_reaction_time, total_duration, ParentDetailsActivity.diagnosis});
 
-        //Toast.makeText(this, "Data Added Successfully", Toast.LENGTH_SHORT).show();
     }
 
     /*************************************************************************************************/

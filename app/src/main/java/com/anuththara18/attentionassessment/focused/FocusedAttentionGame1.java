@@ -882,7 +882,7 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
 
     private void saveDataToLocalDB() {
 
-        String child = String.valueOf(GenderActivity.gender) + String.valueOf(AgeActivity.age);
+        String child = String.valueOf(GenderActivity.gender) + String.valueOf(AgeActivity.age) + String.valueOf(Map1Activity.level);
         int child_ID = Integer.parseInt(child);
         int total_correct_responses = totalCorrectResponses;
         int no_of_correct_responses = noOfCorrectResponses;
