@@ -383,24 +383,27 @@ public class AACompleteScreen extends AppCompatActivity {
                 }
             });
         }
+        else {
 
-        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+            StorageReference storageRef = FirebaseStorage.getInstance().getReference();
 
-        Uri file = Uri.fromFile(new File(csv));
+            Uri file = Uri.fromFile(new File(csv));
 
-        StorageReference storageReference = storageRef.child(auth.getCurrentUser().getUid() + file.getLastPathSegment());
-        storageReference.putFile(file).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                //Toast.makeText(getApplicationContext(), "Upload Filed", Toast.LENGTH_SHORT).show();
+            StorageReference storageReference = storageRef.child(auth.getCurrentUser().getUid() + "/AlternatingAttention/" + file.getLastPathSegment());
+            //StorageReference storageReference = storageRef.child(auth.getCurrentUser().getUid() + file.getLastPathSegment());
+            storageReference.putFile(file).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                    //Toast.makeText(getApplicationContext(), "Upload Filed", Toast.LENGTH_SHORT).show();
 
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                //Toast.makeText(getApplicationContext(), "Upload successful", Toast.LENGTH_SHORT).show();
-            }
-        });
+                }
+            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    //Toast.makeText(getApplicationContext(), "Upload successful", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
 
     }
 
