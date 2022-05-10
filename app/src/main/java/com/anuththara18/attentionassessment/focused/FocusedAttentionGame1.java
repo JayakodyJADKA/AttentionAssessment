@@ -739,6 +739,20 @@ public class FocusedAttentionGame1 extends AppCompatActivity {
         mp.pause();
     }
 
+    @Override
+    protected void onPause() {
+        //Toast.makeText(this, "onPause MainActivity", Toast.LENGTH_SHORT).show();
+        mp.pause();
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        //Toast.makeText(this, "resumed MainActivity", Toast.LENGTH_SHORT).show();
+        mp.start();
+        super.onResume();
+    }
+
     /*************************************************************************************************/
 
     private void alert() {
