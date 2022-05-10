@@ -12,10 +12,13 @@ import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageButton;
@@ -48,6 +51,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
 
+import pl.droidsonroids.gif.GifImageView;
+
 import static com.anuththara18.attentionassessment.consentform.GetSignatureActivity.myEdit;
 import static com.anuththara18.attentionassessment.map.Map1Activity.comp1;
 import static com.anuththara18.attentionassessment.map.Map1Activity.comp2;
@@ -66,6 +71,7 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
     ImageButton imageButton;
     ArrayList<GridModel> gridModelArrayList;
     GVAdapter adapter;
+    GifImageView red_circle;
 
     public static ArrayList<Integer> correctResponses;
     public static ArrayList<Integer> incorrectResponses;
@@ -80,7 +86,7 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
     SimpleDateFormat simpleDateFormat;
     Calendar calendar;
     Date startDate, endDate;
-    TextView textview;
+    TextView textview, textview2;
 
     // test variables
     int totalCorrectResponses = 0;
@@ -123,8 +129,11 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
         imageButton = findViewById(R.id.imageButton);
         cross_btn = (ImageView) findViewById(R.id.cross_btn);
         textview = findViewById(R.id.textview);
+        textview2 = findViewById(R.id.textview2);
+        red_circle = findViewById(R.id.red_circle);
 
         textview.setText(LanguageSetter.getresources().getString(R.string.select));
+        textview2.setText(LanguageSetter.getresources().getString(R.string.selecttxt));
 
         sequence_of_responses = new ArrayList<>();
 
@@ -472,7 +481,6 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
 
         getGridSize();
 
-
         do  {
             totalCorrectResponses = 0;
             formGrid();
@@ -480,7 +488,7 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
                 GridModel data = (GridModel) gridModelArrayList.get(i);
                 if ( data.getImage_name().equals(image_name)){
                     totalCorrectResponses++;
-                    missedResponses.add(i);
+                    //missedResponses.add(i);
                 }
             }
             Log.d("@@@@@@@@@@@@@@@@@@@", String.valueOf(totalCorrectResponses));
@@ -504,7 +512,7 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
                     correctResponses.add(position);
                     sequence_of_responses.add("C");
                     Log.d("%%%%%%%%%%%%%%%%%%", String.valueOf(sequence_of_responses));
-                    Toast.makeText(getApplicationContext(), data.getImage_name() + image_name, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), data.getImage_name() + image_name, Toast.LENGTH_SHORT).show();
                     order_of_selection = order_of_selection + data.getImage_name() + ", ";
                     gridView.setAdapter(adapter);
                 }
@@ -515,11 +523,27 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
                     gridView.setAdapter(adapter);
                     sequence_of_responses.add("W");
                     Log.d("%%%%%%%%%%%%%%%%%%", String.valueOf(sequence_of_responses));
-                    Toast.makeText(getApplicationContext(), data.getImage_name()  + image_name, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), data.getImage_name()  + image_name, Toast.LENGTH_SHORT).show();
                     order_of_selection = order_of_selection + data.getImage_name() + ", ";
                 }
             }
         });
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Animation animZoomOut = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.zoom_out);
+                        imageButton.startAnimation(animZoomOut);
+                        handler.postDelayed(this, 750);
+
+                    }
+                });
+            }
+        }, 0);
 
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -583,6 +607,7 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
                     createTable();
                     saveDataToLocalDB();
                     clickCount++;
+                    red_circle.setVisibility(View.VISIBLE);
                 }
                 else {
                     Intent intent = new Intent(getApplicationContext(), SelectiveACompleteScreen.class);
@@ -913,7 +938,7 @@ public class SelectiveAttentionGame1 extends AppCompatActivity {
             try {
                 JSONObject object = new JSONObject(s);
                 if (!object.getBoolean("error")) {
-                    Toast.makeText(getApplicationContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
                     //refreshing the herolist after every operation
                     //so we get an updated list
                     //we will create this method right now it is commented

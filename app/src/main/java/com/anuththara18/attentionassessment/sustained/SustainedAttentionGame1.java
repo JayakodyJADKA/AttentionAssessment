@@ -48,7 +48,7 @@ public class SustainedAttentionGame1 extends AppCompatActivity {
 
     ImageButton red_btn;
     ImageView gifImageView, cross_btn, bird;
-    TextView textView;
+    TextView textView, textView2;
 
     // isi = 10 - 60 secs
 
@@ -114,8 +114,10 @@ public class SustainedAttentionGame1 extends AppCompatActivity {
         bird = (ImageView) findViewById(R.id.bird);
         textView = (TextView) findViewById(R.id.textView);
         textView = (TextView) findViewById(R.id.textView);
+        textView2 = (TextView) findViewById(R.id.textView2);
 
         textView.setText(LanguageSetter.getresources().getString(R.string.susg1));
+        textView2.setText(LanguageSetter.getresources().getString(R.string.susg1txt));
 
         mp = MediaPlayer.create(getApplicationContext(), R.raw.sustained);
         mp.start();
